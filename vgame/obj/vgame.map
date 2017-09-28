@@ -8,41 +8,50 @@ Area                                    Addr        Size        Decimal Bytes (A
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
      00000000  .__.ABS.                           cpct_video
-     00000006  l__DATA                         
-     00000118  l__CODE                         
+     0000000D  l__DATA                         
+     00000131  l__CODE                         
      00004000  s__CODE                         
-     00004118  s__DATA                         
+     00004131  s__DATA                         
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00000118 =         280. bytes (REL,CON)
+_CODE                               00004000    00000131 =         305. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00004035  _main                              
-     00004047  _cpct_waitVSYNC                    cpct_video
-     00004047  cpct_waitVSYNC_asm                 cpct_video
-     0000404F  cpct_drawSolidBox_asm              cpct_sprites
-     000040FB  _cpct_mode_rom_status              cpct_firmware
-     000040FC  cpct_getScreenPtr_asm              cpct_video
+     00004023  _main                              
+     00004045  checkUserInput                     
+     00004060  _cpct_waitVSYNC                    cpct_video
+     00004060  cpct_waitVSYNC_asm                 cpct_video
+     00004068  cpct_drawSolidBox_asm              cpct_sprites
+     00004114  _cpct_mode_rom_status              cpct_firmware
+     00004115  cpct_getScreenPtr_asm              cpct_video
+
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_DATA                               00004118    00000006 =           6. bytes (REL,CON)
+_DATA                               00004131    0000000D =          13. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
+     0000413A  hero_x                             
+     0000413B  hero_y                             
+     0000413C  hero_x_size                        
+     0000413D  hero_y_size                        
+
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 
 Files Linked                              [ module(s) ]
 
 obj/cpctelera.h.rel                       [  ]
 obj/main.rel                              [  ]
+obj/control.rel                           [  ]
+obj/control.h.rel                         [  ]
 
 
 Libraries Linked                          [ object file ]

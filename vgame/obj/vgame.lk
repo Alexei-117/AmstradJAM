@@ -9,5 +9,7 @@
 -l z80
 obj/cpctelera.h.rel
 obj/main.rel
+obj/control.rel
+obj/control.h.rel
 
 -e
