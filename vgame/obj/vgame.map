@@ -7,30 +7,52 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000000  .__.ABS.                           
-     00000000  l__DATA                         
-     00000007  l__CODE                         
+     00000000  .__.ABS.                           cpct_firmware
+     00000002  l__DATA                         
+     000000E6  l__CODE                         
      00004000  s__CODE                         
-     00004007  s__DATA                         
+     000040E6  s__DATA                         
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00000007 =           7. bytes (REL,CON)
+_CODE                               00004000    000000E6 =         230. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00004000  _main                              
+     00004018  _main                              
+     0000401D  cpct_drawSolidBox_asm              cpct_sprites
+     000040C9  cpct_getScreenPtr_asm              cpct_video
+     000040E5  _cpct_mode_rom_status              cpct_firmware
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_DATA                               000040E6    00000002 =           2. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 
 Files Linked                              [ module(s) ]
 
 obj/main.rel                              [  ]
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
+
+Libraries Linked                          [ object file ]
+
+/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_drawSolidBox_asmbindings.re ]
+/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_getScreenPtr_asmbindings.re ]
+/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpc_mode_rom_status.rel ]
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
 
 User Base Address Definitions
 

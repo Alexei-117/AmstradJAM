@@ -4,14 +4,48 @@ Hexadecimal [16-Bits]
 
 
                               1 .area _DATA
-                              2 .area _CODE
-                              3 
-                              4 ;;====================
-                              5 ;; Main of the program
-                              6 ;;====================
+                              2 
+   0000 3C                    3 	hero_x: .db #60
+   0001 50                    4 	hero_y: .db #80
+                              5 
+                              6 .area _CODE
                               7 
-   0000                       8 _main::
-   0000 3E FF         [ 7]    9 	ld a, #0xFF		;Carga el pixel 1 rojo en A
-   0002 32 00 C0      [13]   10 	ld (0xC000), a	;lo mete en C0000
-                             11 
-   0005 18 FE         [12]   12 	jr .
+                              8 	;2B DE) screen_start	Pointer to the start of the screen (or a backbuffer)
+                              9 	;(1B C ) x	[0-79] Byte-aligned column starting from 0 (x coordinate,
+                             10 	;(1B B ) y	[0-199] row starting from 0 (y coordinate) in bytes)
+                             11 	.globl cpct_getScreenPtr_asm
+                             12 
+                             13 
+                             14 	;(2B DE) memory	Video memory pointer to the upper left box corner byte
+                             15 	;(1B A ) colour_pattern	1-byte colour pattern (in screen pixel format) to fill the box with
+                             16 	;(1B C ) width	Box width in bytes [1-64] (Beware!  not in pixels!)
+                             17 	;(1B B ) height	Box height in bytes (>0)
+                             18 	.globl cpct_drawSolidBox_asm
+                             19 
+                             20 
+                             21 ;Draws the main character on screen
+   0000                      22 draw_hero:
+                             23 
+   0000 11 00 C0      [10]   24 	ld de, #0xC000	;beginning of screen
+                             25 
+   0003 3A 00 00      [13]   26 	ld a, (hero_x)
+   0006 47            [ 4]   27 	ld b, a 		; b = hero_X
+                             28 
+   0007 3A 01 00      [13]   29 	ld a, (hero_y)
+   000A 4F            [ 4]   30 	ld c, a 		; c = hero_y
+                             31 	
+   000B CD 00 00      [17]   32 	call cpct_getScreenPtr_asm
+                             33 
+   000E EB            [ 4]   34 	ex de, hl 		;HL holds the screen pointer, so we swap it with de for fast change
+   000F 3E FF         [ 7]   35 	ld a, #0xFF  	;red colour
+   0011 01 02 08      [10]   36 	ld bc, #0x0802 	;heigh: 8x8 pixels on mode 1 (2 bytes every 4 pixels)
+                             37 	
+   0014 CD 00 00      [17]   38 	call cpct_drawSolidBox_asm ;draw box itself
+   0017 C9            [10]   39 	ret
+                             40 ;;====================
+                             41 ;; Main of the program
+                             42 ;;====================
+                             43 
+   0018                      44 _main::
+   0018 CD 00 00      [17]   45 	call draw_hero	;paint hero on screen
+   001B 18 FE         [12]   46 	jr .

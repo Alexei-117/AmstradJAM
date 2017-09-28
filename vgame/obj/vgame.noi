@@ -1,7 +1,10 @@
 DEF .__.ABS. 0x0
-DEF l__DATA 0x0
-DEF l__CODE 0x7
+DEF l__DATA 0x2
+DEF l__CODE 0xE6
 DEF s__CODE 0x4000
-DEF s__DATA 0x4007
-DEF _main 0x4000
+DEF s__DATA 0x40E6
+DEF _main 0x4018
+DEF cpct_drawSolidBox_asm 0x401D
+DEF cpct_getScreenPtr_asm 0x40C9
+DEF _cpct_mode_rom_status 0x40E5
 LOAD obj/vgame.ihx
