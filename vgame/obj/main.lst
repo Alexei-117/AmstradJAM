@@ -5,47 +5,161 @@ Hexadecimal [16-Bits]
 
                               1 .area _DATA
                               2 
-   0000 3C                    3 	hero_x: .db #60
-   0001 50                    4 	hero_y: .db #80
-                              5 
-                              6 .area _CODE
+                              3 	;Controles
+   0000 3D                    4 	key_right: .db #61
+   0001 45                    5 	key_left: .db #69
+   0002 3B                    6 	key_jump: .db #59
                               7 
-                              8 	;2B DE) screen_start	Pointer to the start of the screen (or a backbuffer)
-                              9 	;(1B C ) x	[0-79] Byte-aligned column starting from 0 (x coordinate,
-                             10 	;(1B B ) y	[0-199] row starting from 0 (y coordinate) in bytes)
-                             11 	.globl cpct_getScreenPtr_asm
-                             12 
-                             13 
-                             14 	;(2B DE) memory	Video memory pointer to the upper left box corner byte
-                             15 	;(1B A ) colour_pattern	1-byte colour pattern (in screen pixel format) to fill the box with
-                             16 	;(1B C ) width	Box width in bytes [1-64] (Beware!  not in pixels!)
-                             17 	;(1B B ) height	Box height in bytes (>0)
-                             18 	.globl cpct_drawSolidBox_asm
-                             19 
-                             20 
-                             21 ;Draws the main character on screen
-   0000                      22 draw_hero:
-                             23 
-   0000 11 00 C0      [10]   24 	ld de, #0xC000	;beginning of screen
+                              8 	;Variables del héroe
+   0003 3C                    9 	hero_x: .db #60
+   0004 50                   10 	hero_y: .db #80
+                             11 
+                             12 	;Control Variables
+   0005 06                   13 	wait_time: .db #0x06
+                             14 
+                             15 .area _CODE
+                             16 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+
+
+                             17 	.include "cpctelera.h.s"
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+
+
+                             18 
+                             19 	;============================
+                             20 	;JUST IN CASE CODE
+                             21 	;============================
+                             22 
+                             23 	;Checks if any key is pressed scanning through all the keyboard
+                             24 	;.globl cpct_scanKeyboard_asm
                              25 
-   0003 3A 00 00      [13]   26 	ld a, (hero_x)
-   0006 47            [ 4]   27 	ld b, a 		; b = hero_X
-                             28 
-   0007 3A 01 00      [13]   29 	ld a, (hero_y)
-   000A 4F            [ 4]   30 	ld c, a 		; c = hero_y
-                             31 	
-   000B CD 00 00      [17]   32 	call cpct_getScreenPtr_asm
-                             33 
-   000E EB            [ 4]   34 	ex de, hl 		;HL holds the screen pointer, so we swap it with de for fast change
-   000F 3E FF         [ 7]   35 	ld a, #0xFF  	;red colour
-   0011 01 02 08      [10]   36 	ld bc, #0x0802 	;heigh: 8x8 pixels on mode 1 (2 bytes every 4 pixels)
-                             37 	
-   0014 CD 00 00      [17]   38 	call cpct_drawSolidBox_asm ;draw box itself
-   0017 C9            [10]   39 	ret
-                             40 ;;====================
-                             41 ;; Main of the program
-                             42 ;;====================
-                             43 
-   0018                      44 _main::
-   0018 CD 00 00      [17]   45 	call draw_hero	;paint hero on screen
-   001B 18 FE         [12]   46 	jr .
+                             26 	;.include "keyboard/keyboard.s"
+                             27 
+                             28 	;checks if a given key in HL is pressed
+                             29 	;.globl cpct_isKeyPressed_asm
+                             30 
+                             31 	;============================
+                             32 	;USING CODE
+                             33 	;============================
+                             34 	
+                             35 	;2B DE) screen_start	Pointer to the start of the screen (or a backbuffer)
+                             36 	;(1B C ) x	[0-79] Byte-aligned column starting from 0 (x coordinate,
+                             37 	;(1B B ) y	[0-199] row starting from 0 (y coordinate) in bytes)
+                             38 	.globl cpct_getScreenPtr_asm
+                             39 
+                             40 
+                             41 	;(2B DE) memory	Video memory pointer to the upper left box corner byte
+                             42 	;(1B A ) colour_pattern	1-byte colour pattern (in screen pixel format) to fill the box with
+                             43 	;(1B C ) width	Box width in bytes [1-64] (Beware!  not in pixels!)
+                             44 	;(1B B ) height	Box height in bytes (>0)
+                             45 	.globl cpct_drawSolidBox_asm
+                             46 
+                             47 	;wait por de raster to be at lowest screen part, to refresh all _DATA
+                             48 	.globl cpct_waitVSYNC_asm
+                             49 
+                             50 
+                             51 ;Draws the main character on screen
+                             52 ;Needs
+                             53 ;	A = color pattern of the box
+                             54 
+   0000                      55 draw_hero:
+   0000 F5            [11]   56 	push af			;pushes color on the pile
+   0001 11 00 C0      [10]   57 	ld de, #0xC000	;beginning of screen
+                             58 
+   0004 3A 03 00      [13]   59 	ld a, (hero_x)
+   0007 4F            [ 4]   60 	ld c, a 		; b = hero_X
+                             61 
+   0008 3A 04 00      [13]   62 	ld a, (hero_y)
+   000B 47            [ 4]   63 	ld b, a 		; c = hero_y
+                             64 	
+   000C CD 00 00      [17]   65 	call cpct_getScreenPtr_asm
+                             66 
+   000F EB            [ 4]   67 	ex de, hl 		;HL holds the screen pointer, so we swap it with de for fast change
+                             68 	;ld a, #0xFF  	;red colour
+   0010 F1            [10]   69 	pop af			;pops the colour
+   0011 01 02 08      [10]   70 	ld bc, #0x0802 	;heigh: 8x8 pixels on mode 1 (2 bytes every 4 pixels)
+                             71 	
+   0014 CD 00 00      [17]   72 	call cpct_drawSolidBox_asm ;draw box itself
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 4.
+Hexadecimal [16-Bits]
+
+
+
+   0017 C9            [10]   73 	ret
+                             74 
+                             75 
+                             76 ;Check if user pressed a key
+   0018                      77 checkUserInput:
+                             78 	;;======
+                             79 	;; Fran's approach
+                             80 	;;======
+                             81 
+                             82 	
+                             83 	;call cpct_scanKeyboard_asm  ;checks a key is pressed
+                             84 	;
+                             85 	;ld hl, #Key_D 				 ;loads key_D in hl
+                             86 	;call cpct_isKeyPressed_asm	 ;checks if the key loaded in hl is pressed
+                             87 	;cp #0 						 ;checks if debugger leaves a 0 behind, if it is 0, then D is not pressed
+                             88 	;jr z, d_not_pressed		 ;This goes to d not pressed zone, if not it is pressed
+                             89 
+                             90 
+                             91 	;;=====================
+                             92 	;; Own approach
+                             93 	;;=====================
+   0018 3A 00 00      [13]   94 	ld a, (key_right)		;check if right button is pressed
+   001B CD 1E BB      [17]   95 	call #0xBB1E				;call the checker KM_TEST KEY
+   001E 20 02         [12]   96 	jr nz, pressedRight			;Not Zero = pressed.
+                             97 
+                             98 
+                             99 	;continous NOT pressed
+   0020 18 07         [12]  100 	jr continueRight 		;if not pressed, just continues
+                            101 
+                            102 	;PRESSED
+   0022                     103 	pressedRight:
+   0022 3A 03 00      [13]  104 		ld a, (hero_x)		;increases x position of the player
+   0025 3C            [ 4]  105 		inc a 				;and saves it in hero_x again
+   0026 32 03 00      [13]  106 		ld (hero_x), a
+                            107 
+                            108 
+   0029                     109 	continueRight:
+                            110 
+   0029 C9            [10]  111 	ret
+                            112 
+   002A                     113 esperar:
+   002A 3A 05 00      [13]  114 	ld a, (wait_time)
+   002D                     115 	bucle:
+   002D 76            [ 4]  116 		halt
+   002E 3D            [ 4]  117 		dec a
+   002F 20 FC         [12]  118 		jr nz, bucle
+                            119 
+   0031 CD 00 00      [17]  120 	call cpct_waitVSYNC_asm
+                            121 
+   0034 C9            [10]  122 	ret
+                            123 
+                            124 
+                            125 ;;====================
+                            126 ;; Main of the program
+                            127 ;;====================
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 5.
+Hexadecimal [16-Bits]
+
+
+
+                            128 
+   0035                     129 _main::
+   0035 3E 00         [ 7]  130 	ld a, #0x00
+   0037 CD 00 00      [17]  131 	call draw_hero		;Erasing the hero
+                            132 
+                            133 
+   003A CD 18 00      [17]  134 	call checkUserInput	;Checking if user pressed a key
+                            135 
+   003D 3E FF         [ 7]  136 	ld a, #0xFF
+   003F CD 00 00      [17]  137 	call draw_hero		;paint hero on screen
+                            138 
+   0042 CD 2A 00      [17]  139 	call esperar		;wait till repainting
+   0045 18 EE         [12]  140 	jr _main

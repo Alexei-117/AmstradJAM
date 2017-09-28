@@ -1,10 +1,12 @@
 DEF .__.ABS. 0x0
-DEF l__DATA 0x2
-DEF l__CODE 0xE6
+DEF l__DATA 0x6
+DEF l__CODE 0x118
 DEF s__CODE 0x4000
-DEF s__DATA 0x40E6
-DEF _main 0x4018
-DEF cpct_drawSolidBox_asm 0x401D
-DEF cpct_getScreenPtr_asm 0x40C9
-DEF _cpct_mode_rom_status 0x40E5
+DEF s__DATA 0x4118
+DEF _main 0x4035
+DEF _cpct_waitVSYNC 0x4047
+DEF cpct_waitVSYNC_asm 0x4047
+DEF cpct_drawSolidBox_asm 0x404F
+DEF _cpct_mode_rom_status 0x40FB
+DEF cpct_getScreenPtr_asm 0x40FC
 LOAD obj/vgame.ihx
