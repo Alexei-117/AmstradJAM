@@ -1,0 +1,17 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+
+
+                              1 .area _DATA
+                              2 .area _CODE
+                              3 
+                              4 ;;====================
+                              5 ;; Main of the program
+                              6 ;;====================
+                              7 
+   4000                       8 _main::
+   4000 3E FF         [ 7]    9 	ld a, #0xFF		;Carga el pixel 1 rojo en A
+   4002 32 00 C0      [13]   10 	ld (0xC000), a	;lo mete en C0000
+                             11 
+   4005 18 FE         [12]   12 	jr .
