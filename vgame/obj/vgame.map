@@ -7,54 +7,100 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000000  .__.ABS.                           cpct_video
-     00000006  l__DATA                         
-     00000118  l__CODE                         
+     00000000  .__.ABS.                           cpct_keyboard
+     00000000  l__CABS                         
+     00000000  l__DABS                         
+     00000000  l__GSFINAL                      
+     00000000  l__GSINIT                       
+     00000000  l__HOME                         
+     00000000  l__INITIALIZED                  
+     00000000  l__INITIALIZER                  
+     00000000  s__CABS                         
+     00000000  s__DABS                         
+     0000000A  l__DATA                         
+     00000208  l__CODE                         
      00004000  s__CODE                         
-     00004118  s__DATA                         
+     00004208  s__DATA                         
+     00004212  s__GSFINAL                      
+     00004212  s__GSINIT                       
+     00004212  s__HOME                         
+     00004212  s__INITIALIZED                  
+     00004212  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00000118 =         280. bytes (REL,CON)
+_CODE                               00004000    00000208 =         520. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00004035  _main                              
-     00004047  _cpct_waitVSYNC                    cpct_video
-     00004047  cpct_waitVSYNC_asm                 cpct_video
-     0000404F  cpct_drawSolidBox_asm              cpct_sprites
-     000040FB  _cpct_mode_rom_status              cpct_firmware
-     000040FC  cpct_getScreenPtr_asm              cpct_video
+     00004000  _t_palette                         test
+     00004010  _t_test                            test
+     00004030  _cpct_keyboardStatusBuffer         cpct_keyboard
+     00004066  _main                              cpct_keyboard
+     0000409D  checkUserInput                     
+     000040DD  _cpct_isKeyPressed                 cpct_keyboard
+     000040DD  cpct_isKeyPressed_asm              cpct_keyboard
+     000040E9  _cpct_waitVSYNC                    cpct_video
+     000040E9  cpct_waitVSYNC_asm                 cpct_video
+     000040F1  cpct_setVideoMode_asm              cpct_video
+     000040FE  _cpct_disableFirmware              cpct_firmware
+     000040FE  _cpct_removeInterruptHandler       cpct_firmware
+     000040FE  cpct_disableFirmware_asm           cpct_firmware
+     000040FE  cpct_removeInterruptHandler_asm    cpct_firmware
+     0000410E  cpct_drawSolidBox_asm              cpct_sprites
+     000041BA  _cpct_mode_rom_status              cpct_firmware
+     000041BB  cpct_getScreenPtr_asm              cpct_video
+     000041D7  _cpct_scanKeyboard                 cpct_keyboard
+     000041D7  cpct_scanKeyboard_asm              cpct_keyboard
+
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_DATA                               00004118    00000006 =           6. bytes (REL,CON)
+_DATA                               00004208    0000000A =          10. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
+     0000420E  hero_x                             
+     0000420F  hero_y                             
+     00004210  hero_x_size                        
+     00004211  hero_y_size                        
+
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 
 Files Linked                              [ module(s) ]
 
+obj/sprites/test.rel                      [ test ]
 obj/cpctelera.h.rel                       [  ]
-obj/main.rel                              [  ]
+obj/main.rel                              [ cpct_keyboard ]
+obj/sprite.rel                            [  ]
+obj/sprite.h.rel                          [  ]
+obj/control.rel                           [  ]
+obj/control.h.rel                         [  ]
 
 
 Libraries Linked                          [ object file ]
 
 /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_isKeyPressed.rel ]
+/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_waitVSYNC.rel ]
+/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_setVideoMode_asmbindings.re ]
+/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_removeInterruptHandler.rel ]
 /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawSolidBox_asmbindings.re ]
 /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
                                           [ cpc_mode_rom_status.rel ]
 /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_getScreenPtr_asmbindings.re ]
+/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_scanKeyboard.rel ]
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
 
