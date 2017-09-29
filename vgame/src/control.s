@@ -1,12 +1,44 @@
+;PERSONAL TRIES
+	;;=====================
+	;; checkUserInput: Our approach (Doesn't work for firmware disabled)
+	;;=====================
+
+	;RIGHT BUTTON FIRST
+	;------------------
+
+	;ld a, (key_right)		;check if right button is pressed
+	;call #0xBB1E			;call the checker KM_TEST KEY
+	;jr nz, pressedRight		;Not Zero = pressed.
+	;jr skipRight			;Skips right function
+
+	;	pressedRight:
+	;		call moveRightMain	;Moves main character to right
+
+	;skipRight:
+
+	;ld a, (key_left)		;check if left button is pressed
+	;call #0xBB1E			;call the checker KM_TEST KEY
+	;jr nz, pressedLeft		;Not Zero = pressed.
+	;jr skipLeft			;Skips right function
+
+	;	pressedLeft:
+	;		call moveLeftMain	;Moves main character to right
+
+	;skipLeft:
+
+
 .area _DATA
 	;==================
 	;;;PRIVATE DATA
 	;==================
 
 	;key positions
-	key_right: .db #61
-	key_left: .db #69
-	key_jump: .db #59
+.equ key_right ,#0x2007
+.equ key_left  ,#0x2008
+.equ key_up    ,#0x0807
+.equ key_down  ,#0x1007
+
+.equ key_jump  ,#0x8005
 
 	;==================
 	;;;PUBLIC FUNCIONS
@@ -30,22 +62,33 @@
 	;;;PRIVATE FUNCTIONS
 	;===================
 
+	;Moving main character throughout 4 axis
+	;CORRUPTS:
+	;	AF
+
 	moveRightMain:
-		ld a, (hero_x)		;increases x position of the player
-		inc a 				;and saves it in hero_x again
+		ld a, (hero_x)		
+		inc a 				
 		ld (hero_x), a
 		ret
 
 	moveLeftMain:
-		ld a, (hero_x)		;increases x position of the player
-		dec a 				;and saves it in hero_x again
+		ld a, (hero_x)		
+		dec a 				
 		ld (hero_x), a
 		ret
 
 	moveUpMain:
+		ld a, (hero_y)		
+		sub #04 				
+		ld (hero_y), a
+		ret
 
 	moveDownMain:
-
+		ld a, (hero_y)		
+		add #04 				
+		ld (hero_y), a
+		ret
 
 	;===================
 	;;;PUBLIC FUNCTIONS
@@ -60,40 +103,51 @@
 		;;======
 
 		
-		;call cpct_scanKeyboard_asm  ;checks a key is pressed
-		;
-		;ld hl, #Key_D 				 ;loads key_D in hl
-		;call cpct_isKeyPressed_asm	 ;checks if the key loaded in hl is pressed
-		;cp #0 						 ;checks if debugger leaves a 0 behind, if it is 0, then D is not pressed
-		;jr z, d_not_pressed		 ;This goes to d not pressed zone, if not it is pressed
+		call cpct_scanKeyboard_asm  ;checks a key is pressed
+		
+		ld hl, #key_right 			 ;loads key_D in hl
+		call cpct_isKeyPressed_asm	 ;checks if the key loaded in hl is pressed
+		cp #0 						 ;checks if debugger leaves a 0 behind, if it is 0, then D is not pressed
+		jr z, skipRight				 ;This goes to Right not pressed
 
-
-		;;=====================
-		;; Own approach
-		;;=====================
-
-		;RIGHT BUTTON FIRST
-		;------------------
-
-		ld a, (key_right)		;check if right button is pressed
-		call #0xBB1E			;call the checker KM_TEST KEY
-		jr nz, pressedRight		;Not Zero = pressed.
-		jr skipRight			;Skips right function
-
-			pressedRight:
-				call moveRightMain	;Moves main character to right
+			;right is pressed
+			call moveRightMain
+			jr continueEnd			 ;one direction at a time
 
 		skipRight:
 
-		ld a, (key_left)		;check if left button is pressed
-		call #0xBB1E			;call the checker KM_TEST KEY
-		jr nz, pressedLeft		;Not Zero = pressed.
-		jr skipLeft			;Skips right function
+		ld hl, #key_left			 ;loads key_A in hl
+		call cpct_isKeyPressed_asm	 ;checks if the key loaded in hl is pressed
+		cp #0 						 ;checks if debugger leaves a 0 behind, if it is 0, then A is not pressed
+		jr z, skipLeft			 	 ;This goes to Left not pressed
 
-			pressedLeft:
-				call moveLeftMain	;Moves main character to right
+			;left is pressed
+			call moveLeftMain
+			jr continueEnd			 ;one direction at a time
 
 		skipLeft:
+
+		ld hl, #key_up				 ;loads key_W in hl
+		call cpct_isKeyPressed_asm	 ;checks if the key loaded in hl is pressed
+		cp #0 						 ;checks if debugger leaves a 0 behind, if it is 0, then W is not pressed
+		jr z, skipUp			 	 ;This goes to up not pressed
+
+			;left is pressed
+			call moveUpMain
+			jr continueEnd			 ;one direction at a time
+
+		skipUp:
+
+		ld hl, #key_down			 ;loads key_S in hl
+		call cpct_isKeyPressed_asm	 ;checks if the key loaded in hl is pressed
+		cp #0 						 ;checks if debugger leaves a 0 behind, if it is 0, thens is not pressed
+		jr z, skipDown			 	 ;This goes to down not pressed
+
+			;left is pressed
+			call moveDownMain
+			jr continueEnd			 ;one direction at a time
+	
+		skipDown:
 
 		continueEnd:
 

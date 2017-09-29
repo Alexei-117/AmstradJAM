@@ -1,36 +1,52 @@
 XL2
-H 2 areas A global symbols
+H 2 areas F global symbols
+M cpct_keyboard
+S cpct_isKeyPressed_asm Ref0000
 S hero_x Ref0000
 S hero_y Ref0000
 S .__.ABS. Def0000
 S hero_x_size Ref0000
 S hero_y_size Ref0000
 S checkUserInput Ref0000
+S cpct_setVideoMode_asm Ref0000
 S cpct_waitVSYNC_asm Ref0000
+S cpct_disableFirmware_asm Ref0000
 S cpct_drawSolidBox_asm Ref0000
+S cpct_scanKeyboard_asm Ref0000
 S cpct_getScreenPtr_asm Ref0000
-A _CODE size 35 flags 0 addr 0
-S _main Def0023
+A _CODE size 4B flags 0 addr 0
+S _main Def0036
+S _cpct_keyboardStatusBuffer Def0000
 A _DATA size 6 flags 0 addr 0
 T 00 00 01 C0 C7 00 4F 50
 R 00 00 01 00
 T 00 00
 R 00 00 00 00
-T 00 00 F5 11 00 C0 3A 00 00 4F 3A 00 00 47 CD
-R 00 00 00 00 02 07 00 00 02 0B 01 00
-T 0D 00 00 00 EB F1 01 02 08 CD 00 00 C9
-R 00 00 00 00 02 02 08 00 02 0A 07 00
-T 18 00
+T 0A 00
 R 00 00 00 00
-T 18 00 3A 00 00
+T 0A 00 CD 00 00 3A 39 00 0E 00 CD 00 00 C9
+R 00 00 00 00 02 03 09 00 02 0B 07 00
+T 16 00
+R 00 00 00 00
+T 16 00 F5 11 00 C0 3A 00 00 4F 3A 00 00 47 CD
+R 00 00 00 00 02 07 01 00 02 0B 02 00
+T 23 00 00 00 EB F1 01 02 08 CD 00 00 C9
+R 00 00 00 00 02 02 0C 00 02 0A 0A 00
+T 2E 00
+R 00 00 00 00
+T 2E 00 3A 00 00
 R 00 00 00 00 00 03 01 00
-T 1B 00
+T 31 00
 R 00 00 00 00
-T 1B 00 76 3D 20 FC CD 00 00 C9
-R 00 00 00 00 02 07 06 00
-T 23 00
+T 31 00 76 3D 20 FC C9
 R 00 00 00 00
-T 23 00 3E 00 CD 00 00 CD 00 00 3E FF CD 00 00 CD
-R 00 00 00 00 00 05 00 00 02 08 05 00 00 0D 00 00
-T 31 00 18 00 18 EE
-R 00 00 00 00 00 02 00 00
+T 36 00
+R 00 00 00 00
+T 36 00 CD 0A 00
+R 00 00 00 00 00 03 00 00
+T 39 00
+R 00 00 00 00
+T 39 00 3E 00 CD 16 00 CD 00 00 3E FF CD 16 00 CD
+R 00 00 00 00 00 05 00 00 02 08 06 00 00 0D 00 00
+T 47 00 00 00 18 EE
+R 00 00 00 00 02 02 08 00
