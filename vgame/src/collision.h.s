@@ -12,5 +12,21 @@
 ;===================
 
 .globl drawBox
-.globl obstacle_checkCollision_X
-.globl obstacle_checkCollision_Y
+.globl moveBox
+
+;;Avoids collision between hero and objects
+;;Saves in register A if pushed or not
+;;NEEDS:
+;;	HL:pointer to hero position
+;;  DE:pointer to list of objects
+;;CORRUPTS: MY SOUL
+.globl avoidCollision
+
+;;Checks if death collision happened between hero and object
+;;Saves in register A 1 death, 0 no death
+;;NEEDS:
+;;	Pushed 2 pointers to objects to check
+;;CORRUPTS: 
+;;  AF, BC
+
+.globl deathCollision

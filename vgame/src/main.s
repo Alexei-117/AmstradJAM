@@ -22,6 +22,7 @@
 	.include "cpctelera.h.s"
 	.include "control.h.s"
 	.include "sprite.h.s"
+	.include "collision.h.s"
 
 	;==================
 	;;;PRIVATE FUNCIONS
@@ -36,9 +37,6 @@
 		ld a, (0x0039) 					;saves data from firmware location
 		ld c, #0 						;load video mode 0 on screen
 		call cpct_setVideoMode_asm
-
-		;ld (0x0039), a
-		;call cpct_reenableFirmware_asm
 
 		ret
 
@@ -63,7 +61,7 @@
 		ex de, hl 		;HL holds the screen pointer, so we swap it with de for fast change
 		;ld a, #0xFF  	;red colour
 		pop af			;pops the colour
-		ld bc, #0x0802 	;heigh: 8x8 pixels on mode 1 (2 bytes every 4 pixels)
+		ld bc, #0x1004 	;heigh: 8x8 pixels on mode 1 (2 bytes every 4 pixels)
 		
 		call cpct_drawSolidBox_asm ;draw box itself
 		ret
@@ -95,11 +93,20 @@
 			ld a, #0x00
 			call draw_hero		;Erasing the hero
 
+			ld a, #0x00
+			call drawBox 		;Erase testing box
+			call moveBox		;move testBox
+
+
 			call jumpControl	;check jumping situation of the character
 			call checkUserInput	;Checking if user pressed a key
 
 			ld a, #0xFF
 			call draw_hero		;paint hero on screen
+
+			ld a, #0xFF
+			call drawBox 		;draw testing box
+
 
 			call cpct_waitVSYNC_asm		;wait till repainting
 			jr _main_bucle

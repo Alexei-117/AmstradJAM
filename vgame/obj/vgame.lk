@@ -10,6 +10,8 @@
 obj/sprites/test.rel
 obj/cpctelera.h.rel
 obj/main.rel
+obj/collision.h.rel
+obj/collision.rel
 obj/sprite.rel
 obj/sprite.h.rel
 obj/control.rel

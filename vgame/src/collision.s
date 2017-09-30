@@ -9,15 +9,19 @@
 	;==================
 
 	;main character data
-	obs_x:: .db #40
+	obs_x:: .db #20
 	obs_y:: .db #80
 
-	obs_x_size:: .db #0x02
+	obs_x_size:: .db #0x04
 	obs_y_size:: .db #0x08
 
 .area _CODE
 
 	.include "cpctelera.h.s"
+
+	;==================
+	;;;TEST FUNCTIONS
+	;==================
 
 	drawBox::
 		push	af 							;;Save A in the stack
@@ -32,83 +36,138 @@
 
 		call 	cpct_getScreenPtr_asm		;; Get pointer to screen
 
-		;;ld	d, h
-		;;ld    e, l
 		ex		de, hl        				;;Swap data
 		pop		af
-		;; Draw A Box
-		;; ld de, #0xC320				;;Location
-		;;ld		a, #0x0F					;;Color
+
 		ld 		bc, #0x0802					;;Width && height
 		call 	cpct_drawSolidBox_asm
 
 		ret
 
-	;;CHecks Collision between an obstacle and the hero
-	;;Input: HL: points to other entity
-	;;Return XXXX XXXX
-	obstacle_checkCollision_Y::
-		; COLLISIONS ON Y
-		;if(obs_y + obs_w <= hero_y) noCollision
-		ld 		a, (obs_y)
-		ld 		c, a
-		ld 		a, (obs_y_size)
-		add 	c
-		sub 	(hl)
-
-		jr 		z, no_collision
-		jp 		m, no_collision
-		;if(hero_y + hero_h <= obs_y)
-		;;COLLISION
-		ld 		a, (hl)
-		inc 	hl
-		inc 	hl
-		add 	(hl)
-
-		ld 		c, a
-		ld 		a, (obs_y)
-		ld 		b, a
-		ld 		a, c
-		sub 	b
-
-		jr 		z, no_collision
-		jp 		m, no_collision
-
-		ld 		a, #1
-		
-		ret
-	obstacle_checkCollision_X::
-		; COLLISIONS ON X
-		;;if(obs_x + obs_w <= hero_x) no Collision
-		ld		a, (obs_x)
-		ld		c, a
-		ld		a, (obs_x_size)	
-		add		c
-		sub 	(hl)
-
-		jr 		z, no_collision
-		jp 		m, no_collision
-
-		;;if (hero_x + hero_w <= obs_x)
-		;; hero_x + hero_w - obs_x <= 0
-		ld		a, (hl) 
-		inc 	hl
-		inc 	hl
-		add 	(hl)
-
-		ld 		c, a
-		ld 		a, (obs_x)
-		ld 		b, a
-		ld 		a, c
-		sub 	b
-
-		jr 		z, no_collision
-		jp 		m, no_collision
-		
-		ld 		a, #1
+	moveBox::
+		ld a, (obs_x)
+		dec a
+		ld (obs_x),a 	;just moving to the left, testing
 
 		ret
-	;;NO COLLISION
-	no_collision:
-		ld 		a, #0
-	ret	
+
+	;==================
+	;;;PRIVATE FUNCTIONS
+	;==================
+
+	checkObstacleX:
+		;Formulae for collisions on X
+		;if(obs_x + obs_w <= hero_x) -> if(obs_x + obs_w - hero_x <= 0)
+
+		ld a, (de)			; |
+		ld c, a 			; C = obs_x
+		inc de
+		inc de 				; +2 positions in memory in x_size
+		ld a, (de)			; A = obs_x_size
+		dec de
+		dec de 				; -2 positions to return to original
+		add c 				; A = obs_x + obs_x_size
+		sub (hl)			; A = obs_x + obs_x_size - hero_x
+
+		jr z, no_collision_x ;if it gives a 0, then no collision is done
+		jp m, no_collision_x ;if its less than 0, it's collision
+
+			;;here it might still collide
+			;;formulae: if(hero_x + hero_x_size <= obs_x) -> if(hero_x + hero_x_size - obs_x <= 0)
+				ld a, (hl)		; |
+				ld c, a 		; C = hero_x
+				inc hl
+				inc hl			; +2 positions in memory is x_size
+				ld a, (hl)		; A = hero_x_size
+				dec hl
+				dec hl 			; -2 positions to return to original
+				add c 			; A = hero_x + hero_x_size
+				ld b, a			; B = A
+				ld a, (de)	; A = obs_X
+				ld c, a 		; C = obs_x
+				ld a, b 		; A = hero_x + hero_x_size
+				sub c			; A = hero_x + hero_x_size - obs_x
+				jr z, no_collision_x ;if it gives a 0, then no collision either
+				jp m, no_collision_x ;if its less than 0, less of a collision, NOTHING
+
+				;;If it goes by here, there is collision in both sides
+				ld a, #1
+				ret 			;return in A a 1
+
+		no_collision_x:
+
+		ld a, #0
+		ret 			;return without collision
+
+	checkObstacleY:
+		;Formulae for collisions on Y
+		;if(obs_y + obs_h <= hero_y) -> if(obs_y + obs_h - hero_y <= 0)
+
+		ld a, (de)			; |
+		ld c, a 			; C = obs_y
+		inc de
+		inc de 				; +2 positions in memory to reach y_size
+		ld a, (de)			; A = obs_y_size
+		dec de
+		dec de 				; -2 positions in memory so to return
+		add c 				; A = obs_y + obs_y_size
+		sub (hl)			; A = obs_y + obs_y_size - hero_y
+
+		jr z, no_collision_y ;if it gives a 0, then no collision is done
+		jp m, no_collision_y ;if its less than 0, it's collision
+
+			;;here it might still collide
+			;;formulae: if(hero_y + hero_y_size <= obs_y) -> if(hero_y + hero_y_size - obs_y <= 0)
+				ld a, (hl)		; |
+				ld c, a 		; C = hero_y
+				inc hl
+				inc hl			; +2 positions in memory is y_size
+				ld a, (hl)		; A = hero_y_size
+				dec hl
+				dec hl 			; -2 positions to return to original
+				add c 			; A = hero_y + hero_y_size
+				ld b, a			; B = A
+				ld a, (de)	; A = obs_y
+				ld c, a 		; C = obs_y
+				ld a, b 		; A = hero_y + hero_y_size
+				sub c			; A = hero_y + hero_y_size - obs_y
+				jr z, no_collision_y ;if it gives a 0, then no collision either
+				jp m, no_collision_y ;if its less than 0, less of a collision, NOTHING
+
+				;;If it goes by here, there is collision in both sides
+				ld a, #1
+				ret 			;return in A a 1
+
+		no_collision_y:
+
+		ld a, #0
+		ret 			;return without collision
+
+	;==================
+	;;;PUBLIC FUNCTIONS
+	;==================
+	avoidCollision::
+		ret
+
+	deathCollision::
+		call checkObstacleX
+		cp #0					
+		jr z, no_deathCollision		;if A turns to be 0, there's no collision on X
+
+		inc hl						;set Y position to check
+		inc de 						;same
+		call checkObstacleY
+		cp #0
+		jr z, no_deathCollision		;if A turns to be 0, there's no collision on Y
+
+			;;Collision zone
+			dec hl
+			dec de 				;restoring values to default
+			ld a, #1
+			ret 				;if collision, returns A with a 1
+
+		no_deathCollision:
+		dec hl
+		dec de 				;restoring values to default
+		ld a, #0
+		ret					;if no collision, returns A with a 0

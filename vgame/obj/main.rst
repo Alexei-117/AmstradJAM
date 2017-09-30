@@ -10,34 +10,26 @@ Hexadecimal [16-Bits]
                               5 	;==================
                               6 
                               7 	;Control Variables
-   4248 01                    8 	wait_time: .db #0x01
+   42E8 01                    8 	wait_time: .db #0x01
                               9 
-                             10 	;Screen limits
-   4249 C0                   11 	limit_up: .db #0xC0
-   424A C7                   12 	limit_down: .db #0xC7
-   424B 00                   13 	limit_left: .db #0x00
-   424C 4F                   14 	limit_right: .db #0x4F
-   424D 50                   15 	line_jump: .db #0x50
-                             16 
+                             10 	;==================
+                             11 	;;;PUBLIC DATA
+                             12 	;==================
+                             13 
+                             14 
+                             15 
+                             16 .area _CODE
                              17 
                              18 	;==================
-                             19 	;;;PUBLIC DATA
+                             19 	;;;INCLUDE FUNCIONS
                              20 	;==================
                              21 
-                             22 
-                             23 
-                             24 .area _CODE
-                             25 
-                             26 	;==================
-                             27 	;;;INCLUDE FUNCIONS
-                             28 	;==================
-                             29 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 
 
-                             30 	.include "cpctelera.h.s"
+                             22 	.include "cpctelera.h.s"
                               1 ;;;;;;;;;;;;;;;;;;;
                               2 ;CPCTELERA SYMBOLS;
                               3 ;;;;;;;;;;;;;;;;;;;
@@ -120,7 +112,7 @@ Hexadecimal [16-Bits]
 
 
 
-                             31 	.include "control.h.s"
+                             23 	.include "control.h.s"
                               1 ;===================
                               2 ;;;PUBLIC DATA
                               3 ;===================
@@ -129,111 +121,154 @@ Hexadecimal [16-Bits]
                               6 .globl hero_x_size
                               7 .globl hero_y_size
                               8 
-                              9 
-                             10 ;===================
-                             11 ;;;PUBLIC FUNCTIONS
-                             12 ;===================
-                             13 
-                             14 ;main character functions
-                             15 .globl checkUserInput
-                             16 .globl jumpControl
-                             17 
-                             18 ;generic functions
-                             19 .globl moveObject
+                              9 ;===================
+                             10 ;;;PUBLIC FUNCTIONS
+                             11 ;===================
+                             12 
+                             13 ;main character functions
+                             14 .globl checkUserInput
+                             15 .globl jumpControl
+                             16 
+                             17 ;generic functions
+                             18 .globl moveObject
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 5.
 Hexadecimal [16-Bits]
 
 
 
-                             32 	.include "sprite.h.s"
+                             24 	.include "sprite.h.s"
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 6.
 Hexadecimal [16-Bits]
 
 
 
-                             33 
-                             34 	;==================
-                             35 	;;;PRIVATE FUNCIONS
-                             36 	;==================
-                             37 
-                             38 	;Loads the initial data options
-                             39 	;Corrupts:
-                             40 	;	C
-                             41 
-   4030                      42 	initialize:
-   4030 CD 3E 41      [17]   43 		call cpct_disableFirmware_asm	;disable firmware so we can set another options
-   4033 3A 39 00      [13]   44 		ld a, (0x0039) 					;saves data from firmware location
-   4036 0E 00         [ 7]   45 		ld c, #0 						;load video mode 0 on screen
-   4038 CD 31 41      [17]   46 		call cpct_setVideoMode_asm
-                             47 
-                             48 		;ld (0x0039), a
-                             49 		;call cpct_reenableFirmware_asm
-                             50 
-   403B C9            [10]   51 		ret
-                             52 
-                             53 	;Draws the main character on screen
-                             54 	;Needs
-                             55 	;	A = color pattern of the box
-                             56 	;Corrupts:
-                             57 	;	HL, DE, AF, BC
-                             58 
-   403C                      59 	draw_hero:
-   403C F5            [11]   60 		push af			;pushes color on the pile
-   403D 11 00 C0      [10]   61 		ld de, #0xC000	;beginning of screen
-                             62 
-   4040 3A 4E 42      [13]   63 		ld a, (hero_x)
-   4043 4F            [ 4]   64 		ld c, a 		; b = hero_X
-                             65 
-   4044 3A 4F 42      [13]   66 		ld a, (hero_y)
-   4047 47            [ 4]   67 		ld b, a 		; c = hero_y
-                             68 		
-   4048 CD FB 41      [17]   69 		call cpct_getScreenPtr_asm	;gets pointer in HL with the data passed on the register
-                             70 
-   404B EB            [ 4]   71 		ex de, hl 		;HL holds the screen pointer, so we swap it with de for fast change
-                             72 		;ld a, #0xFF  	;red colour
-   404C F1            [10]   73 		pop af			;pops the colour
-   404D 01 02 08      [10]   74 		ld bc, #0x0802 	;heigh: 8x8 pixels on mode 1 (2 bytes every 4 pixels)
-                             75 		
-   4050 CD 4E 41      [17]   76 		call cpct_drawSolidBox_asm ;draw box itself
-   4053 C9            [10]   77 		ret
-                             78 
-                             79 
-                             80 	;Waits the wait_time specified
-                             81 	;Corrupts
-                             82 	;	A;
-                             83 
-   4054                      84 	esperar:
-   4054 3A 48 42      [13]   85 		ld a, (wait_time)
-   4057                      86 		bucle:
-   4057 76            [ 4]   87 			halt
+                             25 	.include "collision.h.s"
+                              1 ;===================
+                              2 ;;;PUBLIC DATA
+                              3 ;===================
+                              4 .globl obs_x
+                              5 .globl obs_y
+                              6 .globl obs_x_size
+                              7 .globl obs_y_size
+                              8 
+                              9 
+                             10 ;===================
+                             11 ;;;PUBLIC FUNCTIONS
+                             12 ;===================
+                             13 
+                             14 .globl drawBox
+                             15 .globl moveBox
+                             16 
+                             17 ;;Avoids collision between hero and objects
+                             18 ;;Saves in register A if pushed or not
+                             19 ;;NEEDS:
+                             20 ;;	HL:pointer to hero position
+                             21 ;;  DE:pointer to list of objects
+                             22 ;;CORRUPTS: MY SOUL
+                             23 .globl avoidCollision
+                             24 
+                             25 ;;Checks if death collision happened between hero and object
+                             26 ;;Saves in register A 1 death, 0 no death
+                             27 ;;NEEDS:
+                             28 ;;	HL:pointer to hero position
+                             29 ;;  DE:pointer to list of objects
+                             30 ;;CORRUPTS: MY SOUL
+                             31 
+                             32 .globl deathCollision
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 7.
 Hexadecimal [16-Bits]
 
 
 
-   4058 3D            [ 4]   88 			dec a
-   4059 20 FC         [12]   89 			jr nz, bucle
-                             90 
-   405B C9            [10]   91 		ret
-                             92 
-                             93 
-                             94 	;==================
-                             95 	;;;PUBLIC FUNCIONS
-                             96 	;==================
-                             97 
-   405C                      98 	_main::
+                             26 
+                             27 	;==================
+                             28 	;;;PRIVATE FUNCIONS
+                             29 	;==================
+                             30 
+                             31 	;Loads the initial data options
+                             32 	;Corrupts:
+                             33 	;	C
+                             34 
+   4030                      35 	initialize:
+   4030 CD DE 41      [17]   36 		call cpct_disableFirmware_asm	;disable firmware so we can set another options
+   4033 3A 39 00      [13]   37 		ld a, (0x0039) 					;saves data from firmware location
+   4036 0E 00         [ 7]   38 		ld c, #0 						;load video mode 0 on screen
+   4038 CD D1 41      [17]   39 		call cpct_setVideoMode_asm
+                             40 
+   403B C9            [10]   41 		ret
+                             42 
+                             43 	;Draws the main character on screen
+                             44 	;Needs
+                             45 	;	A = color pattern of the box
+                             46 	;Corrupts:
+                             47 	;	HL, DE, AF, BC
+                             48 
+   403C                      49 	draw_hero:
+   403C F5            [11]   50 		push af			;pushes color on the pile
+   403D 11 00 C0      [10]   51 		ld de, #0xC000	;beginning of screen
+                             52 
+   4040 3A ED 42      [13]   53 		ld a, (hero_x)
+   4043 4F            [ 4]   54 		ld c, a 		; b = hero_X
+                             55 
+   4044 3A EE 42      [13]   56 		ld a, (hero_y)
+   4047 47            [ 4]   57 		ld b, a 		; c = hero_y
+                             58 		
+   4048 CD 9B 42      [17]   59 		call cpct_getScreenPtr_asm	;gets pointer in HL with the data passed on the register
+                             60 
+   404B EB            [ 4]   61 		ex de, hl 		;HL holds the screen pointer, so we swap it with de for fast change
+                             62 		;ld a, #0xFF  	;red colour
+   404C F1            [10]   63 		pop af			;pops the colour
+   404D 01 04 10      [10]   64 		ld bc, #0x1004 	;heigh: 8x8 pixels on mode 1 (2 bytes every 4 pixels)
+                             65 		
+   4050 CD EE 41      [17]   66 		call cpct_drawSolidBox_asm ;draw box itself
+   4053 C9            [10]   67 		ret
+                             68 
+                             69 
+                             70 	;Waits the wait_time specified
+                             71 	;Corrupts
+                             72 	;	A;
+                             73 
+   4054                      74 	esperar:
+   4054 3A E8 42      [13]   75 		ld a, (wait_time)
+   4057                      76 		bucle:
+   4057 76            [ 4]   77 			halt
+   4058 3D            [ 4]   78 			dec a
+   4059 20 FC         [12]   79 			jr nz, bucle
+                             80 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 8.
+Hexadecimal [16-Bits]
+
+
+
+   405B C9            [10]   81 		ret
+                             82 
+                             83 
+                             84 	;==================
+                             85 	;;;PUBLIC FUNCIONS
+                             86 	;==================
+                             87 
+   405C                      88 	_main::
+                             89 
+   405C CD 30 40      [17]   90 		call initialize		;initializes all functions and firmware options
+                             91 
+   405F                      92 		_main_bucle:
+   405F 3E 00         [ 7]   93 			ld a, #0x00
+   4061 CD 3C 40      [17]   94 			call draw_hero		;Erasing the hero
+                             95 
+   4064 3E 00         [ 7]   96 			ld a, #0x00
+   4066 CD 81 40      [17]   97 			call drawBox 		;Erase testing box
+   4069 CD 99 40      [17]   98 			call moveBox		;move testBox
                              99 
-   405C CD 30 40      [17]  100 		call initialize		;initializes all functions and firmware options
-                            101 
-   405F                     102 		_main_bucle:
-   405F 3E 00         [ 7]  103 			ld a, #0x00
-   4061 CD 3C 40      [17]  104 			call draw_hero		;Erasing the hero
-                            105 
-   4064 CD C5 40      [17]  106 			call jumpControl	;check jumping situation of the character
-   4067 CD E8 40      [17]  107 			call checkUserInput	;Checking if user pressed a key
-                            108 
-   406A 3E FF         [ 7]  109 			ld a, #0xFF
-   406C CD 3C 40      [17]  110 			call draw_hero		;paint hero on screen
-                            111 
-   406F CD 29 41      [17]  112 			call cpct_waitVSYNC_asm		;wait till repainting
-   4072 18 EB         [12]  113 			jr _main_bucle
+                            100 
+   406C CD 59 41      [17]  101 			call jumpControl	;check jumping situation of the character
+   406F CD 7C 41      [17]  102 			call checkUserInput	;Checking if user pressed a key
+                            103 
+   4072 3E FF         [ 7]  104 			ld a, #0xFF
+   4074 CD 3C 40      [17]  105 			call draw_hero		;paint hero on screen
+                            106 
+   4077 3E FF         [ 7]  107 			ld a, #0xFF
+   4079 CD 81 40      [17]  108 			call drawBox 		;draw testing box
+                            109 
+                            110 
+   407C CD C9 41      [17]  111 			call cpct_waitVSYNC_asm		;wait till repainting
+   407F 18 DE         [12]  112 			jr _main_bucle

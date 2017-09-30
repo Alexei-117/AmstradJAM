@@ -69,6 +69,7 @@
 	;===================
 
 	.include "cpctelera.h.s"
+	.include "collision.h.s"
 
 	;===================
 	;;;PRIVATE FUNCTIONS
@@ -148,6 +149,7 @@
 
 		ld hl, #hero_x 		;loading hero x data
 		ld b, #right 		;loading in B the axis to move on
+
 		call moveObject
 		ret
 
@@ -222,7 +224,12 @@
 		;; Fran's approach
 		;;======
 
-		
+		ld hl, #hero_x
+		ld de, #obs_x
+		call deathCollision
+		cp #1
+		ret z 				;;-----TESTING---------- if there is a collision, it returns
+
 		call cpct_scanKeyboard_asm  ;checks a key is pressed
 		
 		ld hl, #key_right 			 ;loads key_D in hl
