@@ -17,119 +17,141 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  l__INITIALIZER                  
      00000000  s__CABS                         
      00000000  s__DABS                         
-     00000011  l__DATA                         
-     0000048C  l__CODE                         
+     00000029  l__DATA                         
+     000006D3  l__CODE                         
      00004000  s__CODE                         
-     0000448C  s__DATA                         
-     0000449D  s__GSFINAL                      
-     0000449D  s__GSINIT                       
-     0000449D  s__HOME                         
-     0000449D  s__INITIALIZED                  
-     0000449D  s__INITIALIZER                  
+     000046D3  s__DATA                         
+     000046FC  s__GSFINAL                      
+     000046FC  s__GSINIT                       
+     000046FC  s__HOME                         
+     000046FC  s__INITIALIZED                  
+     000046FC  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    0000048C =        1164. bytes (REL,CON)
+_CODE                               00004000    000006D3 =        1747. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
      00004000  _sprite_palette                    Piernas
-     00004010  _sprite_Piernas                    Piernas
-     00004090  _t_palette                         test
-     000040A0  _t_test                            test
-     000040EC  _main                              
-     00004111  drawBox                            
-     00004129  moveBox                            
-     00004182  avoidCollisionRight                
-     00004198  avoidCollisionDown                 
-     000041B7  avoidCollision                     
-     000041B8  deathCollision                     
-     000041D2  moveObject                         
-     00004223  jumpControl                        
-     0000425D  checkUserInput                     
-     00004296  _cpct_isKeyPressed                 cpct_keyboard
-     00004296  cpct_isKeyPressed_asm              cpct_keyboard
-     000042A2  _cpct_drawStringM0                 cpct_strings
-     000042AA  cpct_drawStringM0_asm              cpct_strings
-     000042C6  _cpct_drawCharM0                   cpct_strings
-     000042D3  cpct_drawCharM0_asm                cpct_strings
-     00004353  _cpct_keyboardStatusBuffer         cpct_keyboard
-     0000435D  dc_mode0_ct                        cpct_strings
-     0000436D  _cpct_waitVSYNC                    cpct_video
-     0000436D  cpct_waitVSYNC_asm                 cpct_video
-     00004375  cpct_setVideoMode_asm              cpct_video
-     00004382  _cpct_disableFirmware              cpct_firmware
-     00004382  _cpct_removeInterruptHandler       cpct_firmware
-     00004382  cpct_disableFirmware_asm           cpct_firmware
-     00004382  cpct_removeInterruptHandler_asm    cpct_firmware
-     00004392  cpct_drawSolidBox_asm              cpct_sprites
-     0000443E  _cpct_mode_rom_status              cpct_firmware
-     0000443F  cpct_getScreenPtr_asm              cpct_video
-     0000445B  _cpct_scanKeyboard                 cpct_keyboard
-     0000445B  cpct_scanKeyboard_asm              cpct_keyboard
+     00004009  _sprite_Piernas                    Piernas
+     00004089  _t_palette                         test
+     00004099  _t_test                            test
+     000040B9  _cpct_keyboardStatusBuffer         cpct_keyboard
+     00004110  loadMenu                           cpct_keyboard
+     00004135  checkMenuInput                     cpct_keyboard
+     000041DC  _main                              
+     00004218  loadHud                            
+     00004222  hudUpdate                          
+     00004253  incPoints                          
+     0000425F  incPoints1                         
+     00004270  incPoints2                         
+     00004281  incPoints3                         
+     000042A2  loseHP                             
+     000042BE  drawBox                            
+     000042D6  moveBox                            
+     0000432F  avoidCollisionRight                
+     00004345  avoidCollisionDown                 
+     00004364  avoidCollision                     
+     00004365  deathCollision                     
+     0000437F  bullet_x                           
+     00004380  bullet_y                           
+     00004381  bullet_w                           
+     00004382  bullet_alive                       
+     00004383  shootBullet                        
+     0000439D  shootUpdate                        
+     000043F3  drawBullet                         
+     00004423  moveObject                         
+     00004474  jumpControl                        
+     000044AE  checkUserInput                     
+     000044E7  _cpct_isKeyPressed                 cpct_keyboard
+     000044E7  cpct_isKeyPressed_asm              cpct_keyboard
+     000044F3  _cpct_drawStringM0                 cpct_strings
+     000044FB  cpct_drawStringM0_asm              cpct_strings
+     00004517  _cpct_drawCharM0                   cpct_strings
+     00004524  cpct_drawCharM0_asm                cpct_strings
+     000045A4  dc_mode0_ct                        cpct_strings
+     000045B4  _cpct_waitVSYNC                    cpct_video
+     000045B4  cpct_waitVSYNC_asm                 cpct_video
+     000045BC  cpct_setVideoMode_asm              cpct_video
+     000045C9  _cpct_disableFirmware              cpct_firmware
+     000045C9  _cpct_removeInterruptHandler       cpct_firmware
+     000045C9  cpct_disableFirmware_asm           cpct_firmware
+     000045C9  cpct_removeInterruptHandler_asm    cpct_firmware
+     000045D9  cpct_drawSolidBox_asm              cpct_sprites
+     00004685  _cpct_mode_rom_status              cpct_firmware
+     00004686  cpct_getScreenPtr_asm              cpct_video
+     000046A2  _cpct_scanKeyboard                 cpct_keyboard
+     000046A2  cpct_scanKeyboard_asm              cpct_keyboard
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_DATA                               0000448C    00000011 =          17. bytes (REL,CON)
+_DATA                               000046D3    00000029 =          41. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     0000448D  obs_x                              
-     0000448E  obs_y                              
-     0000448F  obs_x_size                         
-     00004490  obs_y_size                         
-     00004491  hero_x                             
-     00004492  hero_y                             
-     00004493  hero_x_size                        
-     00004494  hero_y_size                        
-
+     000046D3  selector                           cpct_keyboard
+     000046EC  obs_x                              
+     000046ED  obs_y                              
+     000046EE  obs_x_size                         
+     000046EF  obs_y_size                         
+     000046F0  hero_x                             
+     000046F1  hero_y                             
+     000046F2  hero_x_size                        
+     000046F3  hero_y_size                        
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 
 Files Linked                              [ module(s) ]
 
 obj/sprites/Piernas.rel                   [ Piernas ]
 obj/sprites/test.rel                      [ test ]
+obj/hero.h.rel                            [  ]
+obj/sprite.rel                            [  ]
 obj/cpctelera.h.rel                       [  ]
+obj/hero.rel                              [  ]
+obj/shoot.h.rel                           [  ]
+obj/menu.rel                              [ cpct_keyboard ]
 obj/main.rel                              [  ]
+obj/menu.h.rel                            [  ]
+obj/hud.rel                               [  ]
 obj/collision.h.rel                       [  ]
 obj/collision.rel                         [  ]
-obj/sprite.rel                            [  ]
 obj/sprite.h.rel                          [  ]
+obj/shoot.rel                             [  ]
+obj/hud.h.rel                             [  ]
 obj/control.rel                           [  ]
 obj/control.h.rel                         [  ]
 
 
 Libraries Linked                          [ object file ]
 
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+/home/julian-ubu/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_isKeyPressed.rel ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+/home/julian-ubu/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawStringM0.rel ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+/home/julian-ubu/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawCharM0.rel ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
-                                          [ keyboard.rel ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+/home/julian-ubu/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_dc_mode0_ct.rel ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+/home/julian-ubu/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_waitVSYNC.rel ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+/home/julian-ubu/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_setVideoMode_asmbindings.re ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+/home/julian-ubu/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_removeInterruptHandler.rel ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+/home/julian-ubu/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawSolidBox_asmbindings.re ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+/home/julian-ubu/cpctelera/cpctelera/cpctelera.lib
                                           [ cpc_mode_rom_status.rel ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+/home/julian-ubu/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_getScreenPtr_asmbindings.re ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+/home/julian-ubu/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_scanKeyboard.rel ]
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
