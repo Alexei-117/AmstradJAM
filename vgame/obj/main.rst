@@ -10,7 +10,7 @@ Hexadecimal [16-Bits]
                               5 	;==================
                               6 
                               7 	;Control Variables
-   4303 01                    8 	wait_time: .db #0x01
+   4A85 01                    8 	wait_time: .db #0x01
                               9 
                              10 	;==================
                              11 	;;;PUBLIC DATA
@@ -189,13 +189,13 @@ Hexadecimal [16-Bits]
                              32 	;Corrupts:
                              33 	;	C
                              34 
-   4030                      35 	initialize:
-   4030 CD F9 41      [17]   36 		call cpct_disableFirmware_asm	;disable firmware so we can set another options
-   4033 3A 39 00      [13]   37 		ld a, (0x0039) 					;saves data from firmware location
-   4036 0E 00         [ 7]   38 		ld c, #0 						;load video mode 0 on screen
-   4038 CD EC 41      [17]   39 		call cpct_setVideoMode_asm
+   46D8                      35 	initialize:
+   46D8 CD 7B 49      [17]   36 		call cpct_disableFirmware_asm	;disable firmware so we can set another options
+   46DB 3A 39 00      [13]   37 		ld a, (0x0039) 					;saves data from firmware location
+   46DE 0E 00         [ 7]   38 		ld c, #0 						;load video mode 0 on screen
+   46E0 CD 6E 49      [17]   39 		call cpct_setVideoMode_asm
                              40 
-   403B C9            [10]   41 		ret
+   46E3 C9            [10]   41 		ret
                              42 
                              43 	;Draws the main character on screen
                              44 	;Needs
@@ -203,72 +203,72 @@ Hexadecimal [16-Bits]
                              46 	;Corrupts:
                              47 	;	HL, DE, AF, BC
                              48 
-   403C                      49 	draw_hero:
-   403C F5            [11]   50 		push af			;pushes color on the pile
-   403D 11 00 C0      [10]   51 		ld de, #0xC000	;beginning of screen
+   46E4                      49 	draw_hero:
+   46E4 F5            [11]   50 		push af			;pushes color on the pile
+   46E5 11 00 C0      [10]   51 		ld de, #0xC000	;beginning of screen
                              52 
-   4040 3A 08 43      [13]   53 		ld a, (hero_x)
-   4043 4F            [ 4]   54 		ld c, a 		; b = hero_X
+   46E8 3A 8A 4A      [13]   53 		ld a, (hero_x)
+   46EB 4F            [ 4]   54 		ld c, a 		; b = hero_X
                              55 
-   4044 3A 09 43      [13]   56 		ld a, (hero_y)
-   4047 47            [ 4]   57 		ld b, a 		; c = hero_y
+   46EC 3A 8B 4A      [13]   56 		ld a, (hero_y)
+   46EF 47            [ 4]   57 		ld b, a 		; c = hero_y
                              58 		
-   4048 CD B6 42      [17]   59 		call cpct_getScreenPtr_asm	;gets pointer in HL with the data passed on the register
+   46F0 CD 38 4A      [17]   59 		call cpct_getScreenPtr_asm	;gets pointer in HL with the data passed on the register
                              60 
-   404B EB            [ 4]   61 		ex de, hl 		;HL holds the screen pointer, so we swap it with de for fast change
+   46F3 EB            [ 4]   61 		ex de, hl 		;HL holds the screen pointer, so we swap it with de for fast change
                              62 		;ld a, #0xFF  	;red colour
-   404C F1            [10]   63 		pop af			;pops the colour
-   404D 01 04 10      [10]   64 		ld bc, #0x1004 	;heigh: 8x8 pixels on mode 1 (2 bytes every 4 pixels)
+   46F4 F1            [10]   63 		pop af			;pops the colour
+   46F5 01 04 10      [10]   64 		ld bc, #0x1004 	;heigh: 8x8 pixels on mode 1 (2 bytes every 4 pixels)
                              65 		
-   4050 CD 09 42      [17]   66 		call cpct_drawSolidBox_asm ;draw box itself
-   4053 C9            [10]   67 		ret
+   46F8 CD 8B 49      [17]   66 		call cpct_drawSolidBox_asm ;draw box itself
+   46FB C9            [10]   67 		ret
                              68 
                              69 
                              70 	;Waits the wait_time specified
                              71 	;Corrupts
                              72 	;	A;
                              73 
-   4054                      74 	esperar:
-   4054 3A 03 43      [13]   75 		ld a, (wait_time)
-   4057                      76 		bucle:
-   4057 76            [ 4]   77 			halt
-   4058 3D            [ 4]   78 			dec a
-   4059 20 FC         [12]   79 			jr nz, bucle
+   46FC                      74 	esperar:
+   46FC 3A 85 4A      [13]   75 		ld a, (wait_time)
+   46FF                      76 		bucle:
+   46FF 76            [ 4]   77 			halt
+   4700 3D            [ 4]   78 			dec a
+   4701 20 FC         [12]   79 			jr nz, bucle
                              80 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 8.
 Hexadecimal [16-Bits]
 
 
 
-   405B C9            [10]   81 		ret
+   4703 C9            [10]   81 		ret
                              82 
                              83 
                              84 	;==================
                              85 	;;;PUBLIC FUNCIONS
                              86 	;==================
                              87 
-   405C                      88 	_main::
+   4704                      88 	_main::
                              89 
-   405C CD 30 40      [17]   90 		call initialize		;initializes all functions and firmware options
+   4704 CD D8 46      [17]   90 		call initialize		;initializes all functions and firmware options
                              91 
-   405F                      92 		_main_bucle:
-   405F 3E 00         [ 7]   93 			ld a, #0x00
-   4061 CD 3C 40      [17]   94 			call draw_hero		;Erasing the hero
+   4707                      92 		_main_bucle:
+   4707 3E 00         [ 7]   93 			ld a, #0x00
+   4709 CD E4 46      [17]   94 			call draw_hero		;Erasing the hero
                              95 
-   4064 3E 00         [ 7]   96 			ld a, #0x00
-   4066 CD 81 40      [17]   97 			call drawBox 		;Erase testing box
-   4069 CD 99 40      [17]   98 			call moveBox		;move testBox
+   470C 3E 00         [ 7]   96 			ld a, #0x00
+   470E CD 29 47      [17]   97 			call drawBox 		;Erase testing box
+   4711 CD 41 47      [17]   98 			call moveBox		;move testBox
                              99 
                             100 
-   406C CD 6E 41      [17]  101 			call jumpControl	;check jumping situation of the character
-   406F CD 91 41      [17]  102 			call checkUserInput	;Checking if user pressed a key
+   4714 CD 3B 48      [17]  101 			call jumpControl	;check jumping situation of the character
+   4717 CD 5E 48      [17]  102 			call checkUserInput	;Checking if user pressed a key
                             103 
-   4072 3E FF         [ 7]  104 			ld a, #0xFF
-   4074 CD 3C 40      [17]  105 			call draw_hero		;paint hero on screen
+   471A 3E FF         [ 7]  104 			ld a, #0xFF
+   471C CD E4 46      [17]  105 			call draw_hero		;paint hero on screen
                             106 
-   4077 3E FF         [ 7]  107 			ld a, #0xFF
-   4079 CD 81 40      [17]  108 			call drawBox 		;draw testing box
+   471F 3E FF         [ 7]  107 			ld a, #0xFF
+   4721 CD 29 47      [17]  108 			call drawBox 		;draw testing box
                             109 
                             110 
-   407C CD E4 41      [17]  111 			call cpct_waitVSYNC_asm		;wait till repainting
-   407F 18 DE         [12]  112 			jr _main_bucle
+   4724 CD 66 49      [17]  111 			call cpct_waitVSYNC_asm		;wait till repainting
+   4727 18 DE         [12]  112 			jr _main_bucle

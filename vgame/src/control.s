@@ -53,8 +53,8 @@
 	;main character data
 	hero_x:: .db #60
 	hero_y:: .db #80
-	hero_x_size:: .db #0x02
-	hero_y_size:: .db #0x01
+	hero_x_size:: .db #0x04
+	hero_y_size:: .db #0x08
 	hero_jump: .db #-1		;initially, it's not jumping
 
 	jump_table:
@@ -224,22 +224,17 @@
 		;; Fran's approach
 		;;======
 
-		ld hl, #hero_x
-		ld de, #obs_x
-		call avoidCollision
-		cp #1
-		jp nz, dont_avoid_colliding				;;-----TESTING---------- if there is a collision, it returns
-
-
-			;avoid colliding
-			call moveLeftMain
-			ret
-
-
-		dont_avoid_colliding:
-
+		;;FIRST OF ALL: Examine keyboard
 		call cpct_scanKeyboard_asm  ;checks a key is pressed
 		
+		;;CHECK COLLISIONS WITH ENVIRORMENT
+		ld hl, #hero_x
+		ld de, #obs_x
+		;call avoidCollisionRight
+		;cp #1
+		;jp nz, skipRight			;;-----TESTING---------- if there is a collision, you can't move right
+
+
 		ld hl, #key_right 			 ;loads key_D in hl
 		call cpct_isKeyPressed_asm	 ;checks if the key loaded in hl is pressed
 		cp #0 						 ;checks if debugger leaves a 0 behind, if it is 0, then D is not pressed

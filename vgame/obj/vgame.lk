@@ -7,6 +7,8 @@
 -k /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/share/sdcc/lib/z80
 -l /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
 -l z80
+obj/sprites/Piernas.rel
+obj/sprites/EdificiosFondo.rel
 obj/sprites/test.rel
 obj/cpctelera.h.rel
 obj/main.rel

@@ -22,6 +22,10 @@
 ;;CORRUPTS: MY SOUL
 .globl avoidCollision
 
+.globl avoidCollisionRight
+
+.globl avoidCollisionDown
+
 ;;Checks if death collision happened between hero and object
 ;;Saves in register A 1 death, 0 no death
 ;;NEEDS:

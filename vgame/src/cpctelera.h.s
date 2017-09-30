@@ -62,6 +62,10 @@
 .globl cpct_isKeyPressed_asm
 
 
+.globl cpct_drawCharM0_asm
+
+.globl cpct_drawStringM0_asm
+
 
 
 

@@ -39,13 +39,20 @@
 		ex		de, hl        				;;Swap data
 		pop		af
 
-		ld 		bc, #0x0802					;;Width && height
+		ld 		bc, #0x0804					;;Width && height
 		call 	cpct_drawSolidBox_asm
 
 		ret
 
 	moveBox::
 		ld a, (obs_x)
+		cp #20
+		jr nz, moveBox_bien
+
+			;no mover la cajita
+			ret
+
+		moveBox_bien:
 		dec a
 		ld (obs_x),a 	;just moving to the left, testing
 
@@ -147,15 +154,18 @@
 		ld a, #0
 		ret 			;return without collision
 
+
 	;==================
 	;;;PUBLIC FUNCTIONS
 	;==================
-	avoidCollision::
+
+
+	avoidCollisionRight::
 
 		;;FOR NOW: IT ONLY AVOIDS RIGHT COLLISIONS
 
 		ld a, (hl) 		;loading actual X in A
-		inc a 			;moving 1 position to the right
+		add #01 		;moving 2 position to the right
 		ld (hl), a 		;relocating
 
 		call deathCollision ;analizing collision
@@ -164,20 +174,58 @@
 
 			;no need to avoid
 			ld a, (hl)
-			dec a
+			sub #01
 			ld (hl), a 		;restoring values to object position
 
-			ld a, #0
+			ld a, #1
 			ret
 
 
 		right_avoidCollision:
-		
+
 		ld a, (hl)
-		dec a
+		sub #01
 		ld (hl), a 		;restoring values to object position
 
-		ld a, #1
+		ld a, #0
+		ret
+
+	avoidCollisionDown::
+
+		;;FOR NOW: IT ONLY AVOIDS RIGHT COLLISIONS
+
+		inc hl
+		ld a, (hl) 		;loading actual X in A
+		add #01 		;moving 2 positions to the right
+		ld (hl), a 		;relocating
+
+		call deathCollision ;analizing collision
+		cp #1
+		jr z, down_avoidCollision
+
+			;no need to avoid
+			ld a, (hl)
+			sub #01
+			ld (hl), a 		;restoring values to object position
+
+			dec hl			;return to initial position
+
+			ld a, #1
+			ret
+
+
+		down_avoidCollision:
+
+		ld a, (hl)
+		sub #01
+		ld (hl), a 		;restoring values to object position
+
+		dec hl 			;return to initial position
+
+		ld a, #0
+		ret
+
+	avoidCollision::
 		ret
 
 	deathCollision::
