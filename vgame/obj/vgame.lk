@@ -3,18 +3,26 @@
 -b _CODE = 0x4000
 -b _DATA = 0x0000
 -u
--k /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80
--k /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/share/sdcc/lib/z80
--l /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+-k /home/julian-ubu/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80
+-k /home/julian-ubu/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/share/sdcc/lib/z80
+-l /home/julian-ubu/cpctelera/cpctelera/cpctelera.lib
 -l z80
 obj/sprites/Piernas.rel
 obj/sprites/test.rel
+obj/hero.h.rel
+obj/sprite.rel
 obj/cpctelera.h.rel
+obj/hero.rel
+obj/shoot.h.rel
+obj/menu.rel
 obj/main.rel
+obj/menu.h.rel
+obj/hud.rel
 obj/collision.h.rel
 obj/collision.rel
-obj/sprite.rel
 obj/sprite.h.rel
+obj/shoot.rel
+obj/hud.h.rel
 obj/control.rel
 obj/control.h.rel
 

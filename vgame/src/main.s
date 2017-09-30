@@ -23,7 +23,13 @@
 	.include "control.h.s"
 	.include "sprite.h.s"
 	.include "collision.h.s"
-
+	;======
+	;NUEVO|
+	;======
+	.include "hud.h.s"
+	.include "menu.h.s"
+	.include "shoot.h.s"
+	.include "hero.h.s"
 	;==================
 	;;;PRIVATE FUNCIONS
 	;==================
@@ -80,6 +86,33 @@
 
 		ret
 
+	;======
+	;NUEVO|
+	;======
+	checkStart:
+		ld 		a, (selector)
+		cp 		#0x0A
+		jr 		z, clear
+		ret
+	;======
+	;NUEVO|
+	;======
+	clear:
+		;LIMPIAR PUTA PANTALLA
+		ld 		hl, #0xC000
+		working:
+		ld 		a, #0x00
+		ld 		(hl), a
+		inc 	hl
+		ld 		a, l
+		sub 	#0xFF
+		jr 		nz, working
+		ld 		a, h
+		sub 	#0xFF
+		jr 		nz, working
+		call 	loadHud
+		jr 		_main_bucle
+		ret
 
 	;==================
 	;;;PUBLIC FUNCIONS
@@ -88,7 +121,18 @@
 	_main::
 
 		call initialize		;initializes all functions and firmware options
-
+		;======
+		;NUEVO|
+		;======
+		call 	loadMenu
+		;======
+		;NUEVO|
+		;======
+		_menu_bucle:
+			call	checkMenuInput
+			call 	checkStart
+			call 	cpct_waitVSYNC_asm
+			jr 		_menu_bucle
 		_main_bucle:
 			ld a, #0x00
 			call draw_hero		;Erasing the hero
@@ -97,6 +141,10 @@
 			call drawBox 		;Erase testing box
 			call moveBox		;move testBox
 
+			;======
+			;NUEVO|
+			;======
+			call hudUpdate
 
 			call jumpControl	;check jumping situation of the character
 			call checkUserInput	;Checking if user pressed a key
@@ -107,6 +155,11 @@
 			ld a, #0xFF
 			call drawBox 		;draw testing box
 
+			;======
+			;NUEVO|
+			;======
+			call shootBullet
+			call shootUpdate
 
 			call cpct_waitVSYNC_asm		;wait till repainting
 			jr _main_bucle
