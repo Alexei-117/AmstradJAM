@@ -18,81 +18,200 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  s__CABS                         
      00000000  s__DABS                         
      00000011  l__DATA                         
-     0000048C  l__CODE                         
+     00003754  l__CODE                         
      00004000  s__CODE                         
-     0000448C  s__DATA                         
-     0000449D  s__GSFINAL                      
-     0000449D  s__GSINIT                       
-     0000449D  s__HOME                         
-     0000449D  s__INITIALIZED                  
-     0000449D  s__INITIALIZER                  
+     00007754  s__DATA                         
+     00007765  s__GSFINAL                      
+     00007765  s__GSINIT                       
+     00007765  s__HOME                         
+     00007765  s__INITIALIZED                  
+     00007765  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    0000048C =        1164. bytes (REL,CON)
+_CODE                               00004000    00003754 =       14164. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00004000  _sprite_palette                    Piernas
-     00004010  _sprite_Piernas                    Piernas
-     00004090  _t_palette                         test
-     000040A0  _t_test                            test
-     000040EC  _main                              
-     00004111  drawBox                            
-     00004129  moveBox                            
-     00004182  avoidCollisionRight                
-     00004198  avoidCollisionDown                 
-     000041B7  avoidCollision                     
-     000041B8  deathCollision                     
-     000041D2  moveObject                         
-     00004223  jumpControl                        
-     0000425D  checkUserInput                     
-     00004296  _cpct_isKeyPressed                 cpct_keyboard
-     00004296  cpct_isKeyPressed_asm              cpct_keyboard
-     000042A2  _cpct_drawStringM0                 cpct_strings
-     000042AA  cpct_drawStringM0_asm              cpct_strings
-     000042C6  _cpct_drawCharM0                   cpct_strings
-     000042D3  cpct_drawCharM0_asm                cpct_strings
-     00004353  _cpct_keyboardStatusBuffer         cpct_keyboard
-     0000435D  dc_mode0_ct                        cpct_strings
-     0000436D  _cpct_waitVSYNC                    cpct_video
-     0000436D  cpct_waitVSYNC_asm                 cpct_video
-     00004375  cpct_setVideoMode_asm              cpct_video
-     00004382  _cpct_disableFirmware              cpct_firmware
-     00004382  _cpct_removeInterruptHandler       cpct_firmware
-     00004382  cpct_disableFirmware_asm           cpct_firmware
-     00004382  cpct_removeInterruptHandler_asm    cpct_firmware
-     00004392  cpct_drawSolidBox_asm              cpct_sprites
-     0000443E  _cpct_mode_rom_status              cpct_firmware
-     0000443F  cpct_getScreenPtr_asm              cpct_video
-     0000445B  _cpct_scanKeyboard                 cpct_keyboard
-     0000445B  cpct_scanKeyboard_asm              cpct_keyboard
-
+     00004000  _g_tileset                         Fondotiles2
+     000040C8  _g_Fondotiles2_000                 Fondotiles2
+     00004148  _g_Fondotiles2_001                 Fondotiles2
+     000041C8  _g_Fondotiles2_002                 Fondotiles2
+     00004248  _g_Fondotiles2_003                 Fondotiles2
+     000042C8  _g_Fondotiles2_004                 Fondotiles2
+     00004348  _g_Fondotiles2_005                 Fondotiles2
+     000043C8  _g_Fondotiles2_006                 Fondotiles2
+     00004448  _g_Fondotiles2_007                 Fondotiles2
+     000044C8  _g_Fondotiles2_008                 Fondotiles2
+     00004548  _g_Fondotiles2_009                 Fondotiles2
+     000045C8  _g_Fondotiles2_010                 Fondotiles2
+     00004648  _g_Fondotiles2_011                 Fondotiles2
+     000046C8  _g_Fondotiles2_012                 Fondotiles2
+     00004748  _g_Fondotiles2_013                 Fondotiles2
+     000047C8  _g_Fondotiles2_014                 Fondotiles2
+     00004848  _g_Fondotiles2_015                 Fondotiles2
+     000048C8  _g_Fondotiles2_016                 Fondotiles2
+     00004948  _g_Fondotiles2_017                 Fondotiles2
+     000049C8  _g_Fondotiles2_018                 Fondotiles2
+     00004A48  _g_Fondotiles2_019                 Fondotiles2
+     00004AC8  _g_Fondotiles2_020                 Fondotiles2
+     00004B48  _g_Fondotiles2_021                 Fondotiles2
+     00004BC8  _g_Fondotiles2_022                 Fondotiles2
+     00004C48  _g_Fondotiles2_023                 Fondotiles2
+     00004CC8  _g_Fondotiles2_024                 Fondotiles2
+     00004D48  _g_Fondotiles2_025                 Fondotiles2
+     00004DC8  _g_Fondotiles2_026                 Fondotiles2
+     00004E48  _g_Fondotiles2_027                 Fondotiles2
+     00004EC8  _g_Fondotiles2_028                 Fondotiles2
+     00004F48  _g_Fondotiles2_029                 Fondotiles2
+     00004FC8  _g_Fondotiles2_030                 Fondotiles2
+     00005048  _g_Fondotiles2_031                 Fondotiles2
+     000050C8  _g_Fondotiles2_032                 Fondotiles2
+     00005148  _g_Fondotiles2_033                 Fondotiles2
+     000051C8  _g_Fondotiles2_034                 Fondotiles2
+     00005248  _g_Fondotiles2_035                 Fondotiles2
+     000052C8  _g_Fondotiles2_036                 Fondotiles2
+     00005348  _g_Fondotiles2_037                 Fondotiles2
+     000053C8  _g_Fondotiles2_038                 Fondotiles2
+     00005448  _g_Fondotiles2_039                 Fondotiles2
+     000054C8  _g_Fondotiles2_040                 Fondotiles2
+     00005548  _g_Fondotiles2_041                 Fondotiles2
+     000055C8  _g_Fondotiles2_042                 Fondotiles2
+     00005648  _g_Fondotiles2_043                 Fondotiles2
+     000056C8  _g_Fondotiles2_044                 Fondotiles2
+     00005748  _g_Fondotiles2_045                 Fondotiles2
+     000057C8  _g_Fondotiles2_046                 Fondotiles2
+     00005848  _g_Fondotiles2_047                 Fondotiles2
+     000058C8  _g_Fondotiles2_048                 Fondotiles2
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_DATA                               0000448C    00000011 =          17. bytes (REL,CON)
+_CODE                               00004000    00003754 =       14164. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     0000448D  obs_x                              
-     0000448E  obs_y                              
-     0000448F  obs_x_size                         
-     00004490  obs_y_size                         
-     00004491  hero_x                             
-     00004492  hero_y                             
-     00004493  hero_x_size                        
-     00004494  hero_y_size                        
-
+     00005948  _g_Fondotiles2_049                 Fondotiles2
+     000059C8  _g_Fondotiles2_050                 Fondotiles2
+     00005A48  _g_Fondotiles2_051                 Fondotiles2
+     00005AC8  _g_Fondotiles2_052                 Fondotiles2
+     00005B48  _g_Fondotiles2_053                 Fondotiles2
+     00005BC8  _g_Fondotiles2_054                 Fondotiles2
+     00005C48  _g_Fondotiles2_055                 Fondotiles2
+     00005CC8  _g_Fondotiles2_056                 Fondotiles2
+     00005D48  _g_Fondotiles2_057                 Fondotiles2
+     00005DC8  _g_Fondotiles2_058                 Fondotiles2
+     00005E48  _g_Fondotiles2_059                 Fondotiles2
+     00005EC8  _g_Fondotiles2_060                 Fondotiles2
+     00005F48  _g_Fondotiles2_061                 Fondotiles2
+     00005FC8  _g_Fondotiles2_062                 Fondotiles2
+     00006048  _g_Fondotiles2_063                 Fondotiles2
+     000060C8  _g_Fondotiles2_064                 Fondotiles2
+     00006148  _g_Fondotiles2_065                 Fondotiles2
+     000061C8  _g_Fondotiles2_066                 Fondotiles2
+     00006248  _g_Fondotiles2_067                 Fondotiles2
+     000062C8  _g_Fondotiles2_068                 Fondotiles2
+     00006348  _g_Fondotiles2_069                 Fondotiles2
+     000063C8  _g_Fondotiles2_070                 Fondotiles2
+     00006448  _g_Fondotiles2_071                 Fondotiles2
+     000064C8  _g_Fondotiles2_072                 Fondotiles2
+     00006548  _g_Fondotiles2_073                 Fondotiles2
+     000065C8  _g_Fondotiles2_074                 Fondotiles2
+     00006648  _g_Fondotiles2_075                 Fondotiles2
+     000066C8  _g_Fondotiles2_076                 Fondotiles2
+     00006748  _g_Fondotiles2_077                 Fondotiles2
+     000067C8  _g_Fondotiles2_078                 Fondotiles2
+     00006848  _g_Fondotiles2_079                 Fondotiles2
+     000068C8  _g_Fondotiles2_080                 Fondotiles2
+     00006948  _g_Fondotiles2_081                 Fondotiles2
+     000069C8  _g_Fondotiles2_082                 Fondotiles2
+     00006A48  _g_Fondotiles2_083                 Fondotiles2
+     00006AC8  _g_Fondotiles2_084                 Fondotiles2
+     00006B48  _g_Fondotiles2_085                 Fondotiles2
+     00006BC8  _g_Fondotiles2_086                 Fondotiles2
+     00006C48  _g_Fondotiles2_087                 Fondotiles2
+     00006CC8  _g_Fondotiles2_088                 Fondotiles2
+     00006D48  _g_Fondotiles2_089                 Fondotiles2
+     00006DC8  _g_Fondotiles2_090                 Fondotiles2
+     00006E48  _g_Fondotiles2_091                 Fondotiles2
+     00006EC8  _g_Fondotiles2_092                 Fondotiles2
+     00006F48  _g_Fondotiles2_093                 Fondotiles2
+     00006FC8  _g_Fondotiles2_094                 Fondotiles2
+     00007048  _g_Fondotiles2_095                 Fondotiles2
+     000070C8  _g_Fondotiles2_096                 Fondotiles2
+     00007148  _g_Fondotiles2_097                 Fondotiles2
+     000071C8  _g_Fondotiles2_098                 Fondotiles2
+     00007248  _g_Fondotiles2_099                 Fondotiles2
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00004000    00003754 =       14164. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     000072C8  _sprite_palette                    Piernas
+     000072D8  _sprite_Piernas                    Piernas
+     00007358  _t_palette                         test
+     00007368  _t_test                            test
+     000073B4  _main                              
+     000073D9  drawBox                            
+     000073F1  moveBox                            
+     0000744A  avoidCollisionRight                
+     00007460  avoidCollisionDown                 
+     0000747F  avoidCollision                     
+     00007480  deathCollision                     
+     0000749A  moveObject                         
+     000074EB  jumpControl                        
+     00007525  checkUserInput                     
+     0000755E  _cpct_isKeyPressed                 cpct_keyboard
+     0000755E  cpct_isKeyPressed_asm              cpct_keyboard
+     0000756A  _cpct_drawStringM0                 cpct_strings
+     00007572  cpct_drawStringM0_asm              cpct_strings
+     0000758E  _cpct_drawCharM0                   cpct_strings
+     0000759B  cpct_drawCharM0_asm                cpct_strings
+     0000761B  _cpct_keyboardStatusBuffer         cpct_keyboard
+     00007625  dc_mode0_ct                        cpct_strings
+     00007635  _cpct_waitVSYNC                    cpct_video
+     00007635  cpct_waitVSYNC_asm                 cpct_video
+     0000763D  cpct_setVideoMode_asm              cpct_video
+     0000764A  _cpct_disableFirmware              cpct_firmware
+     0000764A  _cpct_removeInterruptHandler       cpct_firmware
+     0000764A  cpct_disableFirmware_asm           cpct_firmware
+     0000764A  cpct_removeInterruptHandler_asm    cpct_firmware
+     0000765A  cpct_drawSolidBox_asm              cpct_sprites
+     00007706  _cpct_mode_rom_status              cpct_firmware
+     00007707  cpct_getScreenPtr_asm              cpct_video
+     00007723  _cpct_scanKeyboard                 cpct_keyboard
+     00007723  cpct_scanKeyboard_asm              cpct_keyboard
+ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_DATA                               00007754    00000011 =          17. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00007755  obs_x                              
+     00007756  obs_y                              
+     00007757  obs_x_size                         
+     00007758  obs_y_size                         
+     00007759  hero_x                             
+     0000775A  hero_y                             
+     0000775B  hero_x_size                        
+     0000775C  hero_y_size                        
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
 
 Files Linked                              [ module(s) ]
 
+obj/sprites/Fondotiles2.rel               [ Fondotiles2 ]
 obj/sprites/Piernas.rel                   [ Piernas ]
 obj/sprites/test.rel                      [ test ]
 obj/cpctelera.h.rel                       [  ]
@@ -132,7 +251,7 @@ Libraries Linked                          [ object file ]
 /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_scanKeyboard.rel ]
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
 
 User Base Address Definitions
 

@@ -67,5 +67,5 @@
 ##	  hardware colour values.
 
 $(eval $(call IMG2SPRITES,sprites/Piernas.png,0,sprite,16,16,$(PALETTE),,src/sprites,hwpalette))
-
+$(eval $(call IMG2SPRITES,sprites/Fondotiles2.png,0,g,16,16,$(PALETTE),tileset,src/sprites, hwpalette))
 

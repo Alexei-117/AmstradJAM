@@ -29,7 +29,7 @@
 ;;Checks if death collision happened between hero and object
 ;;Saves in register A 1 death, 0 no death
 ;;NEEDS:
-;;	Pushed 2 pointers to objects to check
+;;	HL and DE pointers 2 pointers to objects to check
 ;;CORRUPTS: 
 ;;  AF, BC
 

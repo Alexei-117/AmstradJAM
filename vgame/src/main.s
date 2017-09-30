@@ -33,11 +33,18 @@
 	;	C
 
 	initialize:
+		
+		;;Enable video mode 0
+		
 		call cpct_disableFirmware_asm	;disable firmware so we can set another options
 		ld a, (0x0039) 					;saves data from firmware location
 		ld c, #0 						;load video mode 0 on screen
 		call cpct_setVideoMode_asm
 
+
+		;;Draw principal Sprite
+
+		
 		ret
 
 	;Draws the main character on screen
@@ -96,7 +103,6 @@
 			ld a, #0x00
 			call drawBox 		;Erase testing box
 			call moveBox		;move testBox
-
 
 			call jumpControl	;check jumping situation of the character
 			call checkUserInput	;Checking if user pressed a key
