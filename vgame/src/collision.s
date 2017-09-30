@@ -164,18 +164,18 @@
 
 		;;FOR NOW: IT ONLY AVOIDS RIGHT COLLISIONS
 
-		ld a, (hl) 		;loading actual X in A
-		add #01 		;moving 2 position to the right
-		ld (hl), a 		;relocating
+		;ld a, (hl) 		;loading actual X in A
+		;add #01 		;moving 2 position to the right
+		;ld (hl), a 		;relocating
 
 		call deathCollision ;analizing collision
 		cp #1
 		jr z, right_avoidCollision
 
 			;no need to avoid
-			ld a, (hl)
-			sub #01
-			ld (hl), a 		;restoring values to object position
+			;ld a, (hl)
+			;sub #01
+			;ld (hl), a 		;restoring values to object position
 
 			ld a, #1
 			ret
@@ -183,9 +183,9 @@
 
 		right_avoidCollision:
 
-		ld a, (hl)
-		sub #01
-		ld (hl), a 		;restoring values to object position
+		;ld a, (hl)
+		;sub #01
+		;ld (hl), a 		;restoring values to object position
 
 		ld a, #0
 		ret

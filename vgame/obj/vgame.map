@@ -18,6 +18,7 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  s__CABS                         
      00000000  s__DABS                         
      00000016  l__DATA                         
+<<<<<<< HEAD
      00000A85  l__CODE                         
      00004000  s__CODE                         
      00004A85  s__DATA                         
@@ -26,17 +27,32 @@ Area                                    Addr        Size        Decimal Bytes (A
      00004A9B  s__HOME                         
      00004A9B  s__INITIALIZED                  
      00004A9B  s__INITIALIZER                  
+=======
+     0000070C  l__CODE                         
+     00004000  s__CODE                         
+     0000470C  s__DATA                         
+     00004722  s__GSFINAL                      
+     00004722  s__GSINIT                       
+     00004722  s__HOME                         
+     00004722  s__INITIALIZED                  
+     00004722  s__INITIALIZER                  
+>>>>>>> 60fbd1c2a1d49d64fa63cfbf8d8016fb08aea566
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
+<<<<<<< HEAD
 _CODE                               00004000    00000A85 =        2693. bytes (REL,CON)
+=======
+_CODE                               00004000    0000070C =        1804. bytes (REL,CON)
+>>>>>>> 60fbd1c2a1d49d64fa63cfbf8d8016fb08aea566
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
      00004000  _sprite_palette                    Piernas
+<<<<<<< HEAD
      00004010  _sprite_Piernas                    Piernas
      00004090  _g_tileset                         EdificiosFondo
      000040A8  _g_EdificiosFondo_00               EdificiosFondo
@@ -83,12 +99,48 @@ _CODE                               00004000    00000A85 =        2693. bytes (R
      00004A38  cpct_getScreenPtr_asm              cpct_video
      00004A54  _cpct_scanKeyboard                 cpct_keyboard
      00004A54  cpct_scanKeyboard_asm              cpct_keyboard
+=======
+     00004009  _sprite_Piernas_0                  Piernas
+     00004089  _sprite_Piernas_1                  Piernas
+     00004109  _sprite_Piernas_2                  Piernas
+     00004189  _sprite_Piernas_3                  Piernas
+     00004209  _sprite_Piernas_4                  Piernas
+     00004289  _sprite_Piernas_5                  Piernas
+     00004309  _sprite_Piernas_6                  Piernas
+     00004389  _sprite_Piernas_7                  Piernas
+     00004409  _t_palette                         test
+     00004419  _t_test                            test
+     00004465  _main                              
+     0000448A  moveObject                         
+     000044DB  jumpControl                        
+     000044FE  checkUserInput                     
+     0000453B  drawBox                            
+     00004553  moveBox                            
+     000045A7  avoidCollision                     
+     000045BD  deathCollision                     
+     000045D7  _cpct_isKeyPressed                 cpct_keyboard
+     000045D7  cpct_isKeyPressed_asm              cpct_keyboard
+     000045E3  _cpct_keyboardStatusBuffer         cpct_keyboard
+     000045ED  _cpct_waitVSYNC                    cpct_video
+     000045ED  cpct_waitVSYNC_asm                 cpct_video
+     000045F5  cpct_setVideoMode_asm              cpct_video
+     00004602  _cpct_disableFirmware              cpct_firmware
+     00004602  _cpct_removeInterruptHandler       cpct_firmware
+     00004602  cpct_disableFirmware_asm           cpct_firmware
+     00004602  cpct_removeInterruptHandler_asm    cpct_firmware
+     00004612  cpct_drawSolidBox_asm              cpct_sprites
+     000046BE  _cpct_mode_rom_status              cpct_firmware
+     000046BF  cpct_getScreenPtr_asm              cpct_video
+     000046DB  _cpct_scanKeyboard                 cpct_keyboard
+     000046DB  cpct_scanKeyboard_asm              cpct_keyboard
+>>>>>>> 60fbd1c2a1d49d64fa63cfbf8d8016fb08aea566
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
+<<<<<<< HEAD
 _DATA                               00004A85    00000016 =          22. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
@@ -101,28 +153,46 @@ _DATA                               00004A85    00000016 =          22. bytes (R
      00004A8B  hero_y                             
      00004A8C  hero_x_size                        
      00004A8D  hero_y_size                        
+=======
+_DATA                               0000470C    00000016 =          22. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0000470D  hero_x                             
+     0000470E  hero_y                             
+     0000470F  hero_x_size                        
+     00004710  hero_y_size                        
+     0000471E  obs_x                              
+     0000471F  obs_y                              
+     00004720  obs_x_size                         
+     00004721  obs_y_size                         
+>>>>>>> 60fbd1c2a1d49d64fa63cfbf8d8016fb08aea566
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 
 Files Linked                              [ module(s) ]
 
 obj/sprites/Piernas.rel                   [ Piernas ]
+<<<<<<< HEAD
 obj/sprites/EdificiosFondo.rel            [ EdificiosFondo ]
+=======
+>>>>>>> 60fbd1c2a1d49d64fa63cfbf8d8016fb08aea566
 obj/sprites/test.rel                      [ test ]
+obj/control.h.rel                         [  ]
 obj/cpctelera.h.rel                       [  ]
 obj/main.rel                              [  ]
 obj/collision.h.rel                       [  ]
-obj/collision.rel                         [  ]
 obj/sprite.rel                            [  ]
 obj/sprite.h.rel                          [  ]
 obj/control.rel                           [  ]
-obj/control.h.rel                         [  ]
+obj/collision.rel                         [  ]
 
 
 Libraries Linked                          [ object file ]
 
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+/home/laura/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_isKeyPressed.rel ]
+<<<<<<< HEAD
 /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawStringM0.rel ]
 /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
@@ -132,18 +202,23 @@ Libraries Linked                          [ object file ]
 /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_dc_mode0_ct.rel ]
 /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+=======
+/home/laura/cpctelera/cpctelera/cpctelera.lib
+                                          [ keyboard.rel ]
+/home/laura/cpctelera/cpctelera/cpctelera.lib
+>>>>>>> 60fbd1c2a1d49d64fa63cfbf8d8016fb08aea566
                                           [ cpct_waitVSYNC.rel ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+/home/laura/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_setVideoMode_asmbindings.re ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+/home/laura/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_removeInterruptHandler.rel ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+/home/laura/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawSolidBox_asmbindings.re ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+/home/laura/cpctelera/cpctelera/cpctelera.lib
                                           [ cpc_mode_rom_status.rel ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+/home/laura/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_getScreenPtr_asmbindings.re ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
+/home/laura/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_scanKeyboard.rel ]
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 5.

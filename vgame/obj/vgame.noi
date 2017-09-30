@@ -9,6 +9,7 @@ DEF l__INITIALIZER 0x0
 DEF s__CABS 0x0
 DEF s__DABS 0x0
 DEF l__DATA 0x16
+<<<<<<< HEAD
 DEF l__CODE 0xA85
 DEF s__CODE 0x4000
 DEF s__DATA 0x4A85
@@ -72,4 +73,56 @@ DEF hero_x 0x4A8A
 DEF hero_y 0x4A8B
 DEF hero_x_size 0x4A8C
 DEF hero_y_size 0x4A8D
+=======
+DEF l__CODE 0x70C
+DEF s__CODE 0x4000
+DEF s__DATA 0x470C
+DEF s__GSFINAL 0x4722
+DEF s__GSINIT 0x4722
+DEF s__HOME 0x4722
+DEF s__INITIALIZED 0x4722
+DEF s__INITIALIZER 0x4722
+DEF _sprite_palette 0x4000
+DEF _sprite_Piernas_0 0x4009
+DEF _sprite_Piernas_1 0x4089
+DEF _sprite_Piernas_2 0x4109
+DEF _sprite_Piernas_3 0x4189
+DEF _sprite_Piernas_4 0x4209
+DEF _sprite_Piernas_5 0x4289
+DEF _sprite_Piernas_6 0x4309
+DEF _sprite_Piernas_7 0x4389
+DEF _t_palette 0x4409
+DEF _t_test 0x4419
+DEF _main 0x4465
+DEF moveObject 0x448A
+DEF jumpControl 0x44DB
+DEF checkUserInput 0x44FE
+DEF drawBox 0x453B
+DEF moveBox 0x4553
+DEF avoidCollision 0x45A7
+DEF deathCollision 0x45BD
+DEF _cpct_isKeyPressed 0x45D7
+DEF cpct_isKeyPressed_asm 0x45D7
+DEF _cpct_keyboardStatusBuffer 0x45E3
+DEF _cpct_waitVSYNC 0x45ED
+DEF cpct_waitVSYNC_asm 0x45ED
+DEF cpct_setVideoMode_asm 0x45F5
+DEF _cpct_disableFirmware 0x4602
+DEF _cpct_removeInterruptHandler 0x4602
+DEF cpct_disableFirmware_asm 0x4602
+DEF cpct_removeInterruptHandler_asm 0x4602
+DEF cpct_drawSolidBox_asm 0x4612
+DEF _cpct_mode_rom_status 0x46BE
+DEF cpct_getScreenPtr_asm 0x46BF
+DEF _cpct_scanKeyboard 0x46DB
+DEF cpct_scanKeyboard_asm 0x46DB
+DEF hero_x 0x470D
+DEF hero_y 0x470E
+DEF hero_x_size 0x470F
+DEF hero_y_size 0x4710
+DEF obs_x 0x471E
+DEF obs_y 0x471F
+DEF obs_x_size 0x4720
+DEF obs_y_size 0x4721
+>>>>>>> 60fbd1c2a1d49d64fa63cfbf8d8016fb08aea566
 LOAD obj/vgame.ihx

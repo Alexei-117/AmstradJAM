@@ -56,7 +56,11 @@
 
 ## Example firmware palette definition as variable in cpct_img2tileset format
 
+<<<<<<< HEAD
 PALETTE={0 1 2 3 4 5 6 7 8 9 10 11 12 18 26 25}
+=======
+ PALETTE={0 1 2 6 11 12 18 26 25}
+>>>>>>> 60fbd1c2a1d49d64fa63cfbf8d8016fb08aea566
 
 ## Example image conversion
 ##    This example would convert img/example.png into src/example.{c|h} files.
@@ -67,4 +71,8 @@ PALETTE={0 1 2 3 4 5 6 7 8 9 10 11 12 18 26 25}
 ##	  hardware colour values.
 
 $(eval $(call IMG2SPRITES,sprites/Piernas.png,0,sprite,16,16,$(PALETTE),,src/sprites,hwpalette))
+<<<<<<< HEAD
 #$(eval $(call IMG2SPRITES,sprites/EdificiosFondo.png,0,g,4,4,$(PALETTE),tileset,src/sprites,))
+=======
+#$(eval $(call IMG2SPRITES,sprites/fondotiles.png,0,g,4,4,$(PALETTE),tileset,src/sprites,))
+>>>>>>> 60fbd1c2a1d49d64fa63cfbf8d8016fb08aea566

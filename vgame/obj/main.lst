@@ -170,9 +170,9 @@ Hexadecimal [16-Bits]
                              25 ;;Checks if death collision happened between hero and object
                              26 ;;Saves in register A 1 death, 0 no death
                              27 ;;NEEDS:
-                             28 ;;	HL:pointer to hero position
-                             29 ;;  DE:pointer to list of objects
-                             30 ;;CORRUPTS: MY SOUL
+                             28 ;;	Pushed 2 pointers to objects to check
+                             29 ;;CORRUPTS: 
+                             30 ;;  AF, BC
                              31 
                              32 .globl deathCollision
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 7.
