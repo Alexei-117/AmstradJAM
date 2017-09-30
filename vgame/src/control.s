@@ -59,8 +59,7 @@
 
 	jump_table:
 		.db #-5 ,#-4 ,#-3 ,#-2
-		.db #-1 ,#-1 ,#0  ,#0
-		.db #02 ,#03 ,#05 ,#06
+		.db #-1 ,#-1 ,#0
 
 .area _CODE
 
@@ -183,9 +182,40 @@
 	;;CORRUPTS:
 	;;	HL, A, BC.
 	jumpControl::
-		ld a, (hero_jump)	;loading jumping situation
-		cp #-1 				;-1 indica que no está saltando
-		ret z 				;Si se da con que no está saltando, salta
+		ld a, (hero_jump)					;loading jumping situation
+		cp #-1 								;-1 indica que no está saltando
+		jr nz, continue_jumpControl	 		;Si se da con que no está saltando, salta
+
+			;if it is not jumping, it tries to fall
+
+			;;First we check if there are obstacles under
+			;ld hl, #hero_x
+			;ld de, #obs_x
+			;call avoidCollisionDown		; |
+			;cp #1						; 1 means, you can't keep falling.
+			;jp z, stop_falling_jumpControl
+
+			;;Now we check if its the end of the map
+			ld a, (hero_y) 					; A = hero_y
+			ld b, a
+			ld a, #200-64 					; preparing positive substraction
+			sub b 							; if this is negative (actual position - 136), then it must fall
+			
+			jp z, stop_falling_jumpControl	; |
+			jp m, stop_falling_jumpControl	; if it is negative, you can't keep falling
+
+
+			ld a, (hero_y)
+			add #03 						; hero_y += 3 -> gravity
+			ld (hero_y), a
+
+			stop_falling_jumpControl:		;deja de caer
+
+			ret
+
+
+
+		continue_jumpControl:
 
 		;load jumping iteration
 		ld hl, #jump_table	;load first position of jumping
@@ -201,7 +231,7 @@
 
 		;update hero_jump index
 		ld a, (hero_jump)	;loading actual jump iteration
-		cp #11
+		cp #06
 		jr nz, continue_main_jump ;continue hero jumping
 
 			;;End jumping
@@ -230,9 +260,9 @@
 		;;CHECK COLLISIONS WITH ENVIRORMENT
 		ld hl, #hero_x
 		ld de, #obs_x
-		;call avoidCollisionRight
-		;cp #1
-		;jp nz, skipRight			;;-----TESTING---------- if there is a collision, you can't move right
+		call avoidCollisionRight
+		cp #1
+		jp z, skipRight			 ;;-----TESTING---------- if there is a collision, you can't move right
 
 
 		ld hl, #key_right 			 ;loads key_D in hl
@@ -245,6 +275,7 @@
 
 		skipRight:
 
+
 		ld hl, #key_left			 ;loads key_A in hl
 		call cpct_isKeyPressed_asm	 ;checks if the key loaded in hl is pressed
 		cp #0 						 ;checks if debugger leaves a 0 behind, if it is 0, then A is not pressed
@@ -255,6 +286,7 @@
 
 		skipLeft:
 
+
 		ld hl, #key_up				 ;loads key_W in hl
 		call cpct_isKeyPressed_asm	 ;checks if the key loaded in hl is pressed
 		cp #0 						 ;checks if debugger leaves a 0 behind, if it is 0, then W is not pressed
@@ -264,6 +296,7 @@
 			call moveJumpMain
 
 		skipUp:
+
 
 		continueEnd:
 

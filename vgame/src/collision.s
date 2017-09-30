@@ -164,46 +164,49 @@
 
 		;;FOR NOW: IT ONLY AVOIDS RIGHT COLLISIONS
 
-		;ld a, (hl) 		;loading actual X in A
-		;add #01 		;moving 2 position to the right
-		;ld (hl), a 		;relocating
+		ld a, (hl) 		;loading actual X in A
+		inc a 			;moving 2 position to the right
+		ld (hl), a 		;relocating
 
-		call deathCollision ;analizing collision
+		call deathCollision 		;analizing collision
 		cp #1
-		jr z, right_avoidCollision
+		jr z, right_avoidCollision 	;avoid collision if returns a 1
 
-			;no need to avoid
-			;ld a, (hl)
-			;sub #01
-			;ld (hl), a 		;restoring values to object position
+			;continue the movement
+			ld a, #0
 
-			ld a, #1
+			ld b, (hl)
+			dec b
+			ld (hl), b 		;reflourish position
 			ret
 
-
 		right_avoidCollision:
+		ld a, #1
 
-		;ld a, (hl)
-		;sub #01
-		;ld (hl), a 		;restoring values to object position
+		ld b, (hl)
+		dec b
+		ld (hl), b 			;reflourish position
 
-		ld a, #0
 		ret
 
 	avoidCollisionDown::
 
-		;;FOR NOW: IT ONLY AVOIDS RIGHT COLLISIONS
+		;;FOR NOW: IT ONLY AVOIDS DOWN COLLISIONS
 
-		inc hl
+		inc hl			;increasing Y so to make prediction
+
 		ld a, (hl) 		;loading actual X in A
 		add #01 		;moving 2 positions to the right
 		ld (hl), a 		;relocating
+		
+		dec hl			;returning to original position
 
 		call deathCollision ;analizing collision
 		cp #1
 		jr z, down_avoidCollision
 
 			;no need to avoid
+			inc hl
 			ld a, (hl)
 			sub #01
 			ld (hl), a 		;restoring values to object position
@@ -215,6 +218,7 @@
 
 
 		down_avoidCollision:
+		inc hl
 
 		ld a, (hl)
 		sub #01
@@ -231,7 +235,7 @@
 	deathCollision::
 		call checkObstacleX
 		cp #0					
-		jr z, no_deathCollision		;if A turns to be 0, there's no collision on X
+		jr z, no_deathCollision_X		;if A turns to be 0, there's no collision on X
 
 		inc hl						;set Y position to check
 		inc de 						;same
@@ -248,5 +252,7 @@
 		no_deathCollision:
 		dec hl
 		dec de 				;restoring values to default
+
+		no_deathCollision_X:
 		ld a, #0
 		ret					;if no collision, returns A with a 0

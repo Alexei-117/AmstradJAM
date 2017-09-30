@@ -3,23 +3,19 @@
 -b _CODE = 0x4000
 -b _DATA = 0x0000
 -u
--k /home/laura/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80
--k /home/laura/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/share/sdcc/lib/z80
--l /home/laura/cpctelera/cpctelera/cpctelera.lib
+-k /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80
+-k /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/share/sdcc/lib/z80
+-l /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
 -l z80
 obj/sprites/Piernas.rel
-<<<<<<< HEAD
-obj/sprites/EdificiosFondo.rel
-=======
->>>>>>> 60fbd1c2a1d49d64fa63cfbf8d8016fb08aea566
 obj/sprites/test.rel
-obj/control.h.rel
 obj/cpctelera.h.rel
 obj/main.rel
 obj/collision.h.rel
+obj/collision.rel
 obj/sprite.rel
 obj/sprite.h.rel
 obj/control.rel
-obj/collision.rel
+obj/control.h.rel
 
 -e

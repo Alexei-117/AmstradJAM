@@ -17,182 +17,98 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  l__INITIALIZER                  
      00000000  s__CABS                         
      00000000  s__DABS                         
-     00000016  l__DATA                         
-<<<<<<< HEAD
-     00000A85  l__CODE                         
+     00000011  l__DATA                         
+     0000048C  l__CODE                         
      00004000  s__CODE                         
-     00004A85  s__DATA                         
-     00004A9B  s__GSFINAL                      
-     00004A9B  s__GSINIT                       
-     00004A9B  s__HOME                         
-     00004A9B  s__INITIALIZED                  
-     00004A9B  s__INITIALIZER                  
-=======
-     0000070C  l__CODE                         
-     00004000  s__CODE                         
-     0000470C  s__DATA                         
-     00004722  s__GSFINAL                      
-     00004722  s__GSINIT                       
-     00004722  s__HOME                         
-     00004722  s__INITIALIZED                  
-     00004722  s__INITIALIZER                  
->>>>>>> 60fbd1c2a1d49d64fa63cfbf8d8016fb08aea566
+     0000448C  s__DATA                         
+     0000449D  s__GSFINAL                      
+     0000449D  s__GSINIT                       
+     0000449D  s__HOME                         
+     0000449D  s__INITIALIZED                  
+     0000449D  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-<<<<<<< HEAD
-_CODE                               00004000    00000A85 =        2693. bytes (REL,CON)
-=======
-_CODE                               00004000    0000070C =        1804. bytes (REL,CON)
->>>>>>> 60fbd1c2a1d49d64fa63cfbf8d8016fb08aea566
+_CODE                               00004000    0000048C =        1164. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
      00004000  _sprite_palette                    Piernas
-<<<<<<< HEAD
      00004010  _sprite_Piernas                    Piernas
-     00004090  _g_tileset                         EdificiosFondo
-     000040A8  _g_EdificiosFondo_00               EdificiosFondo
-     00004128  _g_EdificiosFondo_01               EdificiosFondo
-     000041A8  _g_EdificiosFondo_02               EdificiosFondo
-     00004228  _g_EdificiosFondo_03               EdificiosFondo
-     000042A8  _g_EdificiosFondo_04               EdificiosFondo
-     00004328  _g_EdificiosFondo_05               EdificiosFondo
-     000043A8  _g_EdificiosFondo_06               EdificiosFondo
-     00004428  _g_EdificiosFondo_07               EdificiosFondo
-     000044A8  _g_EdificiosFondo_08               EdificiosFondo
-     00004528  _g_EdificiosFondo_09               EdificiosFondo
-     000045A8  _g_EdificiosFondo_10               EdificiosFondo
-     00004628  _g_EdificiosFondo_11               EdificiosFondo
-     000046A8  _t_palette                         test
-     000046B8  _t_test                            test
-     00004704  _main                              
-     00004729  drawBox                            
-     00004741  moveBox                            
-     0000479A  avoidCollisionRight                
-     000047B3  avoidCollisionDown                 
-     000047CF  avoidCollision                     
-     000047D0  deathCollision                     
-     000047EA  moveObject                         
-     0000483B  jumpControl                        
-     0000485E  checkUserInput                     
-     0000488F  _cpct_isKeyPressed                 cpct_keyboard
-     0000488F  cpct_isKeyPressed_asm              cpct_keyboard
-     0000489B  _cpct_drawStringM0                 cpct_strings
-     000048A3  cpct_drawStringM0_asm              cpct_strings
-     000048BF  _cpct_drawCharM0                   cpct_strings
-     000048CC  cpct_drawCharM0_asm                cpct_strings
-     0000494C  _cpct_keyboardStatusBuffer         cpct_keyboard
-     00004956  dc_mode0_ct                        cpct_strings
-     00004966  _cpct_waitVSYNC                    cpct_video
-     00004966  cpct_waitVSYNC_asm                 cpct_video
-     0000496E  cpct_setVideoMode_asm              cpct_video
-     0000497B  _cpct_disableFirmware              cpct_firmware
-     0000497B  _cpct_removeInterruptHandler       cpct_firmware
-     0000497B  cpct_disableFirmware_asm           cpct_firmware
-     0000497B  cpct_removeInterruptHandler_asm    cpct_firmware
-     0000498B  cpct_drawSolidBox_asm              cpct_sprites
-     00004A37  _cpct_mode_rom_status              cpct_firmware
-     00004A38  cpct_getScreenPtr_asm              cpct_video
-     00004A54  _cpct_scanKeyboard                 cpct_keyboard
-     00004A54  cpct_scanKeyboard_asm              cpct_keyboard
-=======
-     00004009  _sprite_Piernas_0                  Piernas
-     00004089  _sprite_Piernas_1                  Piernas
-     00004109  _sprite_Piernas_2                  Piernas
-     00004189  _sprite_Piernas_3                  Piernas
-     00004209  _sprite_Piernas_4                  Piernas
-     00004289  _sprite_Piernas_5                  Piernas
-     00004309  _sprite_Piernas_6                  Piernas
-     00004389  _sprite_Piernas_7                  Piernas
-     00004409  _t_palette                         test
-     00004419  _t_test                            test
-     00004465  _main                              
-     0000448A  moveObject                         
-     000044DB  jumpControl                        
-     000044FE  checkUserInput                     
-     0000453B  drawBox                            
-     00004553  moveBox                            
-     000045A7  avoidCollision                     
-     000045BD  deathCollision                     
-     000045D7  _cpct_isKeyPressed                 cpct_keyboard
-     000045D7  cpct_isKeyPressed_asm              cpct_keyboard
-     000045E3  _cpct_keyboardStatusBuffer         cpct_keyboard
-     000045ED  _cpct_waitVSYNC                    cpct_video
-     000045ED  cpct_waitVSYNC_asm                 cpct_video
-     000045F5  cpct_setVideoMode_asm              cpct_video
-     00004602  _cpct_disableFirmware              cpct_firmware
-     00004602  _cpct_removeInterruptHandler       cpct_firmware
-     00004602  cpct_disableFirmware_asm           cpct_firmware
-     00004602  cpct_removeInterruptHandler_asm    cpct_firmware
-     00004612  cpct_drawSolidBox_asm              cpct_sprites
-     000046BE  _cpct_mode_rom_status              cpct_firmware
-     000046BF  cpct_getScreenPtr_asm              cpct_video
-     000046DB  _cpct_scanKeyboard                 cpct_keyboard
-     000046DB  cpct_scanKeyboard_asm              cpct_keyboard
->>>>>>> 60fbd1c2a1d49d64fa63cfbf8d8016fb08aea566
+     00004090  _t_palette                         test
+     000040A0  _t_test                            test
+     000040EC  _main                              
+     00004111  drawBox                            
+     00004129  moveBox                            
+     00004182  avoidCollisionRight                
+     00004198  avoidCollisionDown                 
+     000041B7  avoidCollision                     
+     000041B8  deathCollision                     
+     000041D2  moveObject                         
+     00004223  jumpControl                        
+     0000425D  checkUserInput                     
+     00004296  _cpct_isKeyPressed                 cpct_keyboard
+     00004296  cpct_isKeyPressed_asm              cpct_keyboard
+     000042A2  _cpct_drawStringM0                 cpct_strings
+     000042AA  cpct_drawStringM0_asm              cpct_strings
+     000042C6  _cpct_drawCharM0                   cpct_strings
+     000042D3  cpct_drawCharM0_asm                cpct_strings
+     00004353  _cpct_keyboardStatusBuffer         cpct_keyboard
+     0000435D  dc_mode0_ct                        cpct_strings
+     0000436D  _cpct_waitVSYNC                    cpct_video
+     0000436D  cpct_waitVSYNC_asm                 cpct_video
+     00004375  cpct_setVideoMode_asm              cpct_video
+     00004382  _cpct_disableFirmware              cpct_firmware
+     00004382  _cpct_removeInterruptHandler       cpct_firmware
+     00004382  cpct_disableFirmware_asm           cpct_firmware
+     00004382  cpct_removeInterruptHandler_asm    cpct_firmware
+     00004392  cpct_drawSolidBox_asm              cpct_sprites
+     0000443E  _cpct_mode_rom_status              cpct_firmware
+     0000443F  cpct_getScreenPtr_asm              cpct_video
+     0000445B  _cpct_scanKeyboard                 cpct_keyboard
+     0000445B  cpct_scanKeyboard_asm              cpct_keyboard
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-<<<<<<< HEAD
-_DATA                               00004A85    00000016 =          22. bytes (REL,CON)
+_DATA                               0000448C    00000011 =          17. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00004A86  obs_x                              
-     00004A87  obs_y                              
-     00004A88  obs_x_size                         
-     00004A89  obs_y_size                         
-     00004A8A  hero_x                             
-     00004A8B  hero_y                             
-     00004A8C  hero_x_size                        
-     00004A8D  hero_y_size                        
-=======
-_DATA                               0000470C    00000016 =          22. bytes (REL,CON)
-
-      Value  Global                              Global Defined In Module
-      -----  --------------------------------   ------------------------
-     0000470D  hero_x                             
-     0000470E  hero_y                             
-     0000470F  hero_x_size                        
-     00004710  hero_y_size                        
-     0000471E  obs_x                              
-     0000471F  obs_y                              
-     00004720  obs_x_size                         
-     00004721  obs_y_size                         
->>>>>>> 60fbd1c2a1d49d64fa63cfbf8d8016fb08aea566
+     0000448D  obs_x                              
+     0000448E  obs_y                              
+     0000448F  obs_x_size                         
+     00004490  obs_y_size                         
+     00004491  hero_x                             
+     00004492  hero_y                             
+     00004493  hero_x_size                        
+     00004494  hero_y_size                        
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 
 Files Linked                              [ module(s) ]
 
 obj/sprites/Piernas.rel                   [ Piernas ]
-<<<<<<< HEAD
-obj/sprites/EdificiosFondo.rel            [ EdificiosFondo ]
-=======
->>>>>>> 60fbd1c2a1d49d64fa63cfbf8d8016fb08aea566
 obj/sprites/test.rel                      [ test ]
-obj/control.h.rel                         [  ]
 obj/cpctelera.h.rel                       [  ]
 obj/main.rel                              [  ]
 obj/collision.h.rel                       [  ]
+obj/collision.rel                         [  ]
 obj/sprite.rel                            [  ]
 obj/sprite.h.rel                          [  ]
 obj/control.rel                           [  ]
-obj/collision.rel                         [  ]
+obj/control.h.rel                         [  ]
 
 
 Libraries Linked                          [ object file ]
 
-/home/laura/cpctelera/cpctelera/cpctelera.lib
+/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_isKeyPressed.rel ]
-<<<<<<< HEAD
 /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawStringM0.rel ]
 /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
@@ -202,23 +118,18 @@ Libraries Linked                          [ object file ]
 /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_dc_mode0_ct.rel ]
 /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
-=======
-/home/laura/cpctelera/cpctelera/cpctelera.lib
-                                          [ keyboard.rel ]
-/home/laura/cpctelera/cpctelera/cpctelera.lib
->>>>>>> 60fbd1c2a1d49d64fa63cfbf8d8016fb08aea566
                                           [ cpct_waitVSYNC.rel ]
-/home/laura/cpctelera/cpctelera/cpctelera.lib
+/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_setVideoMode_asmbindings.re ]
-/home/laura/cpctelera/cpctelera/cpctelera.lib
+/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_removeInterruptHandler.rel ]
-/home/laura/cpctelera/cpctelera/cpctelera.lib
+/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawSolidBox_asmbindings.re ]
-/home/laura/cpctelera/cpctelera/cpctelera.lib
+/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
                                           [ cpc_mode_rom_status.rel ]
-/home/laura/cpctelera/cpctelera/cpctelera.lib
+/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_getScreenPtr_asmbindings.re ]
-/home/laura/cpctelera/cpctelera/cpctelera.lib
+/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_scanKeyboard.rel ]
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 5.

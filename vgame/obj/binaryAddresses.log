@@ -1,7 +1,3 @@
 Generated Binary File obj/vgame.bin:
 Load Address = 4000
-<<<<<<< HEAD
-Run  Address = 4704 
-=======
-Run  Address = 4465 
->>>>>>> 60fbd1c2a1d49d64fa63cfbf8d8016fb08aea566
+Run  Address = 40EC 
