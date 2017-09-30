@@ -14,7 +14,7 @@
  </tileset>
  <layer name="Capa de Patrones 1" width="10" height="5">
   <data encoding="base64" compression="zlib">
-   eJzjZGBg4MSDYQDE5gJibiSMzIcBViBmA2J2IObAwocBRiBmAmJmIGbBwocBAQIYBgCMQAFl
+   eJzjZGBg4MSDuaEYxOZC4nOj8WHyrEDMBsTsQMyBh88IxExAzAzELHj4AkRiAKjUAbw=
   </data>
  </layer>
 </map>
