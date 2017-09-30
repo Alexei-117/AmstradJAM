@@ -17,22 +17,22 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  l__INITIALIZER                  
      00000000  s__CABS                         
      00000000  s__DABS                         
-     00000011  l__DATA                         
-     00003754  l__CODE                         
+     00000029  l__DATA                         
+     0000399B  l__CODE                         
      00004000  s__CODE                         
-     00007754  s__DATA                         
-     00007765  s__GSFINAL                      
-     00007765  s__GSINIT                       
-     00007765  s__HOME                         
-     00007765  s__INITIALIZED                  
-     00007765  s__INITIALIZER                  
+     0000799B  s__DATA                         
+     000079C4  s__GSFINAL                      
+     000079C4  s__GSINIT                       
+     000079C4  s__HOME                         
+     000079C4  s__INITIALIZED                  
+     000079C4  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00003754 =       14164. bytes (REL,CON)
+_CODE                               00004000    0000399B =       14747. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -91,7 +91,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00003754 =       14164. bytes (REL,CON)
+_CODE                               00004000    0000399B =       14747. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -151,62 +151,79 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00003754 =       14164. bytes (REL,CON)
+_CODE                               00004000    0000399B =       14747. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
      000072C8  _sprite_palette                    Piernas
-     000072D8  _sprite_Piernas                    Piernas
-     00007358  _t_palette                         test
-     00007368  _t_test                            test
-     000073B4  _main                              
-     000073D9  drawBox                            
-     000073F1  moveBox                            
-     0000744A  avoidCollisionRight                
-     00007460  avoidCollisionDown                 
-     0000747F  avoidCollision                     
-     00007480  deathCollision                     
-     0000749A  moveObject                         
-     000074EB  jumpControl                        
-     00007525  checkUserInput                     
-     0000755E  _cpct_isKeyPressed                 cpct_keyboard
-     0000755E  cpct_isKeyPressed_asm              cpct_keyboard
-     0000756A  _cpct_drawStringM0                 cpct_strings
-     00007572  cpct_drawStringM0_asm              cpct_strings
-     0000758E  _cpct_drawCharM0                   cpct_strings
-     0000759B  cpct_drawCharM0_asm                cpct_strings
-     0000761B  _cpct_keyboardStatusBuffer         cpct_keyboard
-     00007625  dc_mode0_ct                        cpct_strings
-     00007635  _cpct_waitVSYNC                    cpct_video
-     00007635  cpct_waitVSYNC_asm                 cpct_video
-     0000763D  cpct_setVideoMode_asm              cpct_video
-     0000764A  _cpct_disableFirmware              cpct_firmware
-     0000764A  _cpct_removeInterruptHandler       cpct_firmware
-     0000764A  cpct_disableFirmware_asm           cpct_firmware
-     0000764A  cpct_removeInterruptHandler_asm    cpct_firmware
-     0000765A  cpct_drawSolidBox_asm              cpct_sprites
-     00007706  _cpct_mode_rom_status              cpct_firmware
-     00007707  cpct_getScreenPtr_asm              cpct_video
-     00007723  _cpct_scanKeyboard                 cpct_keyboard
-     00007723  cpct_scanKeyboard_asm              cpct_keyboard
+     000072D1  _sprite_Piernas                    Piernas
+     00007351  _t_palette                         test
+     00007361  _t_test                            test
+     00007381  _cpct_keyboardStatusBuffer         cpct_keyboard
+     000073D8  loadMenu                           cpct_keyboard
+     000073FD  checkMenuInput                     cpct_keyboard
+     000074A4  _main                              
+     000074E0  loadHud                            
+     000074EA  hudUpdate                          
+     0000751B  incPoints                          
+     00007527  incPoints1                         
+     00007538  incPoints2                         
+     00007549  incPoints3                         
+     0000756A  loseHP                             
+     00007586  drawBox                            
+     0000759E  moveBox                            
+     000075F7  avoidCollisionRight                
+     0000760D  avoidCollisionDown                 
+     0000762C  avoidCollision                     
+     0000762D  deathCollision                     
+     00007647  bullet_x                           
+     00007648  bullet_y                           
+     00007649  bullet_w                           
+     0000764A  bullet_alive                       
+     0000764B  shootBullet                        
+     00007665  shootUpdate                        
+     000076BB  drawBullet                         
+     000076EB  moveObject                         
+     0000773C  jumpControl                        
+     00007776  checkUserInput                     
+     000077AF  _cpct_isKeyPressed                 cpct_keyboard
+     000077AF  cpct_isKeyPressed_asm              cpct_keyboard
+     000077BB  _cpct_drawStringM0                 cpct_strings
+     000077C3  cpct_drawStringM0_asm              cpct_strings
+     000077DF  _cpct_drawCharM0                   cpct_strings
+     000077EC  cpct_drawCharM0_asm                cpct_strings
+     0000786C  dc_mode0_ct                        cpct_strings
+     0000787C  _cpct_waitVSYNC                    cpct_video
+     0000787C  cpct_waitVSYNC_asm                 cpct_video
+     00007884  cpct_setVideoMode_asm              cpct_video
+     00007891  _cpct_disableFirmware              cpct_firmware
+     00007891  _cpct_removeInterruptHandler       cpct_firmware
+     00007891  cpct_disableFirmware_asm           cpct_firmware
+     00007891  cpct_removeInterruptHandler_asm    cpct_firmware
+     000078A1  cpct_drawSolidBox_asm              cpct_sprites
+     0000794D  _cpct_mode_rom_status              cpct_firmware
+     0000794E  cpct_getScreenPtr_asm              cpct_video
+     0000796A  _cpct_scanKeyboard                 cpct_keyboard
+     0000796A  cpct_scanKeyboard_asm              cpct_keyboard
+
 ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_DATA                               00007754    00000011 =          17. bytes (REL,CON)
+_DATA                               0000799B    00000029 =          41. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00007755  obs_x                              
-     00007756  obs_y                              
-     00007757  obs_x_size                         
-     00007758  obs_y_size                         
-     00007759  hero_x                             
-     0000775A  hero_y                             
-     0000775B  hero_x_size                        
-     0000775C  hero_y_size                        
-
+     0000799B  selector                           cpct_keyboard
+     000079B4  obs_x                              
+     000079B5  obs_y                              
+     000079B6  obs_x_size                         
+     000079B7  obs_y_size                         
+     000079B8  hero_x                             
+     000079B9  hero_y                             
+     000079BA  hero_x_size                        
+     000079BB  hero_y_size                        
 ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
 
 Files Linked                              [ module(s) ]
@@ -214,12 +231,20 @@ Files Linked                              [ module(s) ]
 obj/sprites/Fondotiles2.rel               [ Fondotiles2 ]
 obj/sprites/Piernas.rel                   [ Piernas ]
 obj/sprites/test.rel                      [ test ]
+obj/hero.h.rel                            [  ]
 obj/cpctelera.h.rel                       [  ]
+obj/hero.rel                              [  ]
+obj/shoot.h.rel                           [  ]
+obj/menu.rel                              [ cpct_keyboard ]
 obj/main.rel                              [  ]
+obj/menu.h.rel                            [  ]
+obj/hud.rel                               [  ]
 obj/collision.h.rel                       [  ]
 obj/collision.rel                         [  ]
 obj/sprite.rel                            [  ]
 obj/sprite.h.rel                          [  ]
+obj/shoot.rel                             [  ]
+obj/hud.h.rel                             [  ]
 obj/control.rel                           [  ]
 obj/control.h.rel                         [  ]
 
@@ -232,8 +257,6 @@ Libraries Linked                          [ object file ]
                                           [ cpct_drawStringM0.rel ]
 /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawCharM0.rel ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
-                                          [ keyboard.rel ]
 /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_dc_mode0_ct.rel ]
 /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib

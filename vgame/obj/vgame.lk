@@ -10,12 +10,20 @@
 obj/sprites/Fondotiles2.rel
 obj/sprites/Piernas.rel
 obj/sprites/test.rel
+obj/hero.h.rel
 obj/cpctelera.h.rel
+obj/hero.rel
+obj/shoot.h.rel
+obj/menu.rel
 obj/main.rel
+obj/menu.h.rel
+obj/hud.rel
 obj/collision.h.rel
 obj/collision.rel
 obj/sprite.rel
 obj/sprite.h.rel
+obj/shoot.rel
+obj/hud.h.rel
 obj/control.rel
 obj/control.h.rel
 
