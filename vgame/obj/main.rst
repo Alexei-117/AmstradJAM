@@ -10,7 +10,7 @@ Hexadecimal [16-Bits]
                               5 	;==================
                               6 
                               7 	;Control Variables
-   42E8 01                    8 	wait_time: .db #0x01
+   4303 01                    8 	wait_time: .db #0x01
                               9 
                              10 	;==================
                              11 	;;;PUBLIC DATA
@@ -190,10 +190,10 @@ Hexadecimal [16-Bits]
                              33 	;	C
                              34 
    4030                      35 	initialize:
-   4030 CD DE 41      [17]   36 		call cpct_disableFirmware_asm	;disable firmware so we can set another options
+   4030 CD F9 41      [17]   36 		call cpct_disableFirmware_asm	;disable firmware so we can set another options
    4033 3A 39 00      [13]   37 		ld a, (0x0039) 					;saves data from firmware location
    4036 0E 00         [ 7]   38 		ld c, #0 						;load video mode 0 on screen
-   4038 CD D1 41      [17]   39 		call cpct_setVideoMode_asm
+   4038 CD EC 41      [17]   39 		call cpct_setVideoMode_asm
                              40 
    403B C9            [10]   41 		ret
                              42 
@@ -207,20 +207,20 @@ Hexadecimal [16-Bits]
    403C F5            [11]   50 		push af			;pushes color on the pile
    403D 11 00 C0      [10]   51 		ld de, #0xC000	;beginning of screen
                              52 
-   4040 3A ED 42      [13]   53 		ld a, (hero_x)
+   4040 3A 08 43      [13]   53 		ld a, (hero_x)
    4043 4F            [ 4]   54 		ld c, a 		; b = hero_X
                              55 
-   4044 3A EE 42      [13]   56 		ld a, (hero_y)
+   4044 3A 09 43      [13]   56 		ld a, (hero_y)
    4047 47            [ 4]   57 		ld b, a 		; c = hero_y
                              58 		
-   4048 CD 9B 42      [17]   59 		call cpct_getScreenPtr_asm	;gets pointer in HL with the data passed on the register
+   4048 CD B6 42      [17]   59 		call cpct_getScreenPtr_asm	;gets pointer in HL with the data passed on the register
                              60 
    404B EB            [ 4]   61 		ex de, hl 		;HL holds the screen pointer, so we swap it with de for fast change
                              62 		;ld a, #0xFF  	;red colour
    404C F1            [10]   63 		pop af			;pops the colour
    404D 01 04 10      [10]   64 		ld bc, #0x1004 	;heigh: 8x8 pixels on mode 1 (2 bytes every 4 pixels)
                              65 		
-   4050 CD EE 41      [17]   66 		call cpct_drawSolidBox_asm ;draw box itself
+   4050 CD 09 42      [17]   66 		call cpct_drawSolidBox_asm ;draw box itself
    4053 C9            [10]   67 		ret
                              68 
                              69 
@@ -229,7 +229,7 @@ Hexadecimal [16-Bits]
                              72 	;	A;
                              73 
    4054                      74 	esperar:
-   4054 3A E8 42      [13]   75 		ld a, (wait_time)
+   4054 3A 03 43      [13]   75 		ld a, (wait_time)
    4057                      76 		bucle:
    4057 76            [ 4]   77 			halt
    4058 3D            [ 4]   78 			dec a
@@ -260,8 +260,8 @@ Hexadecimal [16-Bits]
    4069 CD 99 40      [17]   98 			call moveBox		;move testBox
                              99 
                             100 
-   406C CD 59 41      [17]  101 			call jumpControl	;check jumping situation of the character
-   406F CD 7C 41      [17]  102 			call checkUserInput	;Checking if user pressed a key
+   406C CD 6E 41      [17]  101 			call jumpControl	;check jumping situation of the character
+   406F CD 91 41      [17]  102 			call checkUserInput	;Checking if user pressed a key
                             103 
    4072 3E FF         [ 7]  104 			ld a, #0xFF
    4074 CD 3C 40      [17]  105 			call draw_hero		;paint hero on screen
@@ -270,5 +270,5 @@ Hexadecimal [16-Bits]
    4079 CD 81 40      [17]  108 			call drawBox 		;draw testing box
                             109 
                             110 
-   407C CD C9 41      [17]  111 			call cpct_waitVSYNC_asm		;wait till repainting
+   407C CD E4 41      [17]  111 			call cpct_waitVSYNC_asm		;wait till repainting
    407F 18 DE         [12]  112 			jr _main_bucle

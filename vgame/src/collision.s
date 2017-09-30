@@ -74,6 +74,7 @@
 
 			;;here it might still collide
 			;;formulae: if(hero_x + hero_x_size <= obs_x) -> if(hero_x + hero_x_size - obs_x <= 0)
+
 				ld a, (hl)		; |
 				ld c, a 		; C = hero_x
 				inc hl
@@ -87,6 +88,7 @@
 				ld c, a 		; C = obs_x
 				ld a, b 		; A = hero_x + hero_x_size
 				sub c			; A = hero_x + hero_x_size - obs_x
+
 				jr z, no_collision_x ;if it gives a 0, then no collision either
 				jp m, no_collision_x ;if its less than 0, less of a collision, NOTHING
 
@@ -118,6 +120,7 @@
 
 			;;here it might still collide
 			;;formulae: if(hero_y + hero_y_size <= obs_y) -> if(hero_y + hero_y_size - obs_y <= 0)
+
 				ld a, (hl)		; |
 				ld c, a 		; C = hero_y
 				inc hl
@@ -127,10 +130,11 @@
 				dec hl 			; -2 positions to return to original
 				add c 			; A = hero_y + hero_y_size
 				ld b, a			; B = A
-				ld a, (de)	; A = obs_y
+				ld a, (de)		;A = obs_y
 				ld c, a 		; C = obs_y
 				ld a, b 		; A = hero_y + hero_y_size
 				sub c			; A = hero_y + hero_y_size - obs_y
+
 				jr z, no_collision_y ;if it gives a 0, then no collision either
 				jp m, no_collision_y ;if its less than 0, less of a collision, NOTHING
 
@@ -147,6 +151,33 @@
 	;;;PUBLIC FUNCTIONS
 	;==================
 	avoidCollision::
+
+		;;FOR NOW: IT ONLY AVOIDS RIGHT COLLISIONS
+
+		ld a, (hl) 		;loading actual X in A
+		inc a 			;moving 1 position to the right
+		ld (hl), a 		;relocating
+
+		call deathCollision ;analizing collision
+		cp #1
+		jr z, right_avoidCollision
+
+			;no need to avoid
+			ld a, (hl)
+			dec a
+			ld (hl), a 		;restoring values to object position
+
+			ld a, #0
+			ret
+
+
+		right_avoidCollision:
+		
+		ld a, (hl)
+		dec a
+		ld (hl), a 		;restoring values to object position
+
+		ld a, #1
 		ret
 
 	deathCollision::

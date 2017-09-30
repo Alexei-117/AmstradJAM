@@ -226,9 +226,17 @@
 
 		ld hl, #hero_x
 		ld de, #obs_x
-		call deathCollision
+		call avoidCollision
 		cp #1
-		ret z 				;;-----TESTING---------- if there is a collision, it returns
+		jp nz, dont_avoid_colliding				;;-----TESTING---------- if there is a collision, it returns
+
+
+			;avoid colliding
+			call moveLeftMain
+			ret
+
+
+		dont_avoid_colliding:
 
 		call cpct_scanKeyboard_asm  ;checks a key is pressed
 		
