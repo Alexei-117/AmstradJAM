@@ -7,14 +7,6 @@
 	;Control Variables
 	wait_time: .db #0x01
 
-	;Screen limits
-	limit_up: .db #0xC0
-	limit_down: .db #0xC7
-	limit_left: .db #0x00
-	limit_right: .db #0x4F
-	line_jump: .db #0x50
-
-
 	;==================
 	;;;PUBLIC DATA
 	;==================
