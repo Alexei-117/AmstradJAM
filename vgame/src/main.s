@@ -103,7 +103,7 @@
 			ld a, #0x00
 			call draw_hero		;Erasing the hero
 
-
+			call jumpControl	;check jumping situation of the character
 			call checkUserInput	;Checking if user pressed a key
 
 			ld a, #0xFF

@@ -38,6 +38,12 @@
 .equ key_up    ,#0x0807
 .equ key_down  ,#0x1007
 
+	;general directions
+.equ up 		,#0
+.equ down 		,#1
+.equ left 		,#2
+.equ right 		,#3
+
 .equ key_jump  ,#0x8005
 
 	;==================
@@ -49,6 +55,12 @@
 	hero_y:: .db #80
 	hero_x_size:: .db #0x02
 	hero_y_size:: .db #0x01
+	hero_jump: .db #-1		;initially, it's not jumping
+
+	jump_table:
+		.db #-5 ,#-4 ,#-3 ,#-2
+		.db #-1 ,#-1 ,#0  ,#0
+		.db #02 ,#03 ,#05 ,#06
 
 .area _CODE
 
@@ -62,40 +74,148 @@
 	;;;PRIVATE FUNCTIONS
 	;===================
 
+	;Moving in the direction given
+	;Specify the object to move
+	;	and the direction
+	;
+	;NEEDS:	
+	;	B-> direction to move (0,up,1,right,2,down,3,left)
+	;	HL-> Beginning memory direction of the object
+	;
+	;CORRUPTS:
+	; 	A, B, HL
+
+	moveObject::
+		ld a, b 						;load direction of movement in B to A
+
+		cp #up 							;check if it is going up
+		jr nz, end_moveObject_1			;if 0, then not moving up, continue trying
+
+			;Is going up
+			inc hl 				;increment hl position to access its Y
+			ld a, (hl)			;load in A to
+			sub #02				;displaces the object 2 positions up
+			ld (hl), a 			;reloads info in position Y of the object
+			jr end_moveObject 	;jumps to end of movement
+
+		end_moveObject_1:
+
+		cp #down 						;check if it is 0
+		jr nz, end_moveObject_2			;if 0, then not moving down, continue trying
+
+			;Is going down
+			inc hl 				;increment hl position to access its Y
+			ld a, (hl)			;load in A to
+			add a, #02	 		;displaces the object 2 positions down
+			ld (hl), a 			;reloads info in position Y of the object
+			jr end_moveObject 	;jumps to end of movement
+
+		end_moveObject_2:
+
+		cp #left 						;check if it is 0
+		jr nz, end_moveObject_3			;if 0, then not moving left, continue trying
+
+			;Is going left
+			ld a, (hl)			;load in A to
+			dec a				;displaces the object to the left
+			ld (hl), a 			;reloads info in position X of the object
+			jr end_moveObject 	;jumps to end of movement
+
+		end_moveObject_3:
+
+		cp #right 						;check if it is 0
+		jr nz, end_moveObject			;if 0, then not moving right, then not moving
+
+			;Is going right
+			ld a, (hl)			;load in A to
+			inc a				;displaces the object to the right
+			ld (hl), a 			;reloads info in position X of the object
+
+		end_moveObject:
+
+		ret
+
+
+
 	;Moving main character throughout 4 axis
 	;CORRUPTS:
-	;	AF
+	;	HL, B, A
 
 	moveRightMain:
-		ld a, (hero_x)		
-		inc a 				
-		ld (hero_x), a
+		ld a, (hero_x)
+		cp #80-8
+		ret z 			;can't move further than 80-8
+
+		ld hl, #hero_x 		;loading hero x data
+		ld b, #right 		;loading in B the axis to move on
+		call moveObject
 		ret
 
 	moveLeftMain:
-		ld a, (hero_x)		
-		dec a 				
-		ld (hero_x), a
+		ld a, (hero_x)
+		cp #0
+		ret z 			;can't move further than 0
+
+
+		ld hl, #hero_x
+		ld b, #left
+		call moveObject
 		ret
 
-	moveUpMain:
-		ld a, (hero_y)		
-		sub #04 				
-		ld (hero_y), a
-		ret
+	moveJumpMain:
+		ld 	a, (hero_jump)	; A = hero jump iteration
+		cp 	#-1
+		ret nz 				;if it's -1,  jump
 
-	moveDownMain:
-		ld a, (hero_y)		
-		add #04 				
-		ld (hero_y), a
+		;Main character is not jumping, so jump
+		inc a
+		ld (hero_jump), a 	;iteration starts at next position
+
 		ret
 
 	;===================
 	;;;PUBLIC FUNCTIONS
 	;===================
 
-	
-	;;Corrupts HL, A registers.
+	;;Checks if main character is jumping
+	;;CORRUPTS:
+	;;	HL, A, BC.
+	jumpControl::
+		ld a, (hero_jump)	;loading jumping situation
+		cp #-1 				;-1 indica que no está saltando
+		ret z 				;Si se da con que no está saltando, salta
+
+		;load jumping iteration
+		ld hl, #jump_table	;load first position of jumping
+		ld c,  a 			;load the jump situation in c, and 0 in b
+		ld b, #0
+		add hl, bc 			;move to the position of actual jump
+
+			;make it jump
+			ld b, (hl)		;B = jump value
+			ld a, (hero_y)	;A = hero_y
+			add b 			;a = a + b
+			ld (hero_y), a  ;hero_y = new jump position
+
+		;update hero_jump index
+		ld a, (hero_jump)	;loading actual jump iteration
+		cp #11
+		jr nz, continue_main_jump ;continue hero jumping
+
+			;;End jumping
+			ld a, #-2		;I load -2, cause later it adds 1 so it stays at -1
+
+		continue_main_jump:
+		inc a 				;
+		ld (hero_jump), a 	;jumping iteration set to next
+
+		ret					;termina el salto y salta
+
+
+
+	;;Checks user input and then moves the main character
+	;;CORRUPTS:
+	;;	HL, A.
 
 	checkUserInput::
 		;;======
@@ -112,7 +232,6 @@
 
 			;right is pressed
 			call moveRightMain
-			jr continueEnd			 ;one direction at a time
 
 		skipRight:
 
@@ -123,7 +242,6 @@
 
 			;left is pressed
 			call moveLeftMain
-			jr continueEnd			 ;one direction at a time
 
 		skipLeft:
 
@@ -133,21 +251,9 @@
 		jr z, skipUp			 	 ;This goes to up not pressed
 
 			;left is pressed
-			call moveUpMain
-			jr continueEnd			 ;one direction at a time
+			call moveJumpMain
 
 		skipUp:
-
-		ld hl, #key_down			 ;loads key_S in hl
-		call cpct_isKeyPressed_asm	 ;checks if the key loaded in hl is pressed
-		cp #0 						 ;checks if debugger leaves a 0 behind, if it is 0, thens is not pressed
-		jr z, skipDown			 	 ;This goes to down not pressed
-
-			;left is pressed
-			call moveDownMain
-			jr continueEnd			 ;one direction at a time
-	
-		skipDown:
 
 		continueEnd:
 
