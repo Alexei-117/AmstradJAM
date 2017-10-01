@@ -143,7 +143,7 @@
 
 	moveRightMain:
 		ld a, (hero_x)
-		cp #80-8
+		cp #80-4
 		ret z 			;can't move further than 80-8
 
 		ld hl, #hero_x 		;loading hero x data
@@ -176,7 +176,7 @@
 
 	moveDownMain:
 		ld a, (hero_y)
-		cp #200-8
+		cp #200-4
 		ret z 			;can't move further than 0
 
 
@@ -334,7 +334,7 @@
 
 		skipUp:
 
-		;CHECK COLLISIONS WITH ENVIRORMENT
+		;CHECK COLLISIONS WITH DOWN
 		ld hl, #hero_x
 		ld de, #obs_x
 		call avoidCollisionDown

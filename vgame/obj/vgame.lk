@@ -9,7 +9,6 @@
 -l z80
 obj/tiles/Fondotiles2.rel
 obj/sprites/test.rel
-obj/documento.rel
 obj/tiles/prueba4x4.rel
 obj/sprites/FONDOESTIRADO2.rel
 obj/sprites/prueba.rel

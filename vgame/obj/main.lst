@@ -16,13 +16,13 @@ Hexadecimal [16-Bits]
                              11 	;;;PUBLIC DATA
                              12 	;==================
                              13 	;Background
-                             14 	.globl _p_tileset
-                             15 	.globl _p_palette
+                             14 	.globl _l_tileset
+                             15 	.globl _l_palette
                              16 	.globl _pruebaMap
                              17 
                              18 	;Main hero
-                             19 	.globl _test_palette
-                             20 	.globl _test_test
+                             19 	.globl _lol_palette
+                             20 	.globl _lol_tileset
                              21 
                              22 .area _CODE
                              23 
@@ -287,18 +287,18 @@ Hexadecimal [16-Bits]
    001C CD 00 00      [17]   67 		call cpct_setVideoMode_asm
                              68 
                              69 		;;Set pallette
-   001F 21 00 00      [10]   70 		ld hl, #_p_palette		;Paleta de los sprites
+   001F 21 00 00      [10]   70 		ld hl, #_l_palette		;Paleta de los sprites
    0022 11 0C 00      [10]   71 		ld de, #12
    0025 CD 00 00      [17]   72 		call cpct_setPalette_asm
                              73 
                              74 		;;Draw map Sprite
                              75 
-   0028 21 00 00      [10]   76 		ld hl, #_p_tileset 					;I've got to pass the beginning of the tileset
-   002B CD 00 00      [17]   77 		call cpct_etm_setTileset2x4_asm
+                             76 		;ld hl, #_l_tileset 					;I've got to pass the beginning of the tileset
+                             77 		;call cpct_etm_setTileset2x4_asm
                              78 		
-   002E CD 00 00      [17]   79 		call paint_background
+                             79 		;call paint_background
                              80 
-   0031 C9            [10]   81 		ret
+   0028 C9            [10]   81 		ret
                              82 
                              83 	;Draws the main character on screen
                              84 	;Needs
@@ -306,70 +306,70 @@ Hexadecimal [16-Bits]
                              86 	;Corrupts:
                              87 	;	HL, DE, AF, BC
                              88 
-   0032                      89 	draw_hero:
-   0032 11 00 C0      [10]   90 		ld de, #0xC000	;beginning of screen
+   0029                      89 	draw_hero:
+   0029 11 00 C0      [10]   90 		ld de, #0xC000	;beginning of screen
                              91 
-   0035 3A 00 00      [13]   92 		ld a, (hero_x)
-   0038 4F            [ 4]   93 		ld c, a 		; b = hero_X
+   002C 3A 00 00      [13]   92 		ld a, (hero_x)
+   002F 4F            [ 4]   93 		ld c, a 		; b = hero_X
                              94 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 14.
 Hexadecimal [16-Bits]
 
 
 
-   0039 3A 00 00      [13]   95 		ld a, (hero_y)
-   003C 47            [ 4]   96 		ld b, a 		; c = hero_y
+   0030 3A 00 00      [13]   95 		ld a, (hero_y)
+   0033 47            [ 4]   96 		ld b, a 		; c = hero_y
                              97 		
-   003D CD 00 00      [17]   98 		call cpct_getScreenPtr_asm	;gets pointer in HL with the data passed on the register
+   0034 CD 00 00      [17]   98 		call cpct_getScreenPtr_asm	;gets pointer in HL with the data passed on the register
                              99 
                             100 		;clean background
-   0040 21 00 00      [10]  101 		ld hl, #_pruebaMap 					;Pushing the tilemap
-   0043 E5            [11]  102 		push hl
-   0044 EB            [ 4]  103 		ex de, hl 							;position of our character
-   0045 E5            [11]  104 		push hl
+                            101 		;ld hl, #_pruebaMap 					;Pushing the tilemap
+                            102 		;push hl
+                            103 		;ex de, hl 							;position of our character
+                            104 		;push hl
                             105 
                             106 		;Starting tilemap of painting
-   0046 3A 00 00      [13]  107 		ld a, (hero_x)
-   0049 4F            [ 4]  108 		ld c, a
-   004A CB 29         [ 8]  109 		sra c
-   004C CB 29         [ 8]  110 		sra c
-   004E 79            [ 4]  111 		ld a,c
-   004F EE F0         [ 7]  112 		xor #0xF0 
-   0051 4F            [ 4]  113 		ld c,a
-                            114 										;dividing in 4 the number the size of a tile
-   0052 3A 00 00      [13]  115 		ld a, (hero_y)
-   0055 47            [ 4]  116 		ld b, a
-   0056 CB 28         [ 8]  117 		sra b
-   0058 CB 28         [ 8]  118 		sra b
-   005A 78            [ 4]  119 		ld a,b
-   005B EE F0         [ 7]  120 		xor #0xF0
-   005D 47            [ 4]  121 		ld b,a 
+                            107 		;ld a, (hero_x)
+                            108 		;ld c, a
+                            109 		;sra c
+                            110 		;sra c
+                            111 		;ld a,c
+                            112 		;xor #0xF0 
+                            113 		;ld c,a
+                            114 	;									;dividing in 4 the number the size of a tile
+                            115 	;	ld a, (hero_y)
+                            116 ;		ld b, a
+                            117 		;sra b
+                            118 		;sra b
+                            119 		;ld a,b
+                            120 		;xor #0xF0
+                            121 		;ld b,a 
                             122 								
-   005E 11 02 02      [10]  123 		ld de, #0x0202						;Size in tiles of the drawing
-   0061 3E 28         [ 7]  124 		ld a, #0x28 						;Map width
-   0063 CD 00 00      [17]  125 		call cpct_etm_drawTileBox2x4_asm 	;Drawing function
+                            123 		;ld de, #0x0202						;Size in tiles of the drawing
+                            124 		;ld a, #0x28 						;Map width
+                            125 		;call cpct_etm_drawTileBox2x4_asm 	;Drawing function
                             126 
-   0066 11 00 C0      [10]  127 		ld de, #0xC000
-   0069 EB            [ 4]  128 		ex de, hl 			;HL holds the screen pointer, so we swap it with de for fast change
-   006A 21 00 00      [10]  129 		ld hl, #_test_test	;pointer to sprite of the test subject
-   006D 01 04 08      [10]  130 		ld bc, #0x0804 		;heigh: 8x8 pixels on mode 1 (2 bytes every 4 pixels)
+   0037 11 00 C0      [10]  127 		ld de, #0xC000
+   003A EB            [ 4]  128 		ex de, hl 			;HL holds the screen pointer, so we swap it with de for fast change
+   003B 21 00 00      [10]  129 		ld hl, #_lol_tileset	;pointer to sprite of the test subject
+   003E 01 04 16      [10]  130 		ld bc, #0x1604 		;heigh: 8x8 pixels on mode 1 (2 bytes every 4 pixels)
                             131 		
-   0070 CD 00 00      [17]  132 		call cpct_drawSprite_asm 	;draw sprite itself
-   0073 C9            [10]  133 		ret
+   0041 CD 00 00      [17]  132 		call cpct_drawSprite_asm 	;draw sprite itself
+   0044 C9            [10]  133 		ret
                             134 
                             135 
                             136 	;Waits the wait_time specified
                             137 	;Corrupts
                             138 	;	A;
                             139 
-   0074                     140 	esperar:
-   0074 3A 00 00      [13]  141 		ld a, (wait_time)
-   0077                     142 		bucle:
-   0077 76            [ 4]  143 			halt
-   0078 3D            [ 4]  144 			dec a
-   0079 20 FC         [12]  145 			jr nz, bucle
+   0045                     140 	esperar:
+   0045 3A 00 00      [13]  141 		ld a, (wait_time)
+   0048                     142 		bucle:
+   0048 76            [ 4]  143 			halt
+   0049 3D            [ 4]  144 			dec a
+   004A 20 FC         [12]  145 			jr nz, bucle
                             146 
-   007B C9            [10]  147 		ret
+   004C C9            [10]  147 		ret
                             148 
                             149 	;======
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 15.
@@ -379,56 +379,56 @@ Hexadecimal [16-Bits]
 
                             150 	;NUEVO|
                             151 	;======
-   007C                     152 	checkStart:
-   007C 3A 00 00      [13]  153 		ld 		a, (selector)
-   007F FE 0A         [ 7]  154 		cp 		#0x0A
-   0081 28 01         [12]  155 		jr 		z, clear
-   0083 C9            [10]  156 		ret
+   004D                     152 	checkStart:
+   004D 3A 00 00      [13]  153 		ld 		a, (selector)
+   0050 FE 0A         [ 7]  154 		cp 		#0x0A
+   0052 28 01         [12]  155 		jr 		z, clear
+   0054 C9            [10]  156 		ret
                             157 	;======
                             158 	;NUEVO|
                             159 	;======
-   0084                     160 	clear:
+   0055                     160 	clear:
                             161 		;LIMPIAR PUTA PANTALLA
-   0084 21 00 C0      [10]  162 		ld 		hl, #0xC000
-   0087                     163 		working:
-   0087 3E 00         [ 7]  164 		ld 		a, #0x00
-   0089 77            [ 7]  165 		ld 		(hl), a
-   008A 23            [ 6]  166 		inc 	hl
-   008B 7D            [ 4]  167 		ld 		a, l
-   008C D6 FF         [ 7]  168 		sub 	#0xFF
-   008E 20 F7         [12]  169 		jr 		nz, working
-   0090 7C            [ 4]  170 		ld 		a, h
-   0091 D6 FF         [ 7]  171 		sub 	#0xFF
-   0093 20 F2         [12]  172 		jr 		nz, working
-   0095 CD 00 00      [17]  173 		call	paint_background
-   0098 CD 00 00      [17]  174 		call 	loadHud
-   009B 18 12         [12]  175 		jr 		_main_bucle
-   009D C9            [10]  176 		ret
+   0055 21 00 C0      [10]  162 		ld 		hl, #0xC000
+   0058                     163 		working:
+   0058 3E 00         [ 7]  164 		ld 		a, #0x00
+   005A 77            [ 7]  165 		ld 		(hl), a
+   005B 23            [ 6]  166 		inc 	hl
+   005C 7D            [ 4]  167 		ld 		a, l
+   005D D6 FF         [ 7]  168 		sub 	#0xFF
+   005F 20 F7         [12]  169 		jr 		nz, working
+   0061 7C            [ 4]  170 		ld 		a, h
+   0062 D6 FF         [ 7]  171 		sub 	#0xFF
+   0064 20 F2         [12]  172 		jr 		nz, working
+                            173 		;call	paint_background
+   0066 CD 00 00      [17]  174 		call 	loadHud
+   0069 18 12         [12]  175 		jr 		_main_bucle
+   006B C9            [10]  176 		ret
                             177 
                             178 	;==================
                             179 	;;;PUBLIC FUNCIONS
                             180 	;==================
                             181 
-   009E                     182 	_main::
+   006C                     182 	_main::
                             183 
-   009E CD 14 00      [17]  184 		call initialize		;initializes all functions and firmware options
+   006C CD 14 00      [17]  184 		call initialize		;initializes all functions and firmware options
                             185 		;======
                             186 		;NUEVO|
                             187 		;======
-   00A1 CD 00 00      [17]  188 		call 	loadMenu
+   006F CD 00 00      [17]  188 		call 	loadMenu
                             189 		;======
                             190 		;NUEVO|
                             191 		;======
-   00A4                     192 		_menu_bucle:
-   00A4 CD 00 00      [17]  193 			call	checkMenuInput
-   00A7 CD 7C 00      [17]  194 			call 	checkStart
-   00AA CD 00 00      [17]  195 			call 	cpct_waitVSYNC_asm
-   00AD 18 F5         [12]  196 			jr 		_menu_bucle
-   00AF                     197 		_main_bucle:
+   0072                     192 		_menu_bucle:
+   0072 CD 00 00      [17]  193 			call	checkMenuInput
+   0075 CD 4D 00      [17]  194 			call 	checkStart
+   0078 CD 00 00      [17]  195 			call 	cpct_waitVSYNC_asm
+   007B 18 F5         [12]  196 			jr 		_menu_bucle
+   007D                     197 		_main_bucle:
                             198 
-   00AF 3E 00         [ 7]  199 			ld a, #0x00
-   00B1 CD 00 00      [17]  200 			call drawBox 		;Erase testing box
-   00B4 CD 00 00      [17]  201 			call moveBox		;move testBox
+   007D 3E 00         [ 7]  199 			ld a, #0x00
+   007F CD 00 00      [17]  200 			call drawBox 		;Erase testing box
+   0082 CD 00 00      [17]  201 			call moveBox		;move testBox
                             202 
                             203 			;======
                             204 			;NUEVO|
@@ -438,7 +438,7 @@ Hexadecimal [16-Bits]
 
 
                             205 			;======
-   00B7 CD 00 00      [17]  206 			call hudUpdate
+   0085 CD 00 00      [17]  206 			call hudUpdate
                             207 			
                             208 
                             209 			;;;;;FUCK JUMPING
@@ -446,19 +446,19 @@ Hexadecimal [16-Bits]
                             211 			;call jumpControl	;check jumping situation of the character
                             212 			;;;;;
                             213 
-   00BA CD 00 00      [17]  214 			call checkUserInput	;Checking if user pressed a key
+   0088 CD 00 00      [17]  214 			call checkUserInput	;Checking if user pressed a key
                             215 
                             216 
-   00BD CD 32 00      [17]  217 			call draw_hero		;paint hero on screen
+   008B CD 29 00      [17]  217 			call draw_hero		;paint hero on screen
                             218 
-   00C0 3E FF         [ 7]  219 			ld a, #0xFF
-   00C2 CD 00 00      [17]  220 			call drawBox 		;draw testing box
+   008E 3E FF         [ 7]  219 			ld a, #0xFF
+   0090 CD 00 00      [17]  220 			call drawBox 		;draw testing box
                             221 
                             222 			;======
                             223 			;NUEVO|
                             224 			;======
-   00C5 CD 00 00      [17]  225 			call shootBullet
-   00C8 CD 00 00      [17]  226 			call shootUpdate
+   0093 CD 00 00      [17]  225 			call shootBullet
+   0096 CD 00 00      [17]  226 			call shootUpdate
                             227 
-   00CB CD 00 00      [17]  228 			call cpct_waitVSYNC_asm		;wait till repainting
-   00CE 18 DF         [12]  229 			jr _main_bucle
+   0099 CD 00 00      [17]  228 			call cpct_waitVSYNC_asm		;wait till repainting
+   009C 18 DF         [12]  229 			jr _main_bucle

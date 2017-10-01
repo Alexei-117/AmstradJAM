@@ -4,20 +4,20 @@ Hexadecimal [16-Bits]
 Symbol Table
 
     .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
-    .__.H$L.=  0000 L   |   0 _main      009E GR  |   0 _main_bu   00AF R
-  0 _menu_bu   00A4 R   |     _p_palet   **** GX  |     _p_tiles   **** GX
-    _pruebaM   **** GX  |     _test_pa   **** GX  |     _test_te   **** GX
+    .__.H$L.=  0000 L   |     _l_palet   **** GX  |     _l_tiles   **** GX
+    _lol_pal   **** GX  |     _lol_til   **** GX  |   0 _main      006C GR
+  0 _main_bu   007D R   |   0 _menu_bu   0072 R   |     _pruebaM   **** GX
     avoidCol   **** GX  |     avoidCol   **** GX  |     avoidCol   **** GX
-    avoidCol   **** GX  |     avoidCol   **** GX  |   0 bucle      0077 R
+    avoidCol   **** GX  |     avoidCol   **** GX  |   0 bucle      0048 R
     bullet_a   **** GX  |     bullet_w   **** GX  |     bullet_x   **** GX
-    bullet_y   **** GX  |     checkMen   **** GX  |   0 checkSta   007C R
-    checkUse   **** GX  |   0 clear      0084 R   |     cpct_dis   **** GX
+    bullet_y   **** GX  |     checkMen   **** GX  |   0 checkSta   004D R
+    checkUse   **** GX  |   0 clear      0055 R   |     cpct_dis   **** GX
     cpct_dra   **** GX  |     cpct_dra   **** GX  |     cpct_dra   **** GX
     cpct_dra   **** GX  |     cpct_etm   **** GX  |     cpct_etm   **** GX
     cpct_get   **** GX  |     cpct_isK   **** GX  |     cpct_sca   **** GX
     cpct_set   **** GX  |     cpct_set   **** GX  |     cpct_wai   **** GX
     deathCol   **** GX  |     drawBox    **** GX  |     drawBull   **** GX
-  0 draw_her   0032 R   |   0 esperar    0074 R   |     hero_x     **** GX
+  0 draw_her   0029 R   |   0 esperar    0045 R   |     hero_x     **** GX
     hero_x_s   **** GX  |     hero_y     **** GX  |     hero_y_s   **** GX
     hudUpdat   **** GX  |     incPoint   **** GX  |   0 initiali   0014 R
     jumpCont   **** GX  |     loadHud    **** GX  |     loadMenu   **** GX
@@ -25,13 +25,13 @@ Symbol Table
     obs_x      **** GX  |     obs_x_si   **** GX  |     obs_y      **** GX
     obs_y_si   **** GX  |   0 paint_ba   0000 R   |     selector   **** GX
     shootBul   **** GX  |     shootUpd   **** GX  |   1 wait_tim   0000 R
-  0 working    0087 R
+  0 working    0058 R
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE      size   D0   flags    0
+   0 _CODE      size   9E   flags    0
    1 _DATA      size    1   flags    0
 

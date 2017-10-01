@@ -160,7 +160,7 @@
 	;==================
 
 
-	avoidCollisionRight::
+	avoidCollisionLeft::
 
 		;;FOR NOW: IT ONLY AVOIDS LEFT COLLISIONS
 
@@ -189,7 +189,7 @@
 
 		ret
 
-	avoidCollisionLeft::
+	avoidCollisionRight::
 
 		;;FOR NOW: IT ONLY AVOIDS RIGHT COLLISIONS
 
@@ -232,7 +232,7 @@
 
 		call deathCollision ;analizing collision
 		cp #1
-		jr z, down_avoidCollision
+		jr z, up_avoidCollision
 
 			;no need to avoid
 			inc hl
@@ -246,7 +246,7 @@
 			ret
 
 
-		down_avoidCollision:
+		up_avoidCollision:
 		inc hl
 
 		ld a, (hl)

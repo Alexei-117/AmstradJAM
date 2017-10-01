@@ -11,13 +11,13 @@
 	;;;PUBLIC DATA
 	;==================
 	;Background
-	.globl _p_tileset
-	.globl _p_palette
+	.globl _l_tileset
+	.globl _l_palette
 	.globl _pruebaMap
 
 	;Main hero
-	.globl _test_palette
-	.globl _test_test
+	.globl _lol_palette
+	.globl _lol_tileset
 
 .area _CODE
 
@@ -67,16 +67,16 @@
 		call cpct_setVideoMode_asm
 
 		;;Set pallette
-		ld hl, #_p_palette		;Paleta de los sprites
+		ld hl, #_l_palette		;Paleta de los sprites
 		ld de, #12
 		call cpct_setPalette_asm
 
 		;;Draw map Sprite
 
-		ld hl, #_p_tileset 					;I've got to pass the beginning of the tileset
-		call cpct_etm_setTileset2x4_asm
+		;ld hl, #_l_tileset 					;I've got to pass the beginning of the tileset
+		;call cpct_etm_setTileset2x4_asm
 		
-		call paint_background
+		;call paint_background
 
 		ret
 
@@ -98,36 +98,36 @@
 		call cpct_getScreenPtr_asm	;gets pointer in HL with the data passed on the register
 
 		;clean background
-		ld hl, #_pruebaMap 					;Pushing the tilemap
-		push hl
-		ex de, hl 							;position of our character
-		push hl
+		;ld hl, #_pruebaMap 					;Pushing the tilemap
+		;push hl
+		;ex de, hl 							;position of our character
+		;push hl
 
 		;Starting tilemap of painting
-		ld a, (hero_x)
-		ld c, a
-		sra c
-		sra c
-		ld a,c
-		xor #0xF0 
-		ld c,a
-										;dividing in 4 the number the size of a tile
-		ld a, (hero_y)
-		ld b, a
-		sra b
-		sra b
-		ld a,b
-		xor #0xF0
-		ld b,a 
+		;ld a, (hero_x)
+		;ld c, a
+		;sra c
+		;sra c
+		;ld a,c
+		;xor #0xF0 
+		;ld c,a
+	;									;dividing in 4 the number the size of a tile
+	;	ld a, (hero_y)
+;		ld b, a
+		;sra b
+		;sra b
+		;ld a,b
+		;xor #0xF0
+		;ld b,a 
 								
-		ld de, #0x0202						;Size in tiles of the drawing
-		ld a, #0x28 						;Map width
-		call cpct_etm_drawTileBox2x4_asm 	;Drawing function
+		;ld de, #0x0202						;Size in tiles of the drawing
+		;ld a, #0x28 						;Map width
+		;call cpct_etm_drawTileBox2x4_asm 	;Drawing function
 
 		ld de, #0xC000
 		ex de, hl 			;HL holds the screen pointer, so we swap it with de for fast change
-		ld hl, #_test_test	;pointer to sprite of the test subject
-		ld bc, #0x0804 		;heigh: 8x8 pixels on mode 1 (2 bytes every 4 pixels)
+		ld hl, #_lol_tileset	;pointer to sprite of the test subject
+		ld bc, #0x1604 		;heigh: 8x8 pixels on mode 1 (2 bytes every 4 pixels)
 		
 		call cpct_drawSprite_asm 	;draw sprite itself
 		ret
@@ -170,7 +170,7 @@
 		ld 		a, h
 		sub 	#0xFF
 		jr 		nz, working
-		call	paint_background
+		;call	paint_background
 		call 	loadHud
 		jr 		_main_bucle
 		ret

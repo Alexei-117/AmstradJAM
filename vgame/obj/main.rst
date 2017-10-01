@@ -10,19 +10,19 @@ Hexadecimal [16-Bits]
                               5 	;==================
                               6 
                               7 	;Control Variables
-   576B 01                    8 	wait_time: .db #0x01
+   571D 01                    8 	wait_time: .db #0x01
                               9 
                              10 	;==================
                              11 	;;;PUBLIC DATA
                              12 	;==================
                              13 	;Background
-                             14 	.globl _p_tileset
-                             15 	.globl _p_palette
+                             14 	.globl _l_tileset
+                             15 	.globl _l_palette
                              16 	.globl _pruebaMap
                              17 
                              18 	;Main hero
-                             19 	.globl _test_palette
-                             20 	.globl _test_test
+                             19 	.globl _lol_palette
+                             20 	.globl _lol_tileset
                              21 
                              22 .area _CODE
                              23 
@@ -194,14 +194,18 @@ Hexadecimal [16-Bits]
                              26 
                              27 .globl avoidCollisionDown
                              28 
-                             29 ;;Checks if death collision happened between hero and object
-                             30 ;;Saves in register A 1 death, 0 no death
-                             31 ;;NEEDS:
-                             32 ;;	HL and DE pointers 2 pointers to objects to check
-                             33 ;;CORRUPTS: 
-                             34 ;;  AF, BC
-                             35 
-                             36 .globl deathCollision
+                             29 .globl avoidCollisionUp
+                             30 
+                             31 .globl avoidCollisionLeft
+                             32 
+                             33 ;;Checks if death collision happened between hero and object
+                             34 ;;Saves in register A 1 death, 0 no death
+                             35 ;;NEEDS:
+                             36 ;;	HL and DE pointers 2 pointers to objects to check
+                             37 ;;CORRUPTS: 
+                             38 ;;  AF, BC
+                             39 
+                             40 .globl deathCollision
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 8.
 Hexadecimal [16-Bits]
 
@@ -261,40 +265,40 @@ Hexadecimal [16-Bits]
                              45 	;Corrupts:
                              46 	;	C
                              47 
-   4FC4                      48 	paint_background:
-   4FC4 21 D2 41      [10]   49 		ld hl, #_pruebaMap 					;Pushing the tilemap
-   4FC7 E5            [11]   50 		push hl
-   4FC8 21 00 C0      [10]   51 		ld hl, #0xC000 						;Point of memory starter
-   4FCB E5            [11]   52 		push hl
+   4FAA                      48 	paint_background:
+   4FAA 21 BC 41      [10]   49 		ld hl, #_pruebaMap 					;Pushing the tilemap
+   4FAD E5            [11]   50 		push hl
+   4FAE 21 00 C0      [10]   51 		ld hl, #0xC000 						;Point of memory starter
+   4FB1 E5            [11]   52 		push hl
                              53 
-   4FCC 01 00 00      [10]   54 		ld bc, #0x0000 						;Starting tilemap of painting
-   4FCF 11 28 28      [10]   55 		ld de, #0x2828						;Size in tiles of the drawing
-   4FD2 3E 28         [ 7]   56 		ld a, #0x28 						;Map width
-   4FD4 CD 49 54      [17]   57 		call cpct_etm_drawTileBox2x4_asm 	;Drawing function
-   4FD7 C9            [10]   58 		ret
+   4FB2 01 00 00      [10]   54 		ld bc, #0x0000 						;Starting tilemap of painting
+   4FB5 11 28 28      [10]   55 		ld de, #0x2828						;Size in tiles of the drawing
+   4FB8 3E 28         [ 7]   56 		ld a, #0x28 						;Map width
+   4FBA CD 84 54      [17]   57 		call cpct_etm_drawTileBox2x4_asm 	;Drawing function
+   4FBD C9            [10]   58 		ret
                              59 
-   4FD8                      60 	initialize:
+   4FBE                      60 	initialize:
                              61 		
                              62 		;;Enable video mode 0
                              63 		
-   4FD8 CD AC 55      [17]   64 		call cpct_disableFirmware_asm	;disable firmware so we can set another options
-   4FDB 3A 39 00      [13]   65 		ld a, (0x0039) 					;saves data from firmware location
-   4FDE 0E 00         [ 7]   66 		ld c, #0 						;load video mode 0 on screen
-   4FE0 CD 9F 55      [17]   67 		call cpct_setVideoMode_asm
+   4FBE CD E7 55      [17]   64 		call cpct_disableFirmware_asm	;disable firmware so we can set another options
+   4FC1 3A 39 00      [13]   65 		ld a, (0x0039) 					;saves data from firmware location
+   4FC4 0E 00         [ 7]   66 		ld c, #0 						;load video mode 0 on screen
+   4FC6 CD DA 55      [17]   67 		call cpct_setVideoMode_asm
                              68 
                              69 		;;Set pallette
-   4FE3 21 C2 4E      [10]   70 		ld hl, #_p_palette		;Paleta de los sprites
-   4FE6 11 0C 00      [10]   71 		ld de, #12
-   4FE9 CD 66 53      [17]   72 		call cpct_setPalette_asm
+   4FC9 21 EE 41      [10]   70 		ld hl, #_l_palette		;Paleta de los sprites
+   4FCC 11 0C 00      [10]   71 		ld de, #12
+   4FCF CD A1 53      [17]   72 		call cpct_setPalette_asm
                              73 
                              74 		;;Draw map Sprite
                              75 
-   4FEC 21 CE 4E      [10]   76 		ld hl, #_p_tileset 					;I've got to pass the beginning of the tileset
-   4FEF CD D5 54      [17]   77 		call cpct_etm_setTileset2x4_asm
+                             76 		;ld hl, #_l_tileset 					;I've got to pass the beginning of the tileset
+                             77 		;call cpct_etm_setTileset2x4_asm
                              78 		
-   4FF2 CD C4 4F      [17]   79 		call paint_background
+                             79 		;call paint_background
                              80 
-   4FF5 C9            [10]   81 		ret
+   4FD2 C9            [10]   81 		ret
                              82 
                              83 	;Draws the main character on screen
                              84 	;Needs
@@ -302,70 +306,70 @@ Hexadecimal [16-Bits]
                              86 	;Corrupts:
                              87 	;	HL, DE, AF, BC
                              88 
-   4FF6                      89 	draw_hero:
-   4FF6 11 00 C0      [10]   90 		ld de, #0xC000	;beginning of screen
+   4FD3                      89 	draw_hero:
+   4FD3 11 00 C0      [10]   90 		ld de, #0xC000	;beginning of screen
                              91 
-   4FF9 3A 7D 57      [13]   92 		ld a, (hero_x)
-   4FFC 4F            [ 4]   93 		ld c, a 		; b = hero_X
+   4FD6 3A 2F 57      [13]   92 		ld a, (hero_x)
+   4FD9 4F            [ 4]   93 		ld c, a 		; b = hero_X
                              94 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 14.
 Hexadecimal [16-Bits]
 
 
 
-   4FFD 3A 7E 57      [13]   95 		ld a, (hero_y)
-   5000 47            [ 4]   96 		ld b, a 		; c = hero_y
+   4FDA 3A 30 57      [13]   95 		ld a, (hero_y)
+   4FDD 47            [ 4]   96 		ld b, a 		; c = hero_y
                              97 		
-   5001 CD 8A 56      [17]   98 		call cpct_getScreenPtr_asm	;gets pointer in HL with the data passed on the register
+   4FDE CD C5 56      [17]   98 		call cpct_getScreenPtr_asm	;gets pointer in HL with the data passed on the register
                              99 
                             100 		;clean background
-   5004 21 D2 41      [10]  101 		ld hl, #_pruebaMap 					;Pushing the tilemap
-   5007 E5            [11]  102 		push hl
-   5008 EB            [ 4]  103 		ex de, hl 							;position of our character
-   5009 E5            [11]  104 		push hl
+                            101 		;ld hl, #_pruebaMap 					;Pushing the tilemap
+                            102 		;push hl
+                            103 		;ex de, hl 							;position of our character
+                            104 		;push hl
                             105 
                             106 		;Starting tilemap of painting
-   500A 3A 7D 57      [13]  107 		ld a, (hero_x)
-   500D 4F            [ 4]  108 		ld c, a
-   500E CB 29         [ 8]  109 		sra c
-   5010 CB 29         [ 8]  110 		sra c
-   5012 79            [ 4]  111 		ld a,c
-   5013 EE F0         [ 7]  112 		xor #0xF0 
-   5015 4F            [ 4]  113 		ld c,a
-                            114 										;dividing in 4 the number the size of a tile
-   5016 3A 7E 57      [13]  115 		ld a, (hero_y)
-   5019 47            [ 4]  116 		ld b, a
-   501A CB 28         [ 8]  117 		sra b
-   501C CB 28         [ 8]  118 		sra b
-   501E 78            [ 4]  119 		ld a,b
-   501F EE F0         [ 7]  120 		xor #0xF0
-   5021 47            [ 4]  121 		ld b,a 
+                            107 		;ld a, (hero_x)
+                            108 		;ld c, a
+                            109 		;sra c
+                            110 		;sra c
+                            111 		;ld a,c
+                            112 		;xor #0xF0 
+                            113 		;ld c,a
+                            114 	;									;dividing in 4 the number the size of a tile
+                            115 	;	ld a, (hero_y)
+                            116 ;		ld b, a
+                            117 		;sra b
+                            118 		;sra b
+                            119 		;ld a,b
+                            120 		;xor #0xF0
+                            121 		;ld b,a 
                             122 								
-   5022 11 02 02      [10]  123 		ld de, #0x0202						;Size in tiles of the drawing
-   5025 3E 28         [ 7]  124 		ld a, #0x28 						;Map width
-   5027 CD 49 54      [17]  125 		call cpct_etm_drawTileBox2x4_asm 	;Drawing function
+                            123 		;ld de, #0x0202						;Size in tiles of the drawing
+                            124 		;ld a, #0x28 						;Map width
+                            125 		;call cpct_etm_drawTileBox2x4_asm 	;Drawing function
                             126 
-   502A 11 00 C0      [10]  127 		ld de, #0xC000
-   502D EB            [ 4]  128 		ex de, hl 			;HL holds the screen pointer, so we swap it with de for fast change
-   502E 21 9C 41      [10]  129 		ld hl, #_test_test	;pointer to sprite of the test subject
-   5031 01 04 08      [10]  130 		ld bc, #0x0804 		;heigh: 8x8 pixels on mode 1 (2 bytes every 4 pixels)
+   4FE1 11 00 C0      [10]  127 		ld de, #0xC000
+   4FE4 EB            [ 4]  128 		ex de, hl 			;HL holds the screen pointer, so we swap it with de for fast change
+   4FE5 21 B8 4E      [10]  129 		ld hl, #_lol_tileset	;pointer to sprite of the test subject
+   4FE8 01 04 16      [10]  130 		ld bc, #0x1604 		;heigh: 8x8 pixels on mode 1 (2 bytes every 4 pixels)
                             131 		
-   5034 CD A9 53      [17]  132 		call cpct_drawSprite_asm 	;draw sprite itself
-   5037 C9            [10]  133 		ret
+   4FEB CD E4 53      [17]  132 		call cpct_drawSprite_asm 	;draw sprite itself
+   4FEE C9            [10]  133 		ret
                             134 
                             135 
                             136 	;Waits the wait_time specified
                             137 	;Corrupts
                             138 	;	A;
                             139 
-   5038                     140 	esperar:
-   5038 3A 6B 57      [13]  141 		ld a, (wait_time)
-   503B                     142 		bucle:
-   503B 76            [ 4]  143 			halt
-   503C 3D            [ 4]  144 			dec a
-   503D 20 FC         [12]  145 			jr nz, bucle
+   4FEF                     140 	esperar:
+   4FEF 3A 1D 57      [13]  141 		ld a, (wait_time)
+   4FF2                     142 		bucle:
+   4FF2 76            [ 4]  143 			halt
+   4FF3 3D            [ 4]  144 			dec a
+   4FF4 20 FC         [12]  145 			jr nz, bucle
                             146 
-   503F C9            [10]  147 		ret
+   4FF6 C9            [10]  147 		ret
                             148 
                             149 	;======
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 15.
@@ -375,84 +379,86 @@ Hexadecimal [16-Bits]
 
                             150 	;NUEVO|
                             151 	;======
-   5040                     152 	checkStart:
-   5040 3A 60 57      [13]  153 		ld 		a, (selector)
-   5043 FE 0A         [ 7]  154 		cp 		#0x0A
-   5045 28 01         [12]  155 		jr 		z, clear
-   5047 C9            [10]  156 		ret
+   4FF7                     152 	checkStart:
+   4FF7 3A 12 57      [13]  153 		ld 		a, (selector)
+   4FFA FE 0A         [ 7]  154 		cp 		#0x0A
+   4FFC 28 01         [12]  155 		jr 		z, clear
+   4FFE C9            [10]  156 		ret
                             157 	;======
                             158 	;NUEVO|
                             159 	;======
-   5048                     160 	clear:
+   4FFF                     160 	clear:
                             161 		;LIMPIAR PUTA PANTALLA
-   5048 21 00 C0      [10]  162 		ld 		hl, #0xC000
-   504B                     163 		working:
-   504B 3E 00         [ 7]  164 		ld 		a, #0x00
-   504D 77            [ 7]  165 		ld 		(hl), a
-   504E 23            [ 6]  166 		inc 	hl
-   504F 7D            [ 4]  167 		ld 		a, l
-   5050 D6 FF         [ 7]  168 		sub 	#0xFF
-   5052 20 F7         [12]  169 		jr 		nz, working
-   5054 7C            [ 4]  170 		ld 		a, h
-   5055 D6 FF         [ 7]  171 		sub 	#0xFF
-   5057 20 F2         [12]  172 		jr 		nz, working
-   5059 CD C4 4F      [17]  173 		call	paint_background
-   505C CD 97 50      [17]  174 		call 	loadHud
-   505F 18 12         [12]  175 		jr 		_main_bucle
-   5061 C9            [10]  176 		ret
+   4FFF 21 00 C0      [10]  162 		ld 		hl, #0xC000
+   5002                     163 		working:
+   5002 3E 00         [ 7]  164 		ld 		a, #0x00
+   5004 77            [ 7]  165 		ld 		(hl), a
+   5005 23            [ 6]  166 		inc 	hl
+   5006 7D            [ 4]  167 		ld 		a, l
+   5007 D6 FF         [ 7]  168 		sub 	#0xFF
+   5009 20 F7         [12]  169 		jr 		nz, working
+   500B 7C            [ 4]  170 		ld 		a, h
+   500C D6 FF         [ 7]  171 		sub 	#0xFF
+   500E 20 F2         [12]  172 		jr 		nz, working
+                            173 		;call	paint_background
+   5010 CD 48 50      [17]  174 		call 	loadHud
+   5013 18 12         [12]  175 		jr 		_main_bucle
+   5015 C9            [10]  176 		ret
                             177 
                             178 	;==================
                             179 	;;;PUBLIC FUNCIONS
                             180 	;==================
                             181 
-   5062                     182 	_main::
+   5016                     182 	_main::
                             183 
-   5062 CD D8 4F      [17]  184 		call initialize		;initializes all functions and firmware options
+   5016 CD BE 4F      [17]  184 		call initialize		;initializes all functions and firmware options
                             185 		;======
                             186 		;NUEVO|
                             187 		;======
-   5065 CD 43 4F      [17]  188 		call 	loadMenu
+   5019 CD 29 4F      [17]  188 		call 	loadMenu
                             189 		;======
                             190 		;NUEVO|
                             191 		;======
-   5068                     192 		_menu_bucle:
-   5068 CD 68 4F      [17]  193 			call	checkMenuInput
-   506B CD 40 50      [17]  194 			call 	checkStart
-   506E CD 97 55      [17]  195 			call 	cpct_waitVSYNC_asm
-   5071 18 F5         [12]  196 			jr 		_menu_bucle
-   5073                     197 		_main_bucle:
+   501C                     192 		_menu_bucle:
+   501C CD 4E 4F      [17]  193 			call	checkMenuInput
+   501F CD F7 4F      [17]  194 			call 	checkStart
+   5022 CD D2 55      [17]  195 			call 	cpct_waitVSYNC_asm
+   5025 18 F5         [12]  196 			jr 		_menu_bucle
+   5027                     197 		_main_bucle:
                             198 
-                            199 		
-                            200 
-                            201 			
+   5027 3E 00         [ 7]  199 			ld a, #0x00
+   5029 CD EE 50      [17]  200 			call drawBox 		;Erase testing box
+   502C CD 06 51      [17]  201 			call moveBox		;move testBox
                             202 
-   5073 3E 00         [ 7]  203 			ld a, #0x00
-   5075 CD 3D 51      [17]  204 			call drawBox 		;Erase testing box
+                            203 			;======
+                            204 			;NUEVO|
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 16.
 Hexadecimal [16-Bits]
 
 
 
-   5078 CD 55 51      [17]  205 			call moveBox		;move testBox
-                            206 
-                            207 			;======
-                            208 			;NUEVO|
-                            209 			;======
-   507B CD A1 50      [17]  210 			call hudUpdate
-   507E CD F3 52      [17]  211 			call jumpControl	;check jumping situation of the character
-   5081 CD 2D 53      [17]  212 			call checkUserInput	;Checking if user pressed a key
+                            205 			;======
+   502F CD 52 50      [17]  206 			call hudUpdate
+                            207 			
+                            208 
+                            209 			;;;;;FUCK JUMPING
+                            210 			;;;;;
+                            211 			;call jumpControl	;check jumping situation of the character
+                            212 			;;;;;
                             213 
-                            214 
-   5084 CD F6 4F      [17]  215 			call draw_hero		;paint hero on screen
+   5032 CD 31 53      [17]  214 			call checkUserInput	;Checking if user pressed a key
+                            215 
                             216 
-   5087 3E FF         [ 7]  217 			ld a, #0xFF
-   5089 CD 3D 51      [17]  218 			call drawBox 		;draw testing box
-                            219 
-                            220 			;======
-                            221 			;NUEVO|
+   5035 CD D3 4F      [17]  217 			call draw_hero		;paint hero on screen
+                            218 
+   5038 3E FF         [ 7]  219 			ld a, #0xFF
+   503A CD EE 50      [17]  220 			call drawBox 		;draw testing box
+                            221 
                             222 			;======
-   508C CD 02 52      [17]  223 			call shootBullet
-   508F CD 1C 52      [17]  224 			call shootUpdate
-                            225 
-   5092 CD 97 55      [17]  226 			call cpct_waitVSYNC_asm		;wait till repainting
-   5095 18 DC         [12]  227 			jr _main_bucle
+                            223 			;NUEVO|
+                            224 			;======
+   503D CD E8 51      [17]  225 			call shootBullet
+   5040 CD 02 52      [17]  226 			call shootUpdate
+                            227 
+   5043 CD D2 55      [17]  228 			call cpct_waitVSYNC_asm		;wait till repainting
+   5046 18 DF         [12]  229 			jr _main_bucle

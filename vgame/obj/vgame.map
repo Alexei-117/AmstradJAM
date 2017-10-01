@@ -7,7 +7,7 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000000  .__.ABS.                           
+     00000000  .__.ABS.                           cpct_keyboard
      00000000  l__CABS                         
      00000000  l__DABS                         
      00000000  l__GSFINAL                      
@@ -18,169 +18,149 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  s__CABS                         
      00000000  s__DABS                         
      00000029  l__DATA                         
-     00001760  l__CODE                         
+     00001712  l__CODE                         
      00004000  s__CODE                         
-     00005760  s__DATA                         
-     00005789  s__GSFINAL                      
-     00005789  s__GSINIT                       
-     00005789  s__HOME                         
-     00005789  s__INITIALIZED                  
-     00005789  s__INITIALIZER                  
+     00005712  s__DATA                         
+     0000573B  s__GSFINAL                      
+     0000573B  s__GSINIT                       
+     0000573B  s__HOME                         
+     0000573B  s__INITIALIZED                  
+     0000573B  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00001760 =        5984. bytes (REL,CON)
+_CODE                               00004000    00001712 =        5906. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
      00004000  _tileMap                           Fondotiles2
      00004190  _test_palette                      test
      0000419C  _test_test                         test
-     000041BC  _function                          documento
-     000041D2  _pruebaMap                         prueba4x4
-     00004204  _l_palette                         FONDOESTIRADO2
-     00004210  _l_tileset                         FONDOESTIRADO2
-     00004242  _l_FONDOESTIRADO2_00               FONDOESTIRADO2
-     000042C2  _l_FONDOESTIRADO2_01               FONDOESTIRADO2
-     00004342  _l_FONDOESTIRADO2_02               FONDOESTIRADO2
-     000043C2  _l_FONDOESTIRADO2_03               FONDOESTIRADO2
-     00004442  _l_FONDOESTIRADO2_04               FONDOESTIRADO2
-     000044C2  _l_FONDOESTIRADO2_05               FONDOESTIRADO2
-     00004542  _l_FONDOESTIRADO2_06               FONDOESTIRADO2
-     000045C2  _l_FONDOESTIRADO2_07               FONDOESTIRADO2
-     00004642  _l_FONDOESTIRADO2_08               FONDOESTIRADO2
-     000046C2  _l_FONDOESTIRADO2_09               FONDOESTIRADO2
-     00004742  _l_FONDOESTIRADO2_10               FONDOESTIRADO2
-     000047C2  _l_FONDOESTIRADO2_11               FONDOESTIRADO2
-     00004842  _l_FONDOESTIRADO2_12               FONDOESTIRADO2
-     000048C2  _l_FONDOESTIRADO2_13               FONDOESTIRADO2
-     00004942  _l_FONDOESTIRADO2_14               FONDOESTIRADO2
-     000049C2  _l_FONDOESTIRADO2_15               FONDOESTIRADO2
-     00004A42  _l_FONDOESTIRADO2_16               FONDOESTIRADO2
-     00004AC2  _l_FONDOESTIRADO2_17               FONDOESTIRADO2
-     00004B42  _l_FONDOESTIRADO2_18               FONDOESTIRADO2
-     00004BC2  _l_FONDOESTIRADO2_19               FONDOESTIRADO2
-     00004C42  _l_FONDOESTIRADO2_20               FONDOESTIRADO2
-     00004CC2  _l_FONDOESTIRADO2_21               FONDOESTIRADO2
-     00004D42  _l_FONDOESTIRADO2_22               FONDOESTIRADO2
-     00004DC2  _l_FONDOESTIRADO2_23               FONDOESTIRADO2
-     00004E42  _l_FONDOESTIRADO2_24               FONDOESTIRADO2
-     00004EC2  _p_palette                         prueba
-     00004ECE  _p_tileset                         prueba
-     00004ED4  _p_prueba_0                        prueba
-     00004EDC  _p_prueba_1                        prueba
-     00004EE4  _p_prueba_2                        prueba
-     00004EEC  _cpct_keyboardStatusBuffer         cpct_keyboard
-     00004F43  loadMenu                           cpct_keyboard
-     00004F68  checkMenuInput                     cpct_keyboard
-     00005062  _main                              
-     00005097  loadHud                            
-     000050A1  hudUpdate                          
-     000050D2  incPoints                          
-     000050DE  incPoints1                         
-     000050EF  incPoints2                         
-     00005100  incPoints3                         
-     00005121  loseHP                             
-     0000513D  drawBox                            
-     00005155  moveBox                            
+     000041BC  _pruebaMap                         prueba4x4
+     000041EE  _l_palette                         FONDOESTIRADO2
+     000041FA  _l_tileset                         FONDOESTIRADO2
+     0000422C  _l_FONDOESTIRADO2_00               FONDOESTIRADO2
+     000042AC  _l_FONDOESTIRADO2_01               FONDOESTIRADO2
+     0000432C  _l_FONDOESTIRADO2_02               FONDOESTIRADO2
+     000043AC  _l_FONDOESTIRADO2_03               FONDOESTIRADO2
+     0000442C  _l_FONDOESTIRADO2_04               FONDOESTIRADO2
+     000044AC  _l_FONDOESTIRADO2_05               FONDOESTIRADO2
+     0000452C  _l_FONDOESTIRADO2_06               FONDOESTIRADO2
+     000045AC  _l_FONDOESTIRADO2_07               FONDOESTIRADO2
+     0000462C  _l_FONDOESTIRADO2_08               FONDOESTIRADO2
+     000046AC  _l_FONDOESTIRADO2_09               FONDOESTIRADO2
+     0000472C  _l_FONDOESTIRADO2_10               FONDOESTIRADO2
+     000047AC  _l_FONDOESTIRADO2_11               FONDOESTIRADO2
+     0000482C  _l_FONDOESTIRADO2_12               FONDOESTIRADO2
+     000048AC  _l_FONDOESTIRADO2_13               FONDOESTIRADO2
+     0000492C  _l_FONDOESTIRADO2_14               FONDOESTIRADO2
+     000049AC  _l_FONDOESTIRADO2_15               FONDOESTIRADO2
+     00004A2C  _l_FONDOESTIRADO2_16               FONDOESTIRADO2
+     00004AAC  _l_FONDOESTIRADO2_17               FONDOESTIRADO2
+     00004B2C  _l_FONDOESTIRADO2_18               FONDOESTIRADO2
+     00004BAC  _l_FONDOESTIRADO2_19               FONDOESTIRADO2
+     00004C2C  _l_FONDOESTIRADO2_20               FONDOESTIRADO2
+     00004CAC  _l_FONDOESTIRADO2_21               FONDOESTIRADO2
+     00004D2C  _l_FONDOESTIRADO2_22               FONDOESTIRADO2
+     00004DAC  _l_FONDOESTIRADO2_23               FONDOESTIRADO2
+     00004E2C  _l_FONDOESTIRADO2_24               FONDOESTIRADO2
+     00004EAC  _lol_palette                       prueba
+     00004EB8  _lol_tileset                       prueba
+     00004EBA  _lol_prueba                        prueba
+     00004ED2  _cpct_keyboardStatusBuffer         cpct_keyboard
+     00004F29  loadMenu                           cpct_keyboard
+     00004F4E  checkMenuInput                     cpct_keyboard
+     00005016  _main                              
+     00005048  loadHud                            
+     00005052  hudUpdate                          
+     00005083  incPoints                          
+     0000508F  incPoints1                         
+     000050A0  incPoints2                         
+     000050B1  incPoints3                         
+     000050D2  loseHP                             
+     000050EE  drawBox                            
+     00005106  moveBox                            
+     0000515F  avoidCollisionLeft                 
+     00005175  avoidCollisionRight                
+     0000518B  avoidCollisionUp                   
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00001760 =        5984. bytes (REL,CON)
+_CODE                               00004000    00001712 =        5906. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000051AE  avoidCollisionRight                
-     000051C4  avoidCollisionDown                 
-     000051E3  avoidCollision                     
-     000051E4  deathCollision                     
-     000051FE  bullet_x                           
-     000051FF  bullet_y                           
-     00005200  bullet_w                           
-     00005201  bullet_alive                       
-     00005202  shootBullet                        
-     0000521C  shootUpdate                        
-     00005272  drawBullet                         
-     000052A2  moveObject                         
-     000052F3  jumpControl                        
-     0000532D  checkUserInput                     
-     00005366  cpct_setPalette_asm                cpct_video
-     00005379  _cpct_isKeyPressed                 cpct_keyboard
-     00005379  cpct_isKeyPressed_asm              cpct_keyboard
-     00005385  _cpct_drawStringM0                 cpct_strings
-     0000538D  cpct_drawStringM0_asm              cpct_strings
-     000053A9  cpct_drawSprite_asm                cpct_sprites
-     00005449  cpct_etm_drawTileBox2x4_asm        cpct_easytilemaps
-     000054D5  _cpct_etm_setTileset2x4            cpct_easytilemaps
-     000054D5  cpct_etm_setTileset2x4_asm         cpct_easytilemaps
-     000054D9  _cpct_drawCharM0                   cpct_strings
-     000054E6  cpct_drawCharM0_asm                cpct_strings
-     00005566  _cpct_etm_drawTileRow2x4           cpct_easytilemaps
-     0000556D  cpct_etm_drawTileRow2x4_asm        cpct_easytilemaps
-     0000556F  dtr_restore_ptileset               cpct_easytilemaps
-     00005587  dc_mode0_ct                        cpct_strings
-     00005597  _cpct_waitVSYNC                    cpct_video
-     00005597  cpct_waitVSYNC_asm                 cpct_video
-     0000559F  cpct_setVideoMode_asm              cpct_video
-     000055AC  _cpct_disableFirmware              cpct_firmware
-     000055AC  _cpct_removeInterruptHandler       cpct_firmware
-     000055AC  cpct_disableFirmware_asm           cpct_firmware
-     000055AC  cpct_removeInterruptHandler_asm    cpct_firmware
-     000055BC  cpct_drawSolidBox_asm              cpct_sprites
-     00005668  cpct_drawTileAligned2x4_f_asm      cpct_sprites
-     00005689  _cpct_mode_rom_status              cpct_firmware
-     0000568A  cpct_getScreenPtr_asm              cpct_video
-     000056A6  _cpct_scanKeyboard                 cpct_keyboard
-     000056A6  cpct_scanKeyboard_asm              cpct_keyboard
-     000056D7  __divsint                          
-     000056E0  __divschar                         
-     000056E7  __div8                             
-     000056EB  __div_signexte                     
-     000056EF  __div16                            
-     00005715  __get_remainder                    
-     0000571F  __divuint                          
-     00005727  __divuchar                         
-     0000572E  __divu8                            
+     000051AA  avoidCollisionDown                 
+     000051C9  avoidCollision                     
+     000051CA  deathCollision                     
+     000051E4  bullet_x                           
+     000051E5  bullet_y                           
+     000051E6  bullet_w                           
+     000051E7  bullet_alive                       
+     000051E8  shootBullet                        
+     00005202  shootUpdate                        
+     00005258  drawBullet                         
+     00005288  moveObject                         
+     000052F7  jumpControl                        
+     00005331  checkUserInput                     
+     000053A1  cpct_setPalette_asm                cpct_video
+     000053B4  _cpct_isKeyPressed                 cpct_keyboard
+     000053B4  cpct_isKeyPressed_asm              cpct_keyboard
+     000053C0  _cpct_drawStringM0                 cpct_strings
+     000053C8  cpct_drawStringM0_asm              cpct_strings
+     000053E4  cpct_drawSprite_asm                cpct_sprites
+     00005484  cpct_etm_drawTileBox2x4_asm        cpct_easytilemaps
+     00005510  _cpct_etm_setTileset2x4            cpct_easytilemaps
+     00005510  cpct_etm_setTileset2x4_asm         cpct_easytilemaps
+     00005514  _cpct_drawCharM0                   cpct_strings
+     00005521  cpct_drawCharM0_asm                cpct_strings
+     000055A1  _cpct_etm_drawTileRow2x4           cpct_easytilemaps
+     000055A8  cpct_etm_drawTileRow2x4_asm        cpct_easytilemaps
+     000055AA  dtr_restore_ptileset               cpct_easytilemaps
+     000055C2  dc_mode0_ct                        cpct_strings
+     000055D2  _cpct_waitVSYNC                    cpct_video
+     000055D2  cpct_waitVSYNC_asm                 cpct_video
+     000055DA  cpct_setVideoMode_asm              cpct_video
+     000055E7  _cpct_disableFirmware              cpct_firmware
+     000055E7  _cpct_removeInterruptHandler       cpct_firmware
+     000055E7  cpct_disableFirmware_asm           cpct_firmware
+     000055E7  cpct_removeInterruptHandler_asm    cpct_firmware
+     000055F7  cpct_drawSolidBox_asm              cpct_sprites
+     000056A3  cpct_drawTileAligned2x4_f_asm      cpct_sprites
+     000056C4  _cpct_mode_rom_status              cpct_firmware
+     000056C5  cpct_getScreenPtr_asm              cpct_video
+     000056E1  _cpct_scanKeyboard                 cpct_keyboard
+     000056E1  cpct_scanKeyboard_asm              cpct_keyboard
+
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00001760 =        5984. bytes (REL,CON)
+_DATA                               00005712    00000029 =          41. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00005731  __divu16                           
+     00005712  selector                           cpct_keyboard
+     0000572B  obs_x                              
+     0000572C  obs_y                              
+     0000572D  obs_x_size                         
+     0000572E  obs_y_size                         
+     0000572F  hero_x                             
+     00005730  hero_y                             
+     00005731  hero_x_size                        
+     00005732  hero_y_size                        
 ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
-Hexadecimal  [32-Bits]
-
-Area                                    Addr        Size        Decimal Bytes (Attributes)
---------------------------------        ----        ----        ------- ----- ------------
-_DATA                               00005760    00000029 =          41. bytes (REL,CON)
-
-      Value  Global                              Global Defined In Module
-      -----  --------------------------------   ------------------------
-     00005760  selector                           cpct_keyboard
-     00005779  obs_x                              
-     0000577A  obs_y                              
-     0000577B  obs_x_size                         
-     0000577C  obs_y_size                         
-     0000577D  hero_x                             
-     0000577E  hero_y                             
-     0000577F  hero_x_size                        
-     00005780  hero_y_size                        
-ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
 
 Files Linked                              [ module(s) ]
 
 obj/tiles/Fondotiles2.rel                 [ Fondotiles2 ]
 obj/sprites/test.rel                      [ test ]
-obj/documento.rel                         [ documento ]
 obj/tiles/prueba4x4.rel                   [ prueba4x4 ]
 obj/sprites/FONDOESTIRADO2.rel            [ FONDOESTIRADO2 ]
 obj/sprites/prueba.rel                    [ prueba ]
@@ -238,12 +218,8 @@ Libraries Linked                          [ object file ]
                                           [ cpct_getScreenPtr_asmbindings.re ]
 /home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_scanKeyboard.rel ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ divsigned.rel ]
-/home/alexei/Escritorio/Amstrad/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ divunsigned.rel ]
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
 
 User Base Address Definitions
 

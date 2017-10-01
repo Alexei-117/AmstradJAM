@@ -3,18 +3,12 @@
 #define _PRUEBA_H_
 
 #include <types.h>
-extern const u8 p_palette[12];
+extern const u8 lol_palette[12];
 
-extern u8* const p_tileset[3];
+extern u8* const lol_tileset[1];
 
-#define P_PRUEBA_0_W 2
-#define P_PRUEBA_0_H 4
-extern const u8 p_prueba_0[2 * 4];
-#define P_PRUEBA_1_W 2
-#define P_PRUEBA_1_H 4
-extern const u8 p_prueba_1[2 * 4];
-#define P_PRUEBA_2_W 2
-#define P_PRUEBA_2_H 4
-extern const u8 p_prueba_2[2 * 4];
+#define LOL_PRUEBA_W 6
+#define LOL_PRUEBA_H 4
+extern const u8 lol_prueba[6 * 4];
 
 #endif
