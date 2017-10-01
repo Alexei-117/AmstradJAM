@@ -163,6 +163,29 @@
 		call moveObject
 		ret
 
+	moveUpMain:
+		ld a, (hero_y)
+		cp #0
+		ret z 			;can't move further than 0
+
+
+		ld hl, #hero_y
+		ld b, #up
+		call moveObject
+		ret
+
+	moveDownMain:
+		ld a, (hero_y)
+		cp #200-8
+		ret z 			;can't move further than 0
+
+
+		ld hl, #hero_y
+		ld b, #down
+		call moveObject
+		ret
+
+
 	moveJumpMain:
 		ld 	a, (hero_jump)	; A = hero jump iteration
 		cp 	#-1
@@ -257,12 +280,12 @@
 		;;FIRST OF ALL: Examine keyboard
 		call cpct_scanKeyboard_asm  ;checks a key is pressed
 		
-		;;CHECK COLLISIONS WITH ENVIRORMENT
+		;;CHECK COLLISIONS WITH RIGHT
 		ld hl, #hero_x
 		ld de, #obs_x
 		call avoidCollisionRight
 		cp #1
-		jp z, skipRight			 ;;-----TESTING---------- if there is a collision, you can't move right
+		jp z, skipRight			 
 
 
 		ld hl, #key_right 			 ;loads key_D in hl
@@ -275,6 +298,13 @@
 
 		skipRight:
 
+		;CHECK COLLISIONS WITH LEFT
+		ld hl, #hero_x
+		ld de, #obs_x
+		call avoidCollisionLeft
+		cp #1
+		jp z, skipLeft		
+
 
 		ld hl, #key_left			 ;loads key_A in hl
 		call cpct_isKeyPressed_asm	 ;checks if the key loaded in hl is pressed
@@ -286,6 +316,13 @@
 
 		skipLeft:
 
+		;CHECK COLLISIONS WITH UP
+		ld hl, #hero_x
+		ld de, #obs_x
+		call avoidCollisionUp
+		cp #1
+		jp z, skipUp	
+
 
 		ld hl, #key_up				 ;loads key_W in hl
 		call cpct_isKeyPressed_asm	 ;checks if the key loaded in hl is pressed
@@ -293,10 +330,27 @@
 		jr z, skipUp			 	 ;This goes to up not pressed
 
 			;left is pressed
-			call moveJumpMain
+			call moveUpMain
 
 		skipUp:
 
+		;CHECK COLLISIONS WITH ENVIRORMENT
+		ld hl, #hero_x
+		ld de, #obs_x
+		call avoidCollisionDown
+		cp #1
+		jp z, skipDown
+
+
+		ld hl, #key_down				 ;loads key_W in hl
+		call cpct_isKeyPressed_asm	 ;checks if the key loaded in hl is pressed
+		cp #0 						 ;checks if debugger leaves a 0 behind, if it is 0, then W is not pressed
+		jr z, skipDown			 	 ;This goes to up not pressed
+
+			;left is pressed
+			call moveDownMain
+
+		skipDown:
 
 		continueEnd:
 

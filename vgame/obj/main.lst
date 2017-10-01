@@ -15,21 +15,27 @@ Hexadecimal [16-Bits]
                              10 	;==================
                              11 	;;;PUBLIC DATA
                              12 	;==================
-                             13 
-                             14 
-                             15 
-                             16 .area _CODE
+                             13 	;Background
+                             14 	.globl _p_tileset
+                             15 	.globl _p_palette
+                             16 	.globl _pruebaMap
                              17 
-                             18 	;==================
-                             19 	;;;INCLUDE FUNCIONS
-                             20 	;==================
+                             18 	;Main hero
+                             19 	.globl _test_palette
+                             20 	.globl _test_test
                              21 
+                             22 .area _CODE
+                             23 
+                             24 	;==================
+                             25 	;;;INCLUDE FUNCIONS
+                             26 	;==================
+                             27 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 
 
-                             22 	.include "cpctelera.h.s"
+                             28 	.include "cpctelera.h.s"
                               1 ;;;;;;;;;;;;;;;;;;;
                               2 ;CPCTELERA SYMBOLS;
                               3 ;;;;;;;;;;;;;;;;;;;
@@ -64,59 +70,72 @@ Hexadecimal [16-Bits]
                              32 ;(1B B ) height	Box height in bytes (>0)
                              33 .globl cpct_drawSolidBox_asm
                              34 
-                             35 
-                             36 	;============================
-                             37 	;FIRMWARE CODE
-                             38 	;============================
-                             39 
-                             40 ;wait por de raster to be at lowest screen part, to refresh all _DATA
-                             41 ;CORRUPTS:
-                             42 ;	AF, VC
-                             43 .globl cpct_waitVSYNC_asm
-                             44 
-                             45 ;Disables firmware control, so we can use our colour mode, for example
-                             46 .globl cpct_disableFirmware_asm
-                             47 
-                             48 ;Loads the video mode expressed in register C
-                             49 ;CORRUPTS
-                             50 ;	AF, BC, HL
-                             51 .globl cpct_setVideoMode_asm
-                             52 
-                             53 	;============================
-                             54 	;KEYBOARD CODE
+                             35 .globl cpct_setPalette_asm
+                             36 
+                             37 .globl cpct_etm_setTileset2x4_asm
+                             38 
+                             39 .globl cpct_etm_drawTileBox2x4_asm
+                             40 
+                             41 .globl cpct_drawSprite_asm
+                             42 
+                             43 	;============================
+                             44 	;FIRMWARE CODE
+                             45 	;============================
+                             46 
+                             47 ;wait por de raster to be at lowest screen part, to refresh all _DATA
+                             48 ;CORRUPTS:
+                             49 ;	AF, VC
+                             50 .globl cpct_waitVSYNC_asm
+                             51 
+                             52 ;Disables firmware control, so we can use our colour mode, for example
+                             53 .globl cpct_disableFirmware_asm
+                             54 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
 Hexadecimal [16-Bits]
 
 
 
-                             55 	;============================
-                             56 
-                             57 ;Checks if any key is pressed scanning through all the keyboard
-                             58 .globl cpct_scanKeyboard_asm
+                             55 ;Loads the video mode expressed in register C
+                             56 ;CORRUPTS
+                             57 ;	AF, BC, HL
+                             58 .globl cpct_setVideoMode_asm
                              59 
-                             60 
-                             61 ;checks if a given key in HL is pressed
-                             62 .globl cpct_isKeyPressed_asm
+                             60 	;============================
+                             61 	;KEYBOARD CODE
+                             62 	;============================
                              63 
-                             64 
-                             65 .globl cpct_drawCharM0_asm
+                             64 ;Checks if any key is pressed scanning through all the keyboard
+                             65 .globl cpct_scanKeyboard_asm
                              66 
-                             67 .globl cpct_drawStringM0_asm
-                             68 
-                             69 
+                             67 
+                             68 ;checks if a given key in HL is pressed
+                             69 .globl cpct_isKeyPressed_asm
                              70 
                              71 
-                             72 
+                             72 .globl cpct_drawCharM0_asm
                              73 
-                             74 
+                             74 .globl cpct_drawStringM0_asm
                              75 
                              76 
+                             77 
+                             78 
+                             79 
+                             80 
+                             81 
+                             82 
+                             83 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 4.
 Hexadecimal [16-Bits]
 
 
 
-                             23 	.include "control.h.s"
+                             29 	.include "tiles/"
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 5.
+Hexadecimal [16-Bits]
+
+
+
+                             30 	.include "control.h.s"
                               1 ;===================
                               2 ;;;PUBLIC DATA
                               3 ;===================
@@ -135,18 +154,18 @@ Hexadecimal [16-Bits]
                              16 
                              17 ;generic functions
                              18 .globl moveObject
-ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 5.
-Hexadecimal [16-Bits]
-
-
-
-                             24 	.include "sprite.h.s"
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 6.
 Hexadecimal [16-Bits]
 
 
 
-                             25 	.include "collision.h.s"
+                             31 	.include "sprite.h.s"
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 7.
+Hexadecimal [16-Bits]
+
+
+
+                             32 	.include "collision.h.s"
                               1 ;===================
                               2 ;;;PUBLIC DATA
                               3 ;===================
@@ -175,47 +194,51 @@ Hexadecimal [16-Bits]
                              26 
                              27 .globl avoidCollisionDown
                              28 
-                             29 ;;Checks if death collision happened between hero and object
-                             30 ;;Saves in register A 1 death, 0 no death
-                             31 ;;NEEDS:
-                             32 ;;	HL and DE pointers 2 pointers to objects to check
-                             33 ;;CORRUPTS: 
-                             34 ;;  AF, BC
-                             35 
-                             36 .globl deathCollision
-ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 7.
-Hexadecimal [16-Bits]
-
-
-
-                             26 	;======
-                             27 	;NUEVO|
-                             28 	;======
+                             29 .globl avoidCollisionUp
+                             30 
+                             31 .globl avoidCollisionLeft
+                             32 
+                             33 ;;Checks if death collision happened between hero and object
+                             34 ;;Saves in register A 1 death, 0 no death
+                             35 ;;NEEDS:
+                             36 ;;	HL and DE pointers 2 pointers to objects to check
+                             37 ;;CORRUPTS: 
+                             38 ;;  AF, BC
+                             39 
+                             40 .globl deathCollision
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 8.
 Hexadecimal [16-Bits]
 
 
 
-                             29 	.include "hud.h.s"
-                              1 .globl hudUpdate
-                              2 .globl incPoints
-                              3 .globl loadHud
-                              4 .globl loseHP
+                             33 	;======
+                             34 	;NUEVO|
+                             35 	;======
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 9.
 Hexadecimal [16-Bits]
 
 
 
-                             30 	.include "menu.h.s"
-                              1 .globl loadMenu
-                              2 .globl checkMenuInput
-                              3 .globl selector
+                             36 	.include "hud.h.s"
+                              1 .globl hudUpdate
+                              2 .globl incPoints
+                              3 .globl loadHud
+                              4 .globl loseHP
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 10.
 Hexadecimal [16-Bits]
 
 
 
-                             31 	.include "shoot.h.s"
+                             37 	.include "menu.h.s"
+                              1 .globl loadMenu
+                              2 .globl checkMenuInput
+                              3 .globl selector
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 11.
+Hexadecimal [16-Bits]
+
+
+
+                             38 	.include "shoot.h.s"
                               1 .globl shootBullet
                               2 .globl shootUpdate
                               3 .globl bullet_x
@@ -223,163 +246,219 @@ Hexadecimal [16-Bits]
                               5 .globl bullet_w
                               6 .globl bullet_alive
                               7 .globl drawBullet
-ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 11.
-Hexadecimal [16-Bits]
-
-
-
-                             32 	.include "hero.h.s"
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 12.
 Hexadecimal [16-Bits]
 
 
 
-                             33 	;==================
-                             34 	;;;PRIVATE FUNCIONS
-                             35 	;==================
-                             36 
-                             37 	;Loads the initial data options
-                             38 	;Corrupts:
-                             39 	;	C
-                             40 
-   0000                      41 	initialize:
-                             42 		
-                             43 		;;Enable video mode 0
-                             44 		
-   0000 CD 00 00      [17]   45 		call cpct_disableFirmware_asm	;disable firmware so we can set another options
-   0003 3A 39 00      [13]   46 		ld a, (0x0039) 					;saves data from firmware location
-   0006 0E 00         [ 7]   47 		ld c, #0 						;load video mode 0 on screen
-   0008 CD 00 00      [17]   48 		call cpct_setVideoMode_asm
-                             49 
-                             50 
-                             51 		;;Draw principal Sprite
-                             52 
-                             53 		
-   000B C9            [10]   54 		ret
-                             55 
-                             56 	;Draws the main character on screen
-                             57 	;Needs
-                             58 	;	A = color pattern of the box
-                             59 	;Corrupts:
-                             60 	;	HL, DE, AF, BC
-                             61 
-   000C                      62 	draw_hero:
-   000C F5            [11]   63 		push af			;pushes color on the pile
-   000D 11 00 C0      [10]   64 		ld de, #0xC000	;beginning of screen
-                             65 
-   0010 3A 00 00      [13]   66 		ld a, (hero_x)
-   0013 4F            [ 4]   67 		ld c, a 		; b = hero_X
-                             68 
-   0014 3A 00 00      [13]   69 		ld a, (hero_y)
-   0017 47            [ 4]   70 		ld b, a 		; c = hero_y
-                             71 		
-   0018 CD 00 00      [17]   72 		call cpct_getScreenPtr_asm	;gets pointer in HL with the data passed on the register
-                             73 
-   001B EB            [ 4]   74 		ex de, hl 		;HL holds the screen pointer, so we swap it with de for fast change
-                             75 		;ld a, #0xFF  	;red colour
-   001C F1            [10]   76 		pop af			;pops the colour
-   001D 01 04 10      [10]   77 		ld bc, #0x1004 	;heigh: 8x8 pixels on mode 1 (2 bytes every 4 pixels)
-                             78 		
-   0020 CD 00 00      [17]   79 		call cpct_drawSolidBox_asm ;draw box itself
-   0023 C9            [10]   80 		ret
-                             81 
-                             82 
-                             83 	;Waits the wait_time specified
-                             84 	;Corrupts
-                             85 	;	A;
-                             86 
-   0024                      87 	esperar:
+                             39 	.include "hero.h.s"
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 13.
 Hexadecimal [16-Bits]
 
 
 
-   0024 3A 00 00      [13]   88 		ld a, (wait_time)
-   0027                      89 		bucle:
-   0027 76            [ 4]   90 			halt
-   0028 3D            [ 4]   91 			dec a
-   0029 20 FC         [12]   92 			jr nz, bucle
-                             93 
-   002B C9            [10]   94 		ret
-                             95 
-                             96 	;======
-                             97 	;NUEVO|
-                             98 	;======
-   002C                      99 	checkStart:
-   002C 3A 00 00      [13]  100 		ld 		a, (selector)
-   002F FE 0A         [ 7]  101 		cp 		#0x0A
-   0031 28 01         [12]  102 		jr 		z, clear
-   0033 C9            [10]  103 		ret
-                            104 	;======
-                            105 	;NUEVO|
-                            106 	;======
-   0034                     107 	clear:
-                            108 		;LIMPIAR PUTA PANTALLA
-   0034 21 00 C0      [10]  109 		ld 		hl, #0xC000
-   0037                     110 		working:
-   0037 3E 00         [ 7]  111 		ld 		a, #0x00
-   0039 77            [ 7]  112 		ld 		(hl), a
-   003A 23            [ 6]  113 		inc 	hl
-   003B 7D            [ 4]  114 		ld 		a, l
-   003C D6 FF         [ 7]  115 		sub 	#0xFF
-   003E 20 F7         [12]  116 		jr 		nz, working
-   0040 7C            [ 4]  117 		ld 		a, h
-   0041 D6 FF         [ 7]  118 		sub 	#0xFF
-   0043 20 F2         [12]  119 		jr 		nz, working
-   0045 CD 00 00      [17]  120 		call 	loadHud
-   0048 18 12         [12]  121 		jr 		_main_bucle
-   004A C9            [10]  122 		ret
-                            123 
-                            124 	;==================
-                            125 	;;;PUBLIC FUNCIONS
-                            126 	;==================
-                            127 
-   004B                     128 	_main::
-                            129 
-   004B CD 00 00      [17]  130 		call initialize		;initializes all functions and firmware options
-                            131 		;======
-                            132 		;NUEVO|
-                            133 		;======
-   004E CD 00 00      [17]  134 		call 	loadMenu
-                            135 		;======
-                            136 		;NUEVO|
-                            137 		;======
-   0051                     138 		_menu_bucle:
-   0051 CD 00 00      [17]  139 			call	checkMenuInput
-   0054 CD 2C 00      [17]  140 			call 	checkStart
-   0057 CD 00 00      [17]  141 			call 	cpct_waitVSYNC_asm
-   005A 18 F5         [12]  142 			jr 		_menu_bucle
+                             40 	;==================
+                             41 	;;;PRIVATE FUNCIONS
+                             42 	;==================
+                             43 
+                             44 	;Loads the initial data options
+                             45 	;Corrupts:
+                             46 	;	C
+                             47 
+   0000                      48 	paint_background:
+   0000 21 00 00      [10]   49 		ld hl, #_pruebaMap 					;Pushing the tilemap
+   0003 E5            [11]   50 		push hl
+   0004 21 00 C0      [10]   51 		ld hl, #0xC000 						;Point of memory starter
+   0007 E5            [11]   52 		push hl
+                             53 
+   0008 01 00 00      [10]   54 		ld bc, #0x0000 						;Starting tilemap of painting
+   000B 11 28 28      [10]   55 		ld de, #0x2828						;Size in tiles of the drawing
+   000E 3E 28         [ 7]   56 		ld a, #0x28 						;Map width
+   0010 CD 00 00      [17]   57 		call cpct_etm_drawTileBox2x4_asm 	;Drawing function
+   0013 C9            [10]   58 		ret
+                             59 
+   0014                      60 	initialize:
+                             61 		
+                             62 		;;Enable video mode 0
+                             63 		
+   0014 CD 00 00      [17]   64 		call cpct_disableFirmware_asm	;disable firmware so we can set another options
+   0017 3A 39 00      [13]   65 		ld a, (0x0039) 					;saves data from firmware location
+   001A 0E 00         [ 7]   66 		ld c, #0 						;load video mode 0 on screen
+   001C CD 00 00      [17]   67 		call cpct_setVideoMode_asm
+                             68 
+                             69 		;;Set pallette
+   001F 21 00 00      [10]   70 		ld hl, #_p_palette		;Paleta de los sprites
+   0022 11 0C 00      [10]   71 		ld de, #12
+   0025 CD 00 00      [17]   72 		call cpct_setPalette_asm
+                             73 
+                             74 		;;Draw map Sprite
+                             75 
+   0028 21 00 00      [10]   76 		ld hl, #_p_tileset 					;I've got to pass the beginning of the tileset
+   002B CD 00 00      [17]   77 		call cpct_etm_setTileset2x4_asm
+                             78 		
+   002E CD 00 00      [17]   79 		call paint_background
+                             80 
+   0031 C9            [10]   81 		ret
+                             82 
+                             83 	;Draws the main character on screen
+                             84 	;Needs
+                             85 	;	A = color pattern of the box
+                             86 	;Corrupts:
+                             87 	;	HL, DE, AF, BC
+                             88 
+   0032                      89 	draw_hero:
+   0032 11 00 C0      [10]   90 		ld de, #0xC000	;beginning of screen
+                             91 
+   0035 3A 00 00      [13]   92 		ld a, (hero_x)
+   0038 4F            [ 4]   93 		ld c, a 		; b = hero_X
+                             94 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 14.
 Hexadecimal [16-Bits]
 
 
 
-   005C                     143 		_main_bucle:
-   005C 3E 00         [ 7]  144 			ld a, #0x00
-   005E CD 0C 00      [17]  145 			call draw_hero		;Erasing the hero
+   0039 3A 00 00      [13]   95 		ld a, (hero_y)
+   003C 47            [ 4]   96 		ld b, a 		; c = hero_y
+                             97 		
+   003D CD 00 00      [17]   98 		call cpct_getScreenPtr_asm	;gets pointer in HL with the data passed on the register
+                             99 
+                            100 		;clean background
+   0040 21 00 00      [10]  101 		ld hl, #_pruebaMap 					;Pushing the tilemap
+   0043 E5            [11]  102 		push hl
+   0044 EB            [ 4]  103 		ex de, hl 							;position of our character
+   0045 E5            [11]  104 		push hl
+                            105 
+                            106 		;Starting tilemap of painting
+   0046 3A 00 00      [13]  107 		ld a, (hero_x)
+   0049 4F            [ 4]  108 		ld c, a
+   004A CB 29         [ 8]  109 		sra c
+   004C CB 29         [ 8]  110 		sra c
+   004E 79            [ 4]  111 		ld a,c
+   004F EE F0         [ 7]  112 		xor #0xF0 
+   0051 4F            [ 4]  113 		ld c,a
+                            114 										;dividing in 4 the number the size of a tile
+   0052 3A 00 00      [13]  115 		ld a, (hero_y)
+   0055 47            [ 4]  116 		ld b, a
+   0056 CB 28         [ 8]  117 		sra b
+   0058 CB 28         [ 8]  118 		sra b
+   005A 78            [ 4]  119 		ld a,b
+   005B EE F0         [ 7]  120 		xor #0xF0
+   005D 47            [ 4]  121 		ld b,a 
+                            122 								
+   005E 11 02 02      [10]  123 		ld de, #0x0202						;Size in tiles of the drawing
+   0061 3E 28         [ 7]  124 		ld a, #0x28 						;Map width
+   0063 CD 00 00      [17]  125 		call cpct_etm_drawTileBox2x4_asm 	;Drawing function
+                            126 
+   0066 11 00 C0      [10]  127 		ld de, #0xC000
+   0069 EB            [ 4]  128 		ex de, hl 			;HL holds the screen pointer, so we swap it with de for fast change
+   006A 21 00 00      [10]  129 		ld hl, #_test_test	;pointer to sprite of the test subject
+   006D 01 04 08      [10]  130 		ld bc, #0x0804 		;heigh: 8x8 pixels on mode 1 (2 bytes every 4 pixels)
+                            131 		
+   0070 CD 00 00      [17]  132 		call cpct_drawSprite_asm 	;draw sprite itself
+   0073 C9            [10]  133 		ret
+                            134 
+                            135 
+                            136 	;Waits the wait_time specified
+                            137 	;Corrupts
+                            138 	;	A;
+                            139 
+   0074                     140 	esperar:
+   0074 3A 00 00      [13]  141 		ld a, (wait_time)
+   0077                     142 		bucle:
+   0077 76            [ 4]  143 			halt
+   0078 3D            [ 4]  144 			dec a
+   0079 20 FC         [12]  145 			jr nz, bucle
                             146 
-   0061 3E 00         [ 7]  147 			ld a, #0x00
-   0063 CD 00 00      [17]  148 			call drawBox 		;Erase testing box
-   0066 CD 00 00      [17]  149 			call moveBox		;move testBox
-                            150 
-                            151 			;======
-                            152 			;NUEVO|
-                            153 			;======
-   0069 CD 00 00      [17]  154 			call hudUpdate
-   006C CD 00 00      [17]  155 			call jumpControl	;check jumping situation of the character
-   006F CD 00 00      [17]  156 			call checkUserInput	;Checking if user pressed a key
-                            157 
-   0072 3E FF         [ 7]  158 			ld a, #0xFF
-   0074 CD 0C 00      [17]  159 			call draw_hero		;paint hero on screen
-                            160 
-   0077 3E FF         [ 7]  161 			ld a, #0xFF
-   0079 CD 00 00      [17]  162 			call drawBox 		;draw testing box
-                            163 
-                            164 			;======
-                            165 			;NUEVO|
-                            166 			;======
-   007C CD 00 00      [17]  167 			call shootBullet
-   007F CD 00 00      [17]  168 			call shootUpdate
-                            169 
-   0082 CD 00 00      [17]  170 			call cpct_waitVSYNC_asm		;wait till repainting
-   0085 18 D5         [12]  171 			jr _main_bucle
+   007B C9            [10]  147 		ret
+                            148 
+                            149 	;======
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 15.
+Hexadecimal [16-Bits]
+
+
+
+                            150 	;NUEVO|
+                            151 	;======
+   007C                     152 	checkStart:
+   007C 3A 00 00      [13]  153 		ld 		a, (selector)
+   007F FE 0A         [ 7]  154 		cp 		#0x0A
+   0081 28 01         [12]  155 		jr 		z, clear
+   0083 C9            [10]  156 		ret
+                            157 	;======
+                            158 	;NUEVO|
+                            159 	;======
+   0084                     160 	clear:
+                            161 		;LIMPIAR PUTA PANTALLA
+   0084 21 00 C0      [10]  162 		ld 		hl, #0xC000
+   0087                     163 		working:
+   0087 3E 00         [ 7]  164 		ld 		a, #0x00
+   0089 77            [ 7]  165 		ld 		(hl), a
+   008A 23            [ 6]  166 		inc 	hl
+   008B 7D            [ 4]  167 		ld 		a, l
+   008C D6 FF         [ 7]  168 		sub 	#0xFF
+   008E 20 F7         [12]  169 		jr 		nz, working
+   0090 7C            [ 4]  170 		ld 		a, h
+   0091 D6 FF         [ 7]  171 		sub 	#0xFF
+   0093 20 F2         [12]  172 		jr 		nz, working
+   0095 CD 00 00      [17]  173 		call	paint_background
+   0098 CD 00 00      [17]  174 		call 	loadHud
+   009B 18 12         [12]  175 		jr 		_main_bucle
+   009D C9            [10]  176 		ret
+                            177 
+                            178 	;==================
+                            179 	;;;PUBLIC FUNCIONS
+                            180 	;==================
+                            181 
+   009E                     182 	_main::
+                            183 
+   009E CD 14 00      [17]  184 		call initialize		;initializes all functions and firmware options
+                            185 		;======
+                            186 		;NUEVO|
+                            187 		;======
+   00A1 CD 00 00      [17]  188 		call 	loadMenu
+                            189 		;======
+                            190 		;NUEVO|
+                            191 		;======
+   00A4                     192 		_menu_bucle:
+   00A4 CD 00 00      [17]  193 			call	checkMenuInput
+   00A7 CD 7C 00      [17]  194 			call 	checkStart
+   00AA CD 00 00      [17]  195 			call 	cpct_waitVSYNC_asm
+   00AD 18 F5         [12]  196 			jr 		_menu_bucle
+   00AF                     197 		_main_bucle:
+                            198 
+   00AF 3E 00         [ 7]  199 			ld a, #0x00
+   00B1 CD 00 00      [17]  200 			call drawBox 		;Erase testing box
+   00B4 CD 00 00      [17]  201 			call moveBox		;move testBox
+                            202 
+                            203 			;======
+                            204 			;NUEVO|
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 16.
+Hexadecimal [16-Bits]
+
+
+
+                            205 			;======
+   00B7 CD 00 00      [17]  206 			call hudUpdate
+                            207 			
+                            208 
+                            209 			;;;;;FUCK JUMPING
+                            210 			;;;;;
+                            211 			;call jumpControl	;check jumping situation of the character
+                            212 			;;;;;
+                            213 
+   00BA CD 00 00      [17]  214 			call checkUserInput	;Checking if user pressed a key
+                            215 
+                            216 
+   00BD CD 32 00      [17]  217 			call draw_hero		;paint hero on screen
+                            218 
+   00C0 3E FF         [ 7]  219 			ld a, #0xFF
+   00C2 CD 00 00      [17]  220 			call drawBox 		;draw testing box
+                            221 
+                            222 			;======
+                            223 			;NUEVO|
+                            224 			;======
+   00C5 CD 00 00      [17]  225 			call shootBullet
+   00C8 CD 00 00      [17]  226 			call shootUpdate
+                            227 
+   00CB CD 00 00      [17]  228 			call cpct_waitVSYNC_asm		;wait till repainting
+   00CE 18 DF         [12]  229 			jr _main_bucle

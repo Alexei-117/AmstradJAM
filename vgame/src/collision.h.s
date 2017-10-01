@@ -26,6 +26,10 @@
 
 .globl avoidCollisionDown
 
+.globl avoidCollisionUp
+
+.globl avoidCollisionLeft
+
 ;;Checks if death collision happened between hero and object
 ;;Saves in register A 1 death, 0 no death
 ;;NEEDS:

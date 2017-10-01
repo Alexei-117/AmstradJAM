@@ -162,6 +162,35 @@
 
 	avoidCollisionRight::
 
+		;;FOR NOW: IT ONLY AVOIDS LEFT COLLISIONS
+
+		ld a, (hl) 		;loading actual X in A
+		dec a 			;moving 2 position to the right
+		ld (hl), a 		;relocating
+
+		call deathCollision 		;analizing collision
+		cp #1
+		jr z, left_avoidCollision 	;avoid collision if returns a 1
+
+			;continue the movement
+			ld a, #0
+
+			ld b, (hl)
+			inc b
+			ld (hl), b 		;reflourish position
+			ret
+
+		left_avoidCollision:
+		ld a, #1
+
+		ld b, (hl)
+		inc b
+		ld (hl), b 			;reflourish position
+
+		ret
+
+	avoidCollisionLeft::
+
 		;;FOR NOW: IT ONLY AVOIDS RIGHT COLLISIONS
 
 		ld a, (hl) 		;loading actual X in A
@@ -188,6 +217,48 @@
 		ld (hl), b 			;reflourish position
 
 		ret
+
+	avoidCollisionUp::
+
+		;;FOR NOW: IT ONLY AVOIDS UP COLLISIONS
+
+		inc hl			;increasing Y so to make prediction
+
+		ld a, (hl) 		;loading actual X in A
+		sub #01 		;moving 2 positions to the right
+		ld (hl), a 		;relocating
+		
+		dec hl			;returning to original position
+
+		call deathCollision ;analizing collision
+		cp #1
+		jr z, down_avoidCollision
+
+			;no need to avoid
+			inc hl
+			ld a, (hl)
+			add #01
+			ld (hl), a 		;restoring values to object position
+
+			dec hl			;return to initial position
+
+			ld a, #1
+			ret
+
+
+		down_avoidCollision:
+		inc hl
+
+		ld a, (hl)
+		add #01
+		ld (hl), a 		;restoring values to object position
+
+		dec hl 			;return to initial position
+
+		ld a, #0
+		ret
+
+
 
 	avoidCollisionDown::
 

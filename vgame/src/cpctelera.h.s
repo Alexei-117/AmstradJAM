@@ -32,6 +32,13 @@
 ;(1B B ) height	Box height in bytes (>0)
 .globl cpct_drawSolidBox_asm
 
+.globl cpct_setPalette_asm
+
+.globl cpct_etm_setTileset2x4_asm
+
+.globl cpct_etm_drawTileBox2x4_asm
+
+.globl cpct_drawSprite_asm
 
 	;============================
 	;FIRMWARE CODE

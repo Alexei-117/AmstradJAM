@@ -107,8 +107,8 @@ checkMenuInput::
 		ret
 
 loadColors:
-	ld 		c, #0xFF 			
-	ld 		b, #0xF0;
+	ld 		c, #0x33 			
+	ld 		b, #0xF3;
 
 	ret
 

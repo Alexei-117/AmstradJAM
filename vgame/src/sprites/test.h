@@ -3,10 +3,10 @@
 #define _IMG_TEST_H_
 
 #include <types.h>
-extern const u8 t_palette[16];
+extern const u8 test_palette[12];
 
-#define T_TEST_W 4
-#define T_TEST_H 8
-extern const u8 t_test[4 * 8];
+#define TEST_TEST_W 4
+#define TEST_TEST_H 8
+extern const u8 test_test[4 * 8];
 
 #endif
